@@ -1,0 +1,63 @@
+﻿
+> next-miratekstil@0.1.0 build
+> next build
+
+ÔÜá Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\Server\package-lock.json as the root directory.
+ To silence this warning, set `turbopack.root` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/turbopack#root-directory for more information.
+ Detected additional lockfiles: 
+   * C:\Users\Server\Downloads\miratekstil-e-commerce (5)\next-miratekstil\package-lock.json
+   * C:\Users\Server\Downloads\miratekstil-e-commerce (5)\package-lock.json
+System.Management.Automation.RemoteException
+Ôû▓ Next.js 16.1.3 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+System.Management.Automation.RemoteException
+> Build error occurred
+Error: Turbopack build failed with 2 errors:
+./Downloads/miratekstil-e-commerce (5)/next-miratekstil/components/PaymentSuccessContent.tsx:7:1
+Module not found: Can't resolve '../../../../components/Icons'
+[0m [90m  5 |[39m [36mimport[39m { useCart } [36mfrom[39m [32m'../../../../components/Providers'[39m[33m;[39m [90m// Access via Providers wrapper if needed, or direct contest[39m
+ [90m  6 |[39m [36mimport[39m { useCart [36mas[39m useCartDirect } [36mfrom[39m [32m'../../../../context/CartContext'[39m[33m;[39m
+[31m[1m>[22m[39m[90m  7 |[39m [36mimport[39m { [33mPackageIcon[39m[33m,[39m [33mChevronRightIcon[39m } [36mfrom[39m [32m'../../../../components/Icons'[39m[33m;[39m
+ [90m    |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m  8 |[39m
+ [90m  9 |[39m [36mconst[39m [33mPaymentSuccessPage[39m [33m=[39m () [33m=>[39m {
+ [90m 10 |[39m     [36mconst[39m router [33m=[39m useRouter()[33m;[39m[0m
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+Import trace:
+  Server Component:
+    ./Downloads/miratekstil-e-commerce (5)/next-miratekstil/components/PaymentSuccessContent.tsx
+    ./Downloads/miratekstil-e-commerce (5)/next-miratekstil/app/payment/success/page.tsx
+System.Management.Automation.RemoteException
+https://nextjs.org/docs/messages/module-not-found
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+./Downloads/miratekstil-e-commerce (5)/next-miratekstil/components/PaymentSuccessContent.tsx:6:1
+Module not found: Can't resolve '../../../../context/CartContext'
+[0m [90m 4 |[39m [36mimport[39m { useRouter[33m,[39m useSearchParams } [36mfrom[39m [32m'next/navigation'[39m[33m;[39m
+ [90m 5 |[39m [36mimport[39m { useCart } [36mfrom[39m [32m'../../../../components/Providers'[39m[33m;[39m [90m// Access via Providers wrapper if needed, or direct contest[39m
+[31m[1m>[22m[39m[90m 6 |[39m [36mimport[39m { useCart [36mas[39m useCartDirect } [36mfrom[39m [32m'../../../../context/CartContext'[39m[33m;[39m
+ [90m   |[39m [31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m[31m[1m^[22m[39m
+ [90m 7 |[39m [36mimport[39m { [33mPackageIcon[39m[33m,[39m [33mChevronRightIcon[39m } [36mfrom[39m [32m'../../../../components/Icons'[39m[33m;[39m
+ [90m 8 |[39m
+ [90m 9 |[39m [36mconst[39m [33mPaymentSuccessPage[39m [33m=[39m () [33m=>[39m {[0m
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+Import trace:
+  Server Component:
+    ./Downloads/miratekstil-e-commerce (5)/next-miratekstil/components/PaymentSuccessContent.tsx
+    ./Downloads/miratekstil-e-commerce (5)/next-miratekstil/app/payment/success/page.tsx
+System.Management.Automation.RemoteException
+https://nextjs.org/docs/messages/module-not-found
+System.Management.Automation.RemoteException
+System.Management.Automation.RemoteException
+    at <unknown> (./Downloads/miratekstil-e-commerce (5)/next-miratekstil/components/PaymentSuccessContent.tsx:7:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (./Downloads/miratekstil-e-commerce (5)/next-miratekstil/components/PaymentSuccessContent.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)

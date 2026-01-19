@@ -2,9 +2,9 @@
 
 import React, { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCart } from '../../../../components/Providers'; // Access via Providers wrapper if needed, or direct contest
-import { useCart as useCartDirect } from '../../../../context/CartContext';
-import { PackageIcon, ChevronRightIcon } from '../../../../components/Icons';
+
+import { useCart as useCartDirect } from '../context/CartContext';
+import { PackageIcon, ChevronRightIcon } from './Icons';
 
 const PaymentSuccessPage = () => {
     const router = useRouter();
