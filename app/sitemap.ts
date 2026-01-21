@@ -4,7 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { createSlug } from '../utils/slugify';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = 'https://miratekstil.com'; // Domain adresi
+    const baseUrl = 'https://miratekstiltr.com'; // Domain adresi
 
     // Statik sayfalar
     const staticRoutes: MetadataRoute.Sitemap = [
