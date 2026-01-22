@@ -6,9 +6,9 @@ import { useProducts } from '../context/ProductContext';
 import { useCategories } from '../context/CategoryContext';
 import { ChevronDownIcon, ChevronUpIcon, SortIcon } from '../components/Icons';
 import ListingProductCard from '../components/ListingProductCard';
-// import ScrollToTopButton from '../components/ScrollToTopButton'; // Varsa açabilirsin
+import ProductSkeleton from './ProductSkeleton'; // 👈 YENİ: İskelet dosyasını import ettik
 
-// Filtre Grupları için Yardımcı Bileşen
+// Filtre Grupları Bileşeni
 const FilterGroup: React.FC<{ title: string; children: React.ReactNode; defaultOpen?: boolean }> = ({ title, children, defaultOpen = true }) => {
     const [isOpen, setIsOpen] = useState(defaultOpen);
     return (
@@ -24,6 +24,7 @@ const FilterGroup: React.FC<{ title: string; children: React.ReactNode; defaultO
     );
 };
 
+// Ana İçerik Bileşeni
 const ProductListPageContent: React.FC = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -218,7 +219,7 @@ const ProductListPageContent: React.FC = () => {
                                     <ListingProductCard
                                         key={product.id}
                                         product={product}
-                                        index={index} /* 👈 KRİTİK EKLEME: LCP optimizasyonu için sıra numarası gönderiliyor */
+                                        index={index} /* 👈 KRİTİK: LCP için sıra numarası gönderiliyor */
                                     />
                                 ))}
                             </div>
@@ -241,13 +242,35 @@ const ProductListPageContent: React.FC = () => {
                     </main>
                 </div>
             </div>
-            {/* <ScrollToTopButton /> */}
         </div>
     );
 };
 
+// Ana Export: Suspense ve Skeleton ile sarmalanmış hali
 const ProductListPage = () => (
-    <Suspense fallback={<div className="p-20 text-center">Yükleniyor...</div>}>
+    <Suspense 
+        fallback={
+            // 👈 Beyaz ekran yerine bu düzen yüklenecek (FCP Çözümü)
+            <div className="bg-brand-bg min-h-screen">
+                <div className="container mx-auto px-6 py-12">
+                   {/* Başlık İskeleti */}
+                   <div className="h-8 bg-gray-200 rounded w-48 mb-8 animate-pulse"></div>
+                   
+                   <div className="flex flex-col lg:flex-row gap-12">
+                        {/* Sidebar İskeleti */}
+                        <aside className="hidden lg:block w-1/4 space-y-4">
+                             <div className="h-64 bg-gray-200 rounded animate-pulse"></div>
+                        </aside>
+                        
+                        {/* Ürün Listesi İskeleti (Gri Kutular) */}
+                        <main className="flex-1">
+                             <ProductSkeleton />
+                        </main>
+                   </div>
+                </div>
+            </div>
+        }
+    >
         <ProductListPageContent />
     </Suspense>
 );
