@@ -65,6 +65,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
               href="/"
               className="text-3xl font-serif font-bold text-brand-primary tracking-wider hover:opacity-80 transition-opacity"
               aria-label="MiraTekstil Anasayfa"
+              title="MiraTekstil Anasayfa"
             >
               MiraTekstil
             </Link>
@@ -76,6 +77,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                 key={link.name}
                 href={link.path}
                 className="text-brand-primary hover:text-brand-secondary transition duration-300 font-medium text-sm uppercase tracking-wide py-2 border-b-2 border-transparent hover:border-brand-secondary"
+                title={link.name}
               >
                 {link.name}
               </Link>
@@ -83,8 +85,9 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
             <a
               href="https://www.trendyol.com/sr?mid=750999&os=1"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="nofollow noreferrer"
               className="text-orange-600 hover:text-orange-700 transition duration-300 font-bold text-sm uppercase tracking-wide py-2 border-b-2 border-transparent hover:border-orange-500"
+              title="Trendyol Mağazamızı Ziyaret Edin"
             >
               Trendyol Mağaza
             </a>
@@ -100,7 +103,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                 className="bg-brand-light border border-transparent border-b-brand-border rounded-full py-2 pl-4 pr-10 w-48 text-sm focus:outline-none focus:ring-1 focus:ring-brand-secondary focus:w-64 transition-all duration-300"
                 aria-label="Ürün arama"
               />
-              <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-brand-secondary transition-colors" aria-label="Ara">
+              <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-brand-secondary transition-colors" aria-label="Ara" title="Ara">
                 <SearchIcon className="h-5 w-5" />
               </button>
             </form>
@@ -112,6 +115,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                     href="/account"
                     className="flex items-center text-brand-primary hover:text-brand-secondary transition duration-300 p-1"
                     aria-label="Kullanıcı hesabı"
+                    title="Hesabım"
                   >
                     <UserIcon className="h-6 w-6" />
                   </Link>

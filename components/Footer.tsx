@@ -39,26 +39,26 @@ const Footer: React.FC = () => {
             <h3 className="text-2xl font-serif font-semibold mb-4">MiraTekstil</h3>
             <p className="text-gray-400 text-sm mb-6">Konfor ve stil dolu bir yaşam için en kaliteli tekstil ürünlerini keşfedin.</p>
             <div className="flex space-x-4">
-              <a href="https://www.instagram.com/barisyilmaz4139/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="Instagram"><InstagramIcon className="h-6 w-6" /></a>
-              <a href="https://www.facebook.com/bar.s.y.lmaz.880467?rdid=qXhECL7kkohPYets&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17n2k2Q54W%2F#" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="Facebook"><FacebookIcon className="h-6 w-6" /></a>
-              <a href="https://wa.me/905374009410" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="WhatsApp"><WhatsAppIcon className="h-6 w-6" /></a>
+              <a href="https://www.instagram.com/barisyilmaz4139/" target="_blank" rel="nofollow noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="Instagram" title="Instagram Sayfamız"><InstagramIcon className="h-6 w-6" /></a>
+              <a href="https://www.facebook.com/bar.s.y.lmaz.880467?rdid=qXhECL7kkohPYets&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17n2k2Q54W%2F#" target="_blank" rel="nofollow noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="Facebook" title="Facebook Sayfamız"><FacebookIcon className="h-6 w-6" /></a>
+              <a href="https://wa.me/905374009410" target="_blank" rel="nofollow noreferrer" className="text-gray-400 hover:text-white transition-colors" aria-label="WhatsApp" title="WhatsApp İle İletişime Geçin"><WhatsAppIcon className="h-6 w-6" /></a>
             </div>
           </div>
           <div>
             <h4 className="font-semibold mb-4 tracking-wider uppercase text-gray-300">Mağaza</h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li><Link href="/shop" className="hover:text-white transition-colors">Aksesuarlar</Link></li>
-              <li><Link href="/shop" className="hover:text-white transition-colors">Yatak Odası</Link></li>
-              <li><Link href="/shop" className="hover:text-white transition-colors">Banyo</Link></li>
-              <li><Link href="/shop" className="hover:text-white transition-colors">Oturma Odası</Link></li>
+              <li><Link href="/shop" className="hover:text-white transition-colors" title="Aksesuarlar Koleksiyonu">Aksesuarlar</Link></li>
+              <li><Link href="/shop" className="hover:text-white transition-colors" title="Yatak Odası Tekstili">Yatak Odası</Link></li>
+              <li><Link href="/shop" className="hover:text-white transition-colors" title="Banyo Tekstili">Banyo</Link></li>
+              <li><Link href="/shop" className="hover:text-white transition-colors" title="Oturma Odası Tekstili">Oturma Odası</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="font-semibold mb-4 tracking-wider uppercase text-gray-300">Hakkımızda</h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li><Link href="/about" className="hover:text-white transition-colors">Hikayemiz</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">İletişim</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors">S.S.S.</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors" title="Hikayemiz">Hikayemiz</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors" title="İletişim Sayfası">İletişim</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors" title="Sıkça Sorulan Sorular">S.S.S.</Link></li>
             </ul>
           </div>
           <div>
@@ -77,6 +77,7 @@ const Footer: React.FC = () => {
                 type="submit"
                 disabled={isSubmitting}
                 className="bg-brand-secondary text-white px-4 py-2 hover:bg-brand-secondary/80 transition-colors rounded-r-md disabled:opacity-50"
+                title="Bültene Katıl"
               >
                 {isSubmitting ? '...' : 'Katıl'}
               </button>
@@ -87,7 +88,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4">
             <p>&copy; 2025 Yusuf Gündüz Developer. Tüm hakları saklıdır.</p>
             <span className="hidden sm:inline text-gray-600">|</span>
-            <Link href="/admin" className="hover:text-white transition-colors">Yönetici Paneli</Link>
+            <Link href="/admin" className="hover:text-white transition-colors" title="Yönetici Paneli Girişi" rel="nofollow">Yönetici Paneli</Link>
           </div>
         </div>
       </div>

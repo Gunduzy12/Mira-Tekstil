@@ -1,7 +1,10 @@
 export const createSlug = (name: string, id: string): string => {
     if (!name) return id;
 
-    const slug = name
+    // Stop words to remove for shorter URLs
+    const stopWords = ['ve', 'ile', 'icin', 'daha', 'cok', 'en', 'yeni', 'ozel', 'uygun'];
+
+    let slug = name
         .toLowerCase()
         .replace(/ğ/g, 'g')
         .replace(/ü/g, 'u')
@@ -10,9 +13,22 @@ export const createSlug = (name: string, id: string): string => {
         .replace(/ö/g, 'o')
         .replace(/ç/g, 'c')
         .replace(/[^a-z0-9\s-]/g, '') // Remove invalid chars
-        .trim()
+        .trim();
+
+    // Remove stop words
+    stopWords.forEach(word => {
+        const regex = new RegExp(`\\b${word}\\b`, 'g');
+        slug = slug.replace(regex, '');
+    });
+
+    slug = slug
         .replace(/\s+/g, '-') // Replace spaces with -
         .replace(/-+/g, '-'); // Remove duplicate -
+
+    // Limit length to ~50-60 chars for SEO friendliness, but keep full words
+    if (slug.length > 60) {
+        slug = slug.substring(0, 60).replace(/-[^-]*$/, '');
+    }
 
     return `${slug}-${id}`;
 };

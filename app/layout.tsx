@@ -17,9 +17,30 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "MiraTekstil | Lüks Ev Tekstili, Nevresim Takımları & Dekorasyon",
-  description: "MiraTekstil ile evinize zarafet katın. En kaliteli pamuk nevresim takımları, bambu havlular, ipek yastık kılıfları ve modern ev dekorasyon ürünleri.",
-  keywords: "mira tekstil, ev tekstili, nevresim takımı, bambu havlu, ipek yastık kılıfı, dekoratif yastık, koltuk şalı, lüks ev dekorasyonu, çeyiz seti",
+  metadataBase: new URL('https://miratekstil.com'), // Canonical URL base
+  title: "MiraTekstil | Perde Modelleri, Tül Perde & Lüks Ev Tekstili",
+  description: "Eviniz için en şık perde modelleri, tül perde, blackout perde ve ışık geçirmeyen perde seçenekleri MiraTekstil'de. En son çıkan perde modelleri ve fiyatları için tıklayın.",
+  authors: [{ name: 'MiraTekstil', url: 'https://miratekstil.com' }],
+  publisher: 'MiraTekstil',
+  robots: {
+    index: true,
+    follow: true,
+  },
+  openGraph: {
+    title: "MiraTekstil | Perde Modelleri, Tül Perde & Lüks Ev Tekstili",
+    description: "Eviniz için en şık perde modelleri, tül perde, blackout perde ve ışık geçirmeyen perde seçenekleri MiraTekstil'de.",
+    url: 'https://miratekstil.com',
+    siteName: 'MiraTekstil',
+    locale: 'tr_TR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@miratekstil', // Assuming a handle or placeholder
+    creator: '@miratekstil',
+    title: "MiraTekstil | Perde Modelleri, Tül Perde & Lüks Ev Tekstili",
+    description: "Eviniz için en şık perde modelleri, tül perde, blackout perde ve ışık geçirmeyen perde seçenekleri MiraTekstil'de.",
+  },
 };
 
 export default function RootLayout({

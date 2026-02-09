@@ -334,26 +334,69 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
     // JSON-LD Structured Data for SEO
     const jsonLd = {
         '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: product.name,
-        image: allImages,
-        description: product.description,
-        brand: {
-            '@type': 'Brand',
-            name: product.brand
-        },
-        offers: {
-            '@type': 'Offer',
-            priceCurrency: 'TRY',
-            price: displayPrice.toFixed(2),
-            availability: (selectedVariant?.stock || 0) > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-            itemCondition: 'https://schema.org/NewCondition'
-        },
-        aggregateRating: product.averageRating ? {
-            '@type': 'AggregateRating',
-            ratingValue: product.averageRating,
-            reviewCount: reviews.length > 0 ? reviews.length : 1
-        } : undefined
+        '@graph': [
+            {
+                '@type': 'BreadcrumbList',
+                'itemListElement': [
+                    {
+                        '@type': 'ListItem',
+                        'position': 1,
+                        'name': 'Anasayfa',
+                        'item': 'https://miratekstil.com'
+                    },
+                    {
+                        '@type': 'ListItem',
+                        'position': 2,
+                        'name': 'Mağaza',
+                        'item': 'https://miratekstil.com/shop'
+                    },
+                    {
+                        '@type': 'ListItem',
+                        'position': 3,
+                        'name': product.name,
+                        'item': `https://miratekstil.com/product/${product.id}` // Ideally slug, but ID is safe fallback or use window loc if client side
+                    }
+                ]
+            },
+            {
+                '@type': 'Product',
+                name: product.name,
+                image: allImages,
+                description: product.description,
+                sku: product.id,
+                mpn: product.id,
+                brand: {
+                    '@type': 'Brand',
+                    name: product.brand || 'MiraTekstil'
+                },
+                offers: {
+                    '@type': 'Offer',
+                    priceCurrency: 'TRY',
+                    price: displayPrice.toFixed(2),
+                    availability: (selectedVariant?.stock || 0) > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+                    itemCondition: 'https://schema.org/NewCondition',
+                    url: `https://miratekstil.com/product/${product.id}`
+                },
+                aggregateRating: product.averageRating ? {
+                    '@type': 'AggregateRating',
+                    ratingValue: product.averageRating,
+                    reviewCount: reviews.length > 0 ? reviews.length : 1
+                } : undefined,
+                review: reviews.map(r => ({
+                    '@type': 'Review',
+                    author: {
+                        '@type': 'Person',
+                        name: r.author
+                    },
+                    datePublished: r.date,
+                    reviewBody: r.comment,
+                    reviewRating: {
+                        '@type': 'Rating',
+                        ratingValue: r.rating
+                    }
+                }))
+            }
+        ]
     };
 
     return (
@@ -365,7 +408,11 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
             <nav aria-label="Breadcrumb" className="container mx-auto px-4 sm:px-6 py-4 text-sm text-gray-500">
                 <ol className="list-none p-0 inline-flex">
                     <li className="flex items-center">
-                        <Link href="/shop" className="hover:text-brand-primary">Mağaza</Link>
+                        <Link href="/" className="hover:text-brand-primary" title="Anasayfa">Anasayfa</Link>
+                        <ChevronRightIcon className="w-3 h-3 mx-2" />
+                    </li>
+                    <li className="flex items-center">
+                        <Link href="/shop" className="hover:text-brand-primary" title="Mağaza">Mağaza</Link>
                         <ChevronRightIcon className="w-3 h-3 mx-2" />
                     </li>
                     <li className="flex items-center">
@@ -411,7 +458,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
 
                     {/* Content Column: 7 cols (approx 58%) */}
                     <main className="lg:col-span-7 pt-2">
-                        <h2 className="text-sm uppercase tracking-widest text-brand-secondary font-bold mb-1">{product.brand}</h2>
+                        <p className="text-sm uppercase tracking-widest text-brand-secondary font-bold mb-1">{product.brand}</p>
                         <h1 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary mb-3">{product.name}</h1>
 
                         <div className="flex items-center gap-4 mb-6 text-sm text-brand-accent">
@@ -638,7 +685,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                     <div className="mt-10 max-w-4xl mx-auto min-h-[300px]">
                         {activeTab === 'description' && (
                             <section className="prose max-w-none text-brand-accent bg-white p-8 rounded-lg shadow-sm border border-brand-border">
-                                <h3 className="text-xl font-serif text-brand-primary mb-4">Ürün Açıklaması</h3>
+                                <h2 className="text-xl font-serif text-brand-primary mb-4">Ürün Açıklaması</h2>
                                 <p className="mb-6 leading-relaxed">{product.description}</p>
                                 <h4 className="font-bold text-brand-primary mb-2">Detaylar ve Bakım</h4>
                                 <ul className="list-disc list-inside space-y-2 marker:text-brand-secondary">
@@ -649,7 +696,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
 
                         {activeTab === 'reviews' && (
                             <section className="bg-white p-8 rounded-lg shadow-sm border border-brand-border">
-                                <h3 className="text-2xl font-serif mb-6 text-center text-brand-primary">Müşteri Yorumları</h3>
+                                <h2 className="text-2xl font-serif mb-6 text-center text-brand-primary">Müşteri Yorumları</h2>
                                 {reviews.length > 0 ? (
                                     <div className="space-y-8">
                                         {reviews.map(review => (
@@ -710,7 +757,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
 
                         {activeTab === 'qa' && (
                             <section className="bg-white p-8 rounded-lg shadow-sm border border-brand-border">
-                                <h3 className="text-2xl font-serif mb-6 text-center text-brand-primary">Satıcıya Sor</h3>
+                                <h2 className="text-2xl font-serif mb-6 text-center text-brand-primary">Satıcıya Sor</h2>
 
                                 {/* Previous Questions List */}
                                 {questions.length > 0 && (
