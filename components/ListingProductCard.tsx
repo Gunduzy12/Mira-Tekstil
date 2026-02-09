@@ -2,6 +2,7 @@
 
 import React, { useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image'; // 👈 EKLENDİ
 import { Product } from '../types';
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
@@ -11,12 +12,16 @@ import { createSlug } from '@/utils/slugify';
 
 interface ListingProductCardProps {
   product: Product;
+  index?: number; // 👈 EKLENDİ: LCP için sıra numarası lazım
 }
 
-const ListingProductCard: React.FC<ListingProductCardProps> = ({ product }) => {
+const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index = -1 }) => {
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const { addToCart } = useCart();
   const isWishlisted = isInWishlist(product.id);
+
+  // 🚀 PERFORMANS AYARI: İlk 4 ürün (0,1,2,3) hemen yüklensin (LCP Düşürücü)
+  const isPriority = index !== -1 && index < 4;
 
   const hasVariants = product.variants.length > 1;
   const isOutOfStock = product.variants.every(v => v.stock === 0);
@@ -36,7 +41,7 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product }) => {
     : 0;
 
   const handleWishlistClick = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent Link navigation
+    e.preventDefault(); 
     e.stopPropagation();
     if (isWishlisted) {
       removeFromWishlist(product.id);
@@ -46,59 +51,54 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product }) => {
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault(); // Prevent Link navigation
+    e.preventDefault(); 
     e.stopPropagation();
     if (isOutOfStock) return;
 
     if (hasVariants || product.isCustomSize) {
-      // Variants selection is needed, so maybe redirect to product page anyway?
-      // Or open a modal? For now, let's redirect via the main Link (so do nothing and let event bubble? No, we prevented default)
-      // If we want to redirect, we shouldn't have prevented default.
-      // But the button says "Select Options" usually.
-      // Let's just navigate to product page manually or let the user click the card.
+       // Varyant varsa detay sayfasına gitmesi için boş bırakıldı (Link çalışacak)
     } else {
       addToCart(product, product.variants[0], 1);
     }
   };
 
-  // Custom navigation handler for "Select Options" button to avoid conflict if needed, 
-  // but since the whole card is a Link, we might just let it bubble if we want navigation.
-  // BUT the instruction says "Refactor... Use Link". So we wrap the card in Link.
-
   return (
     <div className="group relative bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-
-
-
       <Link href={`/product/${createSlug(product.name, product.id)}`} className="block h-full">
+        
+        {/* 👇 GÖRSEL ALANI GÜNCELLENDİ 👇 */}
         <div className="relative aspect-[4/5] overflow-hidden bg-gray-100">
-          <img
+          <Image
             src={product.imageUrl}
             alt={product.name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            fill // 👈 Kapsayıcıya (aspect-[4/5]) tam oturur
+            priority={isPriority} // 👈 9.7sn sorununu çözen kod
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // 👈 Doğru boyutu indirir
+            className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
+          
           {/* Badges */}
-          <div className="absolute top-2 left-2 flex flex-col gap-2">
+          <div className="absolute top-2 left-2 flex flex-col gap-2 z-10"> 
             {product.isFeatured && (
-              <span className="bg-brand-secondary text-white text-xs font-bold px-2 py-1 rounded">Öne Çıkan</span>
+              <span className="bg-brand-secondary text-white text-xs font-bold px-2 py-1 rounded shadow-sm">Öne Çıkan</span>
             )}
             {discountRate > 0 && (
-              <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">%{discountRate} İndirim</span>
+              <span className="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded shadow-sm">%{discountRate} İndirim</span>
             )}
           </div>
 
           {/* Wishlist Button */}
           <button
             onClick={handleWishlistClick}
-            className="absolute top-2 right-2 bg-white/80 backdrop-blur-sm p-2 rounded-full hover:bg-white text-gray-600 hover:text-red-500 transition-colors shadow-sm"
+            className="absolute top-2 right-2 z-10 bg-white/80 backdrop-blur-sm p-2 rounded-full hover:bg-white text-gray-600 hover:text-red-500 transition-colors shadow-sm"
           >
             <HeartIcon className="w-5 h-5" fill={isWishlisted ? 'currentColor' : 'none'} />
           </button>
 
           {/* Quick Action Overlay (Desktop) */}
-          <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-white/90 backdrop-blur-sm border-t border-gray-100 hidden lg:flex flex-col gap-2">
+          <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 bg-white/90 backdrop-blur-sm border-t border-gray-100 hidden lg:flex flex-col gap-2 z-10">
             <button
-              onClick={hasVariants || product.isCustomSize ? undefined : handleAddToCart} // If variants, let Link handle click (go to details)
+              onClick={hasVariants || product.isCustomSize ? undefined : handleAddToCart}
               disabled={isOutOfStock}
               className={`w-full py-2 rounded-md font-medium text-sm flex items-center justify-center gap-2 ${isOutOfStock
                 ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
@@ -110,6 +110,7 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product }) => {
             </button>
           </div>
         </div>
+        {/* 👆 GÖRSEL ALANI BİTİŞ 👆 */}
 
         <div className="p-4">
           <div className="text-sm text-gray-500 mb-1">{product.brand}</div>
@@ -132,7 +133,7 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product }) => {
               )}
             </div>
           </div>
-          {/* Mobile Add to Cart (Visible only on small screens) */}
+          {/* Mobile Add to Cart */}
           <div className="mt-4 lg:hidden">
             <button
               onClick={hasVariants || product.isCustomSize ? undefined : handleAddToCart}

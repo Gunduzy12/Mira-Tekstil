@@ -6,8 +6,9 @@ import { useProducts } from '../context/ProductContext';
 import { useCategories } from '../context/CategoryContext';
 import { ChevronDownIcon, ChevronUpIcon, SortIcon } from '../components/Icons';
 import ListingProductCard from '../components/ListingProductCard';
-// import ScrollToTopButton from '../components/ScrollToTopButton'; // Make sure this exists or comment out
+import ProductSkeleton from './ProductSkeleton'; // 👈 YENİ: İskelet dosyasını import ettik
 
+// Filtre Grupları Bileşeni
 const FilterGroup: React.FC<{ title: string; children: React.ReactNode; defaultOpen?: boolean }> = ({ title, children, defaultOpen = true }) => {
     const [isOpen, setIsOpen] = useState(defaultOpen);
     return (
@@ -23,6 +24,7 @@ const FilterGroup: React.FC<{ title: string; children: React.ReactNode; defaultO
     );
 };
 
+// Ana İçerik Bileşeni
 const ProductListPageContent: React.FC = () => {
     const searchParams = useSearchParams();
     const router = useRouter();
@@ -37,14 +39,11 @@ const ProductListPageContent: React.FC = () => {
     const [sortOption, setSortOption] = useState<string>('featured');
     const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
 
-    // Sync state with URL params
+    // URL Parametrelerini State ile Eşle
     useEffect(() => {
         const cat = searchParams.get('category');
         if (cat) setSelectedCategory(cat);
-        else if (!searchParams.has('view')) setSelectedCategory('Tümü'); // Only reset if not explicitly viewing something else? Simplified:
-
-        // Actually, if URL changes, we update state.
-        // If user clicks filter, we update URL.
+        else if (!searchParams.has('view')) setSelectedCategory('Tümü');
     }, [searchParams]);
 
     const updateUrl = (newCategory: string) => {
@@ -54,7 +53,6 @@ const ProductListPageContent: React.FC = () => {
         } else {
             params.delete('category');
         }
-        // Keep search query if exists? Usually yes, filtering results.
         router.push(`/shop?${params.toString()}`);
     };
 
@@ -63,11 +61,11 @@ const ProductListPageContent: React.FC = () => {
         updateUrl(category);
     };
 
-    // Filter & Sort Logic
+    // Filtreleme ve Sıralama Mantığı
     const filteredProducts = useMemo(() => {
         let result = [...products];
 
-        // Search Query
+        // Arama Sorgusu
         if (initialSearchQuery) {
             const query = initialSearchQuery.toLowerCase();
             result = result.filter(p =>
@@ -77,15 +75,15 @@ const ProductListPageContent: React.FC = () => {
             );
         }
 
-        // Category Filter
+        // Kategori Filtresi
         if (selectedCategory !== 'Tümü') {
             result = result.filter(p => p.category === selectedCategory);
         }
 
-        // Price Filter
+        // Fiyat Filtresi
         result = result.filter(p => p.priceFrom >= priceRange[0] && p.priceFrom <= priceRange[1]);
 
-        // Sorting
+        // Sıralama
         switch (sortOption) {
             case 'priceAsc':
                 result.sort((a, b) => a.priceFrom - b.priceFrom);
@@ -107,7 +105,6 @@ const ProductListPageContent: React.FC = () => {
         return result;
     }, [products, initialSearchQuery, selectedCategory, priceRange, sortOption]);
 
-    // Input stilleri için ortak sınıf
     const priceInputClass = "w-full bg-white border border-gray-300 rounded-md py-2 px-3 text-sm text-center text-gray-900 focus:outline-none focus:ring-1 focus:ring-brand-secondary focus:border-brand-secondary shadow-sm placeholder-gray-400";
 
     return (
@@ -139,7 +136,7 @@ const ProductListPageContent: React.FC = () => {
                 </header>
 
                 <div className="flex flex-col lg:flex-row gap-12">
-                    {/* Mobile Filter Toggle Button */}
+                    {/* Mobil Filtre Butonu */}
                     <button
                         className="lg:hidden flex items-center justify-center gap-2 w-full bg-white border border-brand-border rounded-lg py-3 text-brand-primary font-semibold shadow-sm hover:bg-gray-50 transition-colors"
                         onClick={() => setIsMobileFiltersOpen(!isMobileFiltersOpen)}
@@ -149,7 +146,7 @@ const ProductListPageContent: React.FC = () => {
                         {isMobileFiltersOpen ? <ChevronUpIcon className="w-4 h-4 ml-1" /> : <ChevronDownIcon className="w-4 h-4 ml-1" />}
                     </button>
 
-                    {/* Sidebar Filters */}
+                    {/* Sidebar Filtreleri */}
                     <aside className={`w-full lg:w-1/4 space-y-2 ${isMobileFiltersOpen ? 'block' : 'hidden lg:block'}`}>
                         <FilterGroup title="Kategoriler">
                             <div className="space-y-2">
@@ -214,15 +211,15 @@ const ProductListPageContent: React.FC = () => {
                         </FilterGroup>
                     </aside>
 
-                    {/* Product Grid */}
+                    {/* Ürün Listesi Grid */}
                     <main className="flex-1">
                         {filteredProducts.length > 0 ? (
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
-                                {filteredProducts.map(product => (
+                                {filteredProducts.map((product, index) => (
                                     <ListingProductCard
                                         key={product.id}
                                         product={product}
-                                    // onSelectProduct is handled via Link inside ListingProductCard now
+                                        index={index} /* 👈 KRİTİK: LCP için sıra numarası gönderiliyor */
                                     />
                                 ))}
                             </div>
@@ -234,7 +231,7 @@ const ProductListPageContent: React.FC = () => {
                                         handleCategoryChange('Tümü');
                                         setPriceRange([0, 5000]);
                                         setSortOption('featured');
-                                        router.push('/shop'); // Clear search query too
+                                        router.push('/shop');
                                     }}
                                     className="mt-4 text-brand-secondary font-medium hover:underline"
                                 >
@@ -245,13 +242,35 @@ const ProductListPageContent: React.FC = () => {
                     </main>
                 </div>
             </div>
-            {/* <ScrollToTopButton /> */}
         </div>
     );
 };
 
+// Ana Export: Suspense ve Skeleton ile sarmalanmış hali
 const ProductListPage = () => (
-    <Suspense fallback={<div className="p-20 text-center">Yükleniyor...</div>}>
+    <Suspense 
+        fallback={
+            // 👈 Beyaz ekran yerine bu düzen yüklenecek (FCP Çözümü)
+            <div className="bg-brand-bg min-h-screen">
+                <div className="container mx-auto px-6 py-12">
+                   {/* Başlık İskeleti */}
+                   <div className="h-8 bg-gray-200 rounded w-48 mb-8 animate-pulse"></div>
+                   
+                   <div className="flex flex-col lg:flex-row gap-12">
+                        {/* Sidebar İskeleti */}
+                        <aside className="hidden lg:block w-1/4 space-y-4">
+                             <div className="h-64 bg-gray-200 rounded animate-pulse"></div>
+                        </aside>
+                        
+                        {/* Ürün Listesi İskeleti (Gri Kutular) */}
+                        <main className="flex-1">
+                             <ProductSkeleton />
+                        </main>
+                   </div>
+                </div>
+            </div>
+        }
+    >
         <ProductListPageContent />
     </Suspense>
 );
