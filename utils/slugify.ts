@@ -1,7 +1,7 @@
 export const createSlug = (name: string, id: string): string => {
     if (!name) return id;
 
-    // Stop words to remove for shorter URLs
+   
     const stopWords = ['ve', 'ile', 'icin', 'daha', 'cok', 'en', 'yeni', 'ozel', 'uygun'];
 
     let slug = name
