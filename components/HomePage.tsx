@@ -23,22 +23,23 @@ const HomePage: React.FC = () => {
                         <div className="absolute -inset-1 bg-gradient-to-r from-brand-secondary/20 to-brand-light/20 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
                         <div className="relative px-8 py-3 bg-black/40 backdrop-blur-md rounded-full border border-brand-secondary/30 ring-1 ring-white/10 shadow-2xl flex items-center justify-center">
                             <span className="text-brand-secondary font-serif tracking-[0.25em] text-xs md:text-sm font-bold uppercase drop-shadow-md">
-                                MiraTekstil 2025 Koleksiyonu
+                                MiraTekstil 2025 Perde Koleksiyonu
                             </span>
                         </div>
                     </div>
 
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold max-w-5xl leading-tight drop-shadow-2xl tracking-tight mb-6">
-                        Zamansız Zarafet,<br />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">Modern Dokunuş</span>
+                        Evinizin Işıltısı,<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-400">Perde Modelleri</span>
                     </h1>
                     <p className="mt-4 max-w-xl text-lg md:text-xl font-medium text-gray-200 drop-shadow-lg leading-relaxed">
-                        Yatak odanızdan salonunuza, evinize lüks ve konfor katan en kaliteli pamuk ve keten ürünleri keşfedin.
+                        Salonunuzdan yatak odanıza, en şık tül, fon ve blackout perde seçenekleri ile yaşam alanlarınıza değer katın.
                     </p>
                     <Link
                         href="/shop"
                         className="mt-12 group bg-white text-brand-primary font-bold py-4 px-12 rounded-full hover:bg-brand-secondary hover:text-white transition-all duration-300 shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_50px_rgba(191,160,128,0.3)] transform hover:-translate-y-1 inline-block"
                         aria-label="Tüm koleksiyonu incele"
+                        title="Koleksiyonu Keşfet"
                     >
                         Koleksiyonu Keşfet
                     </Link>
@@ -59,6 +60,7 @@ const HomePage: React.FC = () => {
                         <Link
                             href="/shop"
                             className="hidden md:flex items-center font-semibold text-brand-primary hover:text-brand-secondary transition-colors"
+                            title="Tüm Ürünleri Gör"
                         >
                             Tümünü Gör <ChevronRightIcon className="ml-1 w-4 h-4" />
                         </Link>
@@ -79,6 +81,7 @@ const HomePage: React.FC = () => {
                         <Link
                             href="/shop"
                             className="inline-flex items-center font-semibold text-brand-primary hover:text-brand-secondary transition-colors border border-brand-primary px-6 py-3 rounded-md"
+                            title="Tüm Ürünleri Gör"
                         >
                             Tümünü Gör <ChevronRightIcon className="ml-1 w-4 h-4" />
                         </Link>
@@ -95,6 +98,7 @@ const HomePage: React.FC = () => {
                     <Link
                         href="/shop"
                         className="bg-brand-secondary text-white font-bold py-4 px-10 rounded-full hover:bg-white hover:text-brand-primary transition-all duration-300 shadow-xl transform hover:scale-105 border border-transparent hover:border-white inline-block"
+                        title="Alışverişe Başla"
                     >
                         Alışverişe Başla
                     </Link>

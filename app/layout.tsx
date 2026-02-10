@@ -18,6 +18,9 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://miratekstil.com'), // Canonical URL base
+  alternates: {
+    canonical: '/',
+  },
   title: "MiraTekstil | Perde Modelleri, Tül Perde & Lüks Ev Tekstili",
   description: "Eviniz için en şık perde modelleri, tül perde, blackout perde ve ışık geçirmeyen perde seçenekleri MiraTekstil'de. En son çıkan perde modelleri ve fiyatları için tıklayın.",
   authors: [{ name: 'MiraTekstil', url: 'https://miratekstil.com' }],

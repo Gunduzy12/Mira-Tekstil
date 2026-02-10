@@ -125,16 +125,16 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                         <p className="text-xs text-gray-500">Hoşgeldiniz,</p>
                         <p className="text-sm font-semibold text-brand-primary truncate">{user.name}</p>
                       </div>
-                      <Link href="/account" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-secondary">Hesabım</Link>
-                      <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">Çıkış Yap</button>
+                      <Link href="/account" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-secondary" title="Hesabım">Hesabım</Link>
+                      <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50" title="Çıkış Yap">Çıkış Yap</button>
                     </div>
                   </div>
                 </div>
               ) : (
                 <div className="hidden lg:flex items-center space-x-3">
-                  <Link href="/auth/login" className="text-sm font-medium text-brand-primary hover:text-brand-secondary transition-colors">Giriş</Link>
+                  <Link href="/auth/login" className="text-sm font-medium text-brand-primary hover:text-brand-secondary transition-colors" title="Giriş Yap">Giriş</Link>
                   <span className="text-gray-300">|</span>
-                  <Link href="/auth/register" className="text-sm font-medium text-brand-primary hover:text-brand-secondary transition-colors">Kayıt Ol</Link>
+                  <Link href="/auth/register" className="text-sm font-medium text-brand-primary hover:text-brand-secondary transition-colors" title="Kayıt Ol">Kayıt Ol</Link>
                 </div>
               )}
 
@@ -142,6 +142,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                 href="/wishlist"
                 className="relative text-brand-primary hover:text-brand-secondary transition duration-300 p-1"
                 aria-label={`İstek Listesi, ${wishlistCount} ürün`}
+                title="İstek Listem"
               >
                 <HeartIcon className="h-6 w-6" />
                 {wishlistCount > 0 && (
@@ -155,6 +156,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                 className="relative text-brand-primary hover:text-brand-secondary transition duration-300 p-1"
                 onClick={() => setIsCartOpen(true)}
                 aria-label={`Alışveriş sepeti, ${itemCount} ürün`}
+                title="Sepetim"
               >
                 <CartIcon className="h-6 w-6" />
                 {itemCount > 0 && (
@@ -199,6 +201,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                   href={link.path}
                   onClick={() => setIsMenuOpen(false)}
                   className="text-brand-primary text-lg font-medium hover:text-brand-secondary transition duration-200 py-3 px-2 hover:bg-gray-50 rounded-md"
+                  title={link.name}
                 >
                   {link.name}
                 </Link>
@@ -206,9 +209,10 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
               <a
                 href="https://www.trendyol.com/sr?mid=750999&os=1"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="nofollow noreferrer"
                 onClick={() => setIsMenuOpen(false)}
                 className="text-orange-600 text-lg font-bold hover:text-orange-700 transition duration-200 py-3 px-2 hover:bg-orange-50 rounded-md"
+                title="Trendyol Mağazamızı Ziyaret Edin"
               >
                 Trendyol Mağaza
               </a>
@@ -221,13 +225,13 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                     <div className="bg-brand-primary text-white rounded-full p-1 mr-3"><UserIcon className="w-4 h-4" /></div>
                     <span className="font-semibold">{user.name}</span>
                   </div>
-                  <Link href="/account" onClick={() => setIsMenuOpen(false)} className="flex items-center text-gray-600 hover:text-brand-primary px-2 py-2">Hesabım</Link>
-                  <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="flex w-full items-center text-red-500 hover:text-red-700 px-2 py-2">Çıkış Yap</button>
+                  <Link href="/account" onClick={() => setIsMenuOpen(false)} className="flex items-center text-gray-600 hover:text-brand-primary px-2 py-2" title="Hesabım">Hesabım</Link>
+                  <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="flex w-full items-center text-red-500 hover:text-red-700 px-2 py-2" title="Çıkış Yap">Çıkış Yap</button>
                 </>
               ) : (
                 <div className="grid grid-cols-2 gap-4">
-                  <Link href="/auth/login" onClick={() => setIsMenuOpen(false)} className="text-center text-brand-primary border border-brand-primary rounded-lg py-3 font-medium hover:bg-gray-50 transition-colors">Giriş Yap</Link>
-                  <Link href="/auth/register" onClick={() => setIsMenuOpen(false)} className="text-center bg-brand-primary text-white rounded-lg py-3 font-medium hover:bg-brand-dark transition-colors">Kayıt Ol</Link>
+                  <Link href="/auth/login" onClick={() => setIsMenuOpen(false)} className="text-center text-brand-primary border border-brand-primary rounded-lg py-3 font-medium hover:bg-gray-50 transition-colors" title="Giriş Yap">Giriş Yap</Link>
+                  <Link href="/auth/register" onClick={() => setIsMenuOpen(false)} className="text-center bg-brand-primary text-white rounded-lg py-3 font-medium hover:bg-brand-dark transition-colors" title="Kayıt Ol">Kayıt Ol</Link>
                 </div>
               )}
             </div>

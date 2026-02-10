@@ -8,7 +8,7 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
     const { categories } = useCategories();
-    
+
     // Select specific categories to feature or just take the first 3
     const featuredCategories = categories.slice(0, 3);
 
@@ -22,6 +22,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                     <button
                         onClick={() => onNavigate('shop')}
                         className="mt-8 bg-brand-bg text-brand-primary font-bold py-3 px-8 rounded-md hover:bg-brand-secondary hover:text-white transition-all duration-300 shadow-lg"
+                        title="Koleksiyonu Keşfet"
                     >
                         Koleksiyonu Keşfet
                     </button>
@@ -32,11 +33,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onNavigate }) => {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                     {featuredCategories.map(category => (
                         <div key={category.id} onClick={() => onNavigate('shop')} className="group relative rounded-lg overflow-hidden shadow-lg cursor-pointer aspect-video md:aspect-square">
-                           <img src={category.imageUrl} alt={category.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"/>
-                           <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-all duration-300"></div>
-                           <div className="absolute bottom-6 left-6">
-                               <h3 className="text-white text-2xl font-serif font-semibold">{category.name}</h3>
-                           </div>
+                            <img src={category.imageUrl} alt={category.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out" />
+                            <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-all duration-300"></div>
+                            <div className="absolute bottom-6 left-6">
+                                <h3 className="text-white text-2xl font-serif font-semibold">{category.name}</h3>
+                            </div>
                         </div>
                     ))}
                 </div>
