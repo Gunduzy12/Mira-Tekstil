@@ -89,6 +89,19 @@ const HomePage: React.FC = () => {
                 </div>
             </section>
 
+            {/* SEO Content Block - Keyword Boosting */}
+            <section className="bg-white py-16 border-t border-brand-border">
+                <div className="container mx-auto px-6 text-center">
+                    <h2 className="text-2xl md:text-3xl font-serif text-brand-primary mb-6">Neden MiraTekstil Perde Modelleri?</h2>
+                    <p className="text-gray-600 max-w-4xl mx-auto leading-relaxed text-lg">
+                        Evinizin havasını değiştirecek en şık <strong>perde modelleri</strong> MiraTekstil'de.
+                        Modern salonlarınız için <strong>zebra perde</strong> ve <strong>fon perde</strong> seçeneklerinden,
+                        yatak odanızda tam karanlık sağlayan <strong>blackout (karartma) perde</strong> modellerine kadar geniş ürün yelpazemizi keşfedin.
+                        Her pencereye uygun <strong>tül perde</strong> çeşitlerimiz ve uygun <strong>perde fiyatları</strong> ile dekorasyonunuzu tamamlayın.
+                    </p>
+                </div>
+            </section>
+
             {/* Promo Section - BRAND PRIMARY THEME (Matches Footer) */}
             <section className="bg-brand-primary text-white py-24 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
