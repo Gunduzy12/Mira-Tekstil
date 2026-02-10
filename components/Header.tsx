@@ -10,8 +10,7 @@ import { useAuth } from '../context/AuthContext';
 import CartSidebar from './CartSidebar';
 
 interface HeaderProps {
-  // onNavigate removed as we use Next.js routing
-  // onSearch kept if it's used for something else, but search usually navigates to a results page
+ 
   onSearch?: (query: string) => void;
 }
 
