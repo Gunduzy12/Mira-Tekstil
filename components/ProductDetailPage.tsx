@@ -20,7 +20,7 @@ interface ProductDetailPageProps {
     product: Product;
 }
 
-// KVKK Masking Helper
+
 const maskName = (name: string) => {
     if (!name) return '*****';
     const parts = name.trim().split(' ');
