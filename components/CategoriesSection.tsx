@@ -34,7 +34,7 @@ const CategoriesSection: React.FC = () => {
     <section className="bg-white py-12 md:py-16">
       <div className="container mx-auto px-6">
         <div className="text-center mb-10 md:mb-12">
-          <h2 className="text-2xl md:text-3xl font-serif text-brand-primary font-medium tracking-wide">Kategorilerimiz</h2>
+          <h2 className="text-2xl md:text-3xl font-serif text-brand-primary font-medium tracking-wide">Perde Koleksiyonları</h2>
         </div>
 
         <div className="flex flex-wrap justify-center gap-8 md:gap-12">
