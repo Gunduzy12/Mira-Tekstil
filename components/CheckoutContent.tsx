@@ -108,6 +108,7 @@ const CheckoutContent: React.FC = () => {
     };
 
     // --- ÖDEME BAŞLAT ---
+    // --- ÖDEME BAŞLAT ---
     const handleStartPayment = async () => {
         if (!formData.firstName || !formData.lastName || !formData.email || !formData.address) {
             return showNotification('Teslimat bilgilerini doldurunuz.', 'error');
@@ -132,8 +133,48 @@ const CheckoutContent: React.FC = () => {
             return details;
         }).join('\n');
 
+        // 1. Önce Siparişi "Ödeme Bekleniyor" olarak kaydet (KRİTİK ADIM)
         try {
-            await sendFormToEmail('Yeni Sipariş (Admin)', {
+            const { doc, setDoc } = await import('firebase/firestore');
+            const { db } = await import('../firebaseConfig');
+
+            const orderData = {
+                id: orderId,
+                date: new Date().toISOString(),
+                status: 'Ödeme Bekleniyor', // Henüz ödeme yapılmadı
+                items: cartItems.map(item => ({
+                    id: item.productId,
+                    name: item.productName,
+                    price: item.variant.price,
+                    imageUrl: item.variant.imageUrl || item.productImageUrl,
+                    quantity: item.quantity,
+                    selectedColor: item.variant.color,
+                    selectedSize: item.variant.size,
+                    customDimensions: item.customDimensions
+                })),
+                total: total,
+                shippingAddress: shippingAddress,
+                customerName: fullName,
+                email: formData.email,
+                phone: formData.phone,
+                userId: user?.id || null, // Varsa user ID'si
+                trackingNumber: '',
+                shippingCompany: undefined
+            };
+
+            await setDoc(doc(db, 'orders', orderId), orderData);
+            console.log("Sipariş geçici olarak kaydedildi:", orderId);
+
+        } catch (dbError) {
+            console.error("Sipariş ön-kayıt hatası:", dbError);
+            showNotification('Sipariş oluşturulurken bir hata oluştu.', 'error');
+            setIsProcessing(false);
+            return;
+        }
+
+        // 2. PayTR Başlat
+        try {
+            await sendFormToEmail('Yeni Sipariş Denemesi (Ödeme Bekleniyor)', {
                 orderId: orderId,
                 customerName: fullName,
                 email: formData.email,
@@ -142,14 +183,7 @@ const CheckoutContent: React.FC = () => {
                 total: total.toFixed(2),
                 items: itemsDetailString
             });
-
-            await sendFormToEmail('Sipariş Alındı (Müşteri)', {
-                orderId: orderId,
-                customerName: fullName,
-                email: formData.email,
-                total: total.toFixed(2),
-                address: shippingAddress
-            });
+            // Müşteriye henüz mail atma, ödeme başarılı olunca callback veya success sayfasında atılır.
         } catch (mailError) {
             console.error("Mail hatası:", mailError);
         }
@@ -248,15 +282,15 @@ const CheckoutContent: React.FC = () => {
                                 </button>
                             </div>
                             <iframe
-  src={`https://www.paytr.com/odeme/guvenli/${iframeToken}`}
-  title="PayTR Güvenli Ödeme"
-  style={{
-    width: "100%",
-    minHeight: "100vh",
-    height: "1400px",   // Mobil güvenli alan
-    border: "none"
-  }}
-/>
+                                src={`https://www.paytr.com/odeme/guvenli/${iframeToken}`}
+                                title="PayTR Güvenli Ödeme"
+                                style={{
+                                    width: "100%",
+                                    minHeight: "100vh",
+                                    height: "1400px", // Mobil güvenli alan
+                                    border: "none"
+                                }}
+                            />
                         </div>
                     ) : (
                         <>
