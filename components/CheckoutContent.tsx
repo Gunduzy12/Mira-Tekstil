@@ -248,10 +248,15 @@ const CheckoutContent: React.FC = () => {
                                 </button>
                             </div>
                             <iframe
-                                src={`https://www.paytr.com/odeme/guvenli/${iframeToken}`}
-                                style={{ width: "100%", height: "800px", border: "none" }}
-                                scrolling="no"
-                            />
+  src={`https://www.paytr.com/odeme/guvenli/${iframeToken}`}
+  title="PayTR Güvenli Ödeme"
+  style={{
+    width: "100%",
+    minHeight: "100vh",
+    height: "1400px",   // Mobil güvenli alan
+    border: "none"
+  }}
+/>
                         </div>
                     ) : (
                         <>
