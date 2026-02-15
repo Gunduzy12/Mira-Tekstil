@@ -92,6 +92,7 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index 
           <button
             onClick={handleWishlistClick}
             className="absolute top-2 right-2 z-10 bg-white/80 backdrop-blur-sm p-2 rounded-full hover:bg-white text-gray-600 hover:text-red-500 transition-colors shadow-sm"
+            aria-label={isWishlisted ? "Favorilerden çıkar" : "Favorilere ekle"}
           >
             <HeartIcon className="w-5 h-5" fill={isWishlisted ? 'currentColor' : 'none'} />
           </button>
@@ -116,12 +117,12 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index 
         <div className="p-4">
 
 
-          
+          // ... inside component ...
 
           <div className="text-sm text-gray-500 mb-1">{product.brand}</div>
-          <h3 className="font-serif text-lg font-medium text-brand-primary mb-1 line-clamp-1 group-hover:text-brand-secondary transition-colors">
+          <h2 className="font-serif text-lg font-medium text-brand-primary mb-1 line-clamp-1 group-hover:text-brand-secondary transition-colors">
             {product.name}
-          </h3>
+          </h2>
 
           {/* Star Rating Display */}
           <div className="flex items-center mb-2">
