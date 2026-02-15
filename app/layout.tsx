@@ -60,6 +60,8 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} antialiased font-sans flex flex-col min-h-screen`}
       >
+        <link rel="preconnect" href="https://tekstil-6f7d4.firebaseapp.com" />
+        <link rel="dns-prefetch" href="https://tekstil-6f7d4.firebaseapp.com" />
         {/* GLOBAL RATING SCHEMA (yorum snippet için) */}
         <script
           type="application/ld+json"
