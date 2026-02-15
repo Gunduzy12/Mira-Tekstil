@@ -10,7 +10,7 @@ import { useAuth } from '../context/AuthContext';
 import CartSidebar from './CartSidebar';
 
 interface HeaderProps {
- 
+
   onSearch?: (query: string) => void;
 }
 
@@ -187,7 +187,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                   placeholder="Ürün ara..."
                   className="w-full bg-gray-50 border border-brand-border rounded-lg py-3 pl-4 pr-10 text-sm focus:outline-none focus:ring-1 focus:ring-brand-secondary"
                 />
-                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
+                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" aria-label="Ürün Ara">
                   <SearchIcon className="h-5 w-5" />
                 </button>
               </div>
