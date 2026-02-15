@@ -85,12 +85,10 @@ const StoreProductCard: React.FC<StoreProductCardProps> = ({ product, onSelectPr
         <p className="text-xs text-brand-accent uppercase tracking-wider">{product.brand}</p>
         <h3 className="text-sm font-serif text-brand-primary group-hover:text-brand-secondary transition-colors truncate mt-1">{product.name}</h3>
         <div className="flex items-center gap-2 mt-2 h-5">
-          {product.reviewCount && product.reviewCount > 0 && (
-            <>
-              <StarRating rating={product.averageRating} />
-              <span className="text-xs text-brand-accent">({product.reviewCount})</span>
-            </>
-          )}
+          <div className="flex items-center gap-2 mt-2 h-5">
+            <StarRating rating={product.averageRating || 0} />
+            <span className="text-xs text-brand-accent">({product.reviewCount || 0})</span>
+          </div>
         </div>
         <div className="mt-2 flex items-baseline gap-2">
           <p className="font-semibold text-brand-primary">{product.priceFrom.toFixed(2)} TL</p>
