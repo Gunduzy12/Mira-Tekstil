@@ -7,6 +7,7 @@ import { Product } from '../types';
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
 import { HeartIcon, CartIcon, RulerIcon } from './Icons';
+import StarRating from './StarRating';
 
 import { createSlug } from '@/utils/slugify';
 
@@ -41,7 +42,7 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index 
     : 0;
 
   const handleWishlistClick = (e: React.MouseEvent) => {
-    e.preventDefault(); 
+    e.preventDefault();
     e.stopPropagation();
     if (isWishlisted) {
       removeFromWishlist(product.id);
@@ -51,12 +52,12 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index 
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault(); 
+    e.preventDefault();
     e.stopPropagation();
     if (isOutOfStock) return;
 
     if (hasVariants || product.isCustomSize) {
-       // Varyant varsa detay sayfasına gitmesi için boş bırakıldı (Link çalışacak)
+      // Varyant varsa detay sayfasına gitmesi için boş bırakıldı (Link çalışacak)
     } else {
       addToCart(product, product.variants[0], 1);
     }
@@ -65,7 +66,7 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index 
   return (
     <div className="group relative bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <Link href={`/product/${createSlug(product.name, product.id)}`} className="block h-full">
-        
+
         {/* 👇 GÖRSEL ALANI GÜNCELLENDİ 👇 */}
         <div className="relative aspect-[4/5] overflow-hidden bg-gray-100">
           <Image
@@ -76,9 +77,9 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index 
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // 👈 Doğru boyutu indirir
             className="object-cover group-hover:scale-105 transition-transform duration-500"
           />
-          
+
           {/* Badges */}
-          <div className="absolute top-2 left-2 flex flex-col gap-2 z-10"> 
+          <div className="absolute top-2 left-2 flex flex-col gap-2 z-10">
             {product.isFeatured && (
               <span className="bg-brand-secondary text-white text-xs font-bold px-2 py-1 rounded shadow-sm">Öne Çıkan</span>
             )}
@@ -113,10 +114,20 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index 
         {/* 👆 GÖRSEL ALANI BİTİŞ 👆 */}
 
         <div className="p-4">
+
+
+          // ... inside component ...
+
           <div className="text-sm text-gray-500 mb-1">{product.brand}</div>
-          <h3 className="font-serif text-lg font-medium text-brand-primary mb-2 line-clamp-1 group-hover:text-brand-secondary transition-colors">
+          <h3 className="font-serif text-lg font-medium text-brand-primary mb-1 line-clamp-1 group-hover:text-brand-secondary transition-colors">
             {product.name}
           </h3>
+
+          {/* Star Rating Display */}
+          <div className="flex items-center mb-2">
+            <StarRating rating={product.averageRating || 0} />
+            <span className="text-xs text-gray-500 ml-1">({product.reviewCount || 0})</span>
+          </div>
 
           <div className="flex items-center justify-between mt-auto">
             <div className="flex flex-col">
