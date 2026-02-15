@@ -76,6 +76,7 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index 
             priority={isPriority} // 👈 9.7sn sorununu çözen kod
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // 👈 Doğru boyutu indirir
             className="object-cover group-hover:scale-105 transition-transform duration-500"
+            {...(isPriority ? { fetchPriority: "high" } : {})}
           />
 
           {/* Badges */}
