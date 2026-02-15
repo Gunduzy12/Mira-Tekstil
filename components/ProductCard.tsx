@@ -109,7 +109,13 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProduct }) =
 
         <div className="pt-4 text-left flex flex-col flex-grow">
           <h3 className="text-base font-serif text-brand-primary group-hover:text-brand-secondary transition-colors mb-1 line-clamp-1">{product.name}</h3>
-          <p className="text-sm text-brand-accent mb-2">{product.brand}</p>
+          <p className="text-sm text-brand-accent mb-1">{product.brand}</p>
+
+          {/* Star Rating Display */}
+          <div className="flex items-center mb-2">
+            <StarRating rating={product.averageRating || 0} />
+            <span className="text-xs text-gray-500 ml-1">({product.reviewCount || 0})</span>
+          </div>
 
           {/* Boyut Etiketi */}
           {sizeInfo && (
