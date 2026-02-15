@@ -116,7 +116,7 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index 
         <div className="p-4">
 
 
-          // ... inside component ...
+          
 
           <div className="text-sm text-gray-500 mb-1">{product.brand}</div>
           <h3 className="font-serif text-lg font-medium text-brand-primary mb-1 line-clamp-1 group-hover:text-brand-secondary transition-colors">
