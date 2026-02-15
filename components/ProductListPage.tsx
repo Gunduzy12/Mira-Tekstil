@@ -125,6 +125,7 @@ const ProductListPageContent: React.FC = () => {
                             value={sortOption}
                             onChange={(e) => setSortOption(e.target.value)}
                             className="w-full md:w-auto border border-brand-border bg-white rounded-md py-2 px-4 text-sm focus:outline-none focus:ring-1 focus:ring-brand-secondary"
+                            aria-label="Sıralama Seçenekleri"
                         >
                             <option value="featured">Öne Çıkanlar</option>
                             <option value="priceAsc">Fiyat (Artan)</option>
@@ -248,25 +249,25 @@ const ProductListPageContent: React.FC = () => {
 
 // Ana Export: Suspense ve Skeleton ile sarmalanmış hali
 const ProductListPage = () => (
-    <Suspense 
+    <Suspense
         fallback={
             // 👈 Beyaz ekran yerine bu düzen yüklenecek (FCP Çözümü)
             <div className="bg-brand-bg min-h-screen">
                 <div className="container mx-auto px-6 py-12">
-                   {/* Başlık İskeleti */}
-                   <div className="h-8 bg-gray-200 rounded w-48 mb-8 animate-pulse"></div>
-                   
-                   <div className="flex flex-col lg:flex-row gap-12">
+                    {/* Başlık İskeleti */}
+                    <div className="h-8 bg-gray-200 rounded w-48 mb-8 animate-pulse"></div>
+
+                    <div className="flex flex-col lg:flex-row gap-12">
                         {/* Sidebar İskeleti */}
                         <aside className="hidden lg:block w-1/4 space-y-4">
-                             <div className="h-64 bg-gray-200 rounded animate-pulse"></div>
+                            <div className="h-64 bg-gray-200 rounded animate-pulse"></div>
                         </aside>
-                        
+
                         {/* Ürün Listesi İskeleti (Gri Kutular) */}
                         <main className="flex-1">
-                             <ProductSkeleton />
+                            <ProductSkeleton />
                         </main>
-                   </div>
+                    </div>
                 </div>
             </div>
         }
