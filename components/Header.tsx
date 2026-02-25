@@ -24,11 +24,30 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   const router = useRouter();
 
   const navLinks = [
-    { name: 'Anasayfa', path: '/' },
-    { name: 'Mağaza', path: '/shop' },
     { name: 'Sipariş Takip', path: '/order-tracking' },
+    { name: 'Blog', path: '/blog' },
     { name: 'Hakkımızda', path: '/about' },
     { name: 'İletişim', path: '/contact' },
+  ];
+
+  const megaMenuCategories = [
+    {
+      name: 'Perde',
+      path: '/perde',
+      children: [
+        { name: 'Blackout Perde', path: '/perde/blackout-perde' },
+        { name: 'Saten Perde', path: '/perde/saten-perde' },
+        { name: 'Tül Perde', path: '/perde/tul-perde' },
+        { name: 'Özel Ölçü Perde', path: '/perde/ozel-olcu-perde' },
+      ],
+    },
+    {
+      name: 'Ev Tekstili',
+      path: '/ev-tekstili',
+      children: [
+        { name: 'Yastık Kılıfı', path: '/ev-tekstili/yastik-kilifi' },
+      ],
+    },
   ];
 
   const handleSearchSubmit = (e: FormEvent) => {
@@ -70,7 +89,41 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
             </Link>
           </div>
 
-          <nav className="hidden lg:flex items-center space-x-8" role="navigation">
+          <nav className="hidden lg:flex items-center space-x-6" role="navigation">
+            {/* Mega Menu Categories */}
+            {megaMenuCategories.map((cat) => (
+              <div key={cat.name} className="relative group h-full flex items-center">
+                <Link
+                  href={cat.path}
+                  className="text-brand-primary hover:text-brand-secondary transition duration-300 font-semibold text-sm uppercase tracking-wide py-2 border-b-2 border-transparent group-hover:border-brand-secondary"
+                  title={cat.name}
+                >
+                  {cat.name}
+                </Link>
+                <div className="absolute top-full left-0 pt-2 w-56 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                  <div className="bg-white rounded-lg shadow-xl border border-brand-border py-2">
+                    <Link
+                      href={cat.path}
+                      className="block px-4 py-2 text-sm font-semibold text-brand-primary hover:bg-gray-50 hover:text-brand-secondary border-b border-gray-100"
+                      title={`Tüm ${cat.name}`}
+                    >
+                      Tüm {cat.name}
+                    </Link>
+                    {cat.children.map((child) => (
+                      <Link
+                        key={child.name}
+                        href={child.path}
+                        className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-brand-secondary transition-colors"
+                        title={child.name}
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+            {/* Regular Nav Links */}
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -193,7 +246,34 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
               </div>
             </form>
 
-            <nav className="flex flex-col space-y-2 flex-grow">
+            <nav className="flex flex-col space-y-2 flex-grow overflow-y-auto">
+              {/* Mobile Mega Menu Categories */}
+              {megaMenuCategories.map((cat) => (
+                <div key={cat.name} className="border-b border-gray-100 pb-2 mb-2">
+                  <Link
+                    href={cat.path}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-brand-primary text-lg font-semibold hover:text-brand-secondary transition duration-200 py-2 px-2 block"
+                    title={cat.name}
+                  >
+                    {cat.name}
+                  </Link>
+                  <div className="pl-4 space-y-1">
+                    {cat.children.map((child) => (
+                      <Link
+                        key={child.name}
+                        href={child.path}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="text-gray-600 text-sm hover:text-brand-secondary transition duration-200 py-1.5 px-2 block rounded hover:bg-gray-50"
+                        title={child.name}
+                      >
+                        {child.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              {/* Regular Nav Links */}
               {navLinks.map((link) => (
                 <Link
                   key={link.name}

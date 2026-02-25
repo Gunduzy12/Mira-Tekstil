@@ -5,6 +5,10 @@ import ProductListPage from '@/components/ProductListPage';
 export const metadata: Metadata = {
     title: 'Mağaza - Tüm Ürünler | MiraTekstil',
     description: 'MiraTekstil mağazasındaki tüm ürünleri inceleyin. Filtreleme seçenekleri ile aradığınız ürünü kolayca bulun.',
+    robots: {
+        index: false,
+        follow: true,
+    },
 };
 
 export default function ShopPage() {

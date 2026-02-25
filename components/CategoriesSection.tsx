@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { useCategories } from '../context/CategoryContext';
+import { getCategoryUrl } from '../data/seoCategories';
 
 const CategoriesSection: React.FC = () => {
   const { categories, isLoading } = useCategories();
@@ -25,7 +26,6 @@ const CategoriesSection: React.FC = () => {
     );
   }
 
-  // Eğer kategori yoksa bölümü hiç gösterme veya bir mesaj göster
   if (categories.length === 0) {
     return null;
   }
@@ -41,7 +41,7 @@ const CategoriesSection: React.FC = () => {
           {categories.map((category) => (
             <Link
               key={category.id}
-              href={`/shop?category=${encodeURIComponent(category.name)}`}
+              href={getCategoryUrl(category.name)}
               className="group flex flex-col items-center cursor-pointer"
             >
               <div className="w-20 h-20 md:w-28 md:h-28 rounded-full bg-[#FFF9F0] border border-transparent group-hover:border-brand-secondary/30 transition-all duration-500 flex items-center justify-center mb-3 md:mb-4 shadow-sm group-hover:shadow-lg overflow-hidden relative">

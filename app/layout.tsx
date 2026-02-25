@@ -6,6 +6,7 @@ import { Providers } from "../components/Providers";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GlobalNotification from "../components/GlobalNotification";
+import JsonLd, { generateOrganizationSchema, generateWebSiteSchema } from "../components/JsonLd";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,32 +19,30 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://miratekstil.com"),
+  metadataBase: new URL('https://miratekstiltr.com'),
   alternates: {
     canonical: "/",
   },
   title: "MiraTekstil | Perde Modelleri, Tül Perde & Lüks Ev Tekstili",
-  description:
-    "Eviniz için en şık perde modelleri, tül perde, blackout perde ve ışık geçirmeyen perde seçenekleri MiraTekstil'de. En son çıkan perde modelleri ve fiyatları için tıklayın.",
-  authors: [{ name: "MiraTekstil", url: "https://miratekstil.com" }],
-  publisher: "MiraTekstil",
+  description: "Eviniz için en şık perde modelleri, tül perde, blackout perde ve ışık geçirmeyen perde seçenekleri MiraTekstil'de. En son çıkan perde modelleri ve fiyatları için tıklayın.",
+  authors: [{ name: 'MiraTekstil', url: 'https://miratekstiltr.com' }],
+  publisher: 'MiraTekstil',
   robots: {
     index: true,
     follow: true,
   },
   openGraph: {
     title: "MiraTekstil | Perde Modelleri, Tül Perde & Lüks Ev Tekstili",
-    description:
-      "Eviniz için en şık perde modelleri, tül perde, blackout perde ve ışık geçirmeyen perde seçenekleri MiraTekstil'de.",
-    url: "https://miratekstil.com",
-    siteName: "MiraTekstil",
-    locale: "tr_TR",
-    type: "website",
+    description: "Eviniz için en şık perde modelleri, tül perde, blackout perde ve ışık geçirmeyen perde seçenekleri MiraTekstil'de.",
+    url: 'https://miratekstiltr.com',
+    siteName: 'MiraTekstil',
+    locale: 'tr_TR',
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    site: "@miratekstil",
-    creator: "@miratekstil",
+    card: 'summary_large_image',
+    site: '@miratekstil',
+    creator: '@miratekstil',
     title: "MiraTekstil | Perde Modelleri, Tül Perde & Lüks Ev Tekstili",
     description:
       "Eviniz için en şık perde modelleri, tül perde, blackout perde ve ışık geçirmeyen perde seçenekleri MiraTekstil'de.",
@@ -60,27 +59,10 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} antialiased font-sans flex flex-col min-h-screen`}
       >
+        <JsonLd data={generateOrganizationSchema()} />
+        <JsonLd data={generateWebSiteSchema()} />
         <link rel="preconnect" href="https://tekstil-6f7d4.firebaseapp.com" />
         <link rel="dns-prefetch" href="https://tekstil-6f7d4.firebaseapp.com" />
-        {/* GLOBAL RATING SCHEMA (yorum snippet için) */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Store",
-              name: "MiraTekstil",
-              url: "https://miratekstil.com",
-              description:
-                "Perde modelleri, tül perde, blackout perde ve ev tekstili ürünleri sunan MiraTekstil.",
-              aggregateRating: {
-                "@type": "AggregateRating",
-                ratingValue: "4.8",
-                reviewCount: "120",
-              },
-            }),
-          }}
-        />
 
         <Providers>
           <Header />

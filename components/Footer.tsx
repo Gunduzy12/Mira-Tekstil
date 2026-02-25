@@ -45,20 +45,25 @@ const Footer: React.FC = () => {
             </div>
           </div>
           <div>
-            <h4 className="font-semibold mb-4 tracking-wider uppercase text-gray-300">Mağaza</h4>
+            <h4 className="font-semibold mb-4 tracking-wider uppercase text-gray-300">Perde</h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li><Link href="/shop" className="hover:text-white transition-colors" title="Aksesuarlar Koleksiyonu">Aksesuarlar</Link></li>
-              <li><Link href="/shop" className="hover:text-white transition-colors" title="Yatak Odası Tekstili">Yatak Odası</Link></li>
-              <li><Link href="/shop" className="hover:text-white transition-colors" title="Banyo Tekstili">Banyo</Link></li>
-              <li><Link href="/shop" className="hover:text-white transition-colors" title="Oturma Odası Tekstili">Oturma Odası</Link></li>
+              <li><Link href="/perde/blackout-perde" className="hover:text-white transition-colors" title="Blackout Perde Modelleri">Blackout Perde</Link></li>
+              <li><Link href="/perde/saten-perde" className="hover:text-white transition-colors" title="Saten Perde Modelleri">Saten Perde</Link></li>
+              <li><Link href="/perde/tul-perde" className="hover:text-white transition-colors" title="Tül Perde Modelleri">Tül Perde</Link></li>
+              <li><Link href="/perde/ozel-olcu-perde" className="hover:text-white transition-colors" title="Özel Ölçü Perde Dikimi">Özel Ölçü Perde</Link></li>
+              <li><Link href="/ev-tekstili/yastik-kilifi" className="hover:text-white transition-colors" title="Dekoratif Yastık Kılıfı">Yastık Kılıfı</Link></li>
+
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-4 tracking-wider uppercase text-gray-300">Hakkımızda</h4>
+            <h4 className="font-semibold mb-4 tracking-wider uppercase text-gray-300">Rehber & Blog</h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li><Link href="/about" className="hover:text-white transition-colors" title="Hikayemiz">Hikayemiz</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors" title="İletişim Sayfası">İletişim</Link></li>
-              <li><Link href="/contact" className="hover:text-white transition-colors" title="Sıkça Sorulan Sorular">S.S.S.</Link></li>
+              <li><Link href="/blog/blackout-perde-mi-tul-perde-mi" className="hover:text-white transition-colors" title="Blackout Perde mi Tül Perde mi?">Blackout vs Tül Perde</Link></li>
+              <li><Link href="/blog/yatak-odasi-icin-en-iyi-perde" className="hover:text-white transition-colors" title="Yatak Odası İçin En İyi Perde">Yatak Odası Perdesi</Link></li>
+              <li><Link href="/blog/perde-olcusu-nasil-alinir" className="hover:text-white transition-colors" title="Perde Ölçüsü Nasıl Alınır">Perde Ölçüsü Rehberi</Link></li>
+              <li><Link href="/blog/salon-perde-secimi" className="hover:text-white transition-colors" title="Salon Perde Seçimi 2025">Salon Perde Seçimi</Link></li>
+              <li><Link href="/about" className="hover:text-white transition-colors" title="Hakkımızda">Hakkımızda</Link></li>
+              <li><Link href="/contact" className="hover:text-white transition-colors" title="İletişim">İletişim</Link></li>
             </ul>
           </div>
           <div>

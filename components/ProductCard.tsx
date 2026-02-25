@@ -5,8 +5,7 @@ import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
 import { HeartIcon, CartIcon, RulerIcon, ChevronRightIcon } from './Icons';
 import StarRating from './StarRating';
-
-import { createSlug } from '@/utils/slugify';
+import { getProductUrl } from '../data/seoCategories';
 
 interface ProductCardProps {
   product: Product;
@@ -79,7 +78,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProduct }) =
 
 
 
-      <Link href={`/product/${createSlug(product.name, product.id)}`} className="contents">
+      <Link href={getProductUrl(product.name, product.id, product.category, product.slug, product.categorySlug, product.parentSlug)} className="contents">
         {/* Link wraps content for navigation, but buttons inside need e.stopPropagation() */}
         <div
           className="overflow-hidden bg-white relative border border-brand-border rounded-lg aspect-[4/5]"

@@ -3,14 +3,14 @@ import { db } from '@/firebaseConfig';
 import { doc, getDoc } from 'firebase/firestore';
 import { Product } from '@/types';
 import ProductDetailPage from '@/components/ProductDetailPage';
-
 import { extractIdFromSlug } from '@/utils/slugify';
+import { getProductUrl } from '@/data/seoCategories';
+import JsonLd, { generateProductSchema } from '@/components/JsonLd';
 
 type Props = {
-    params: { slug: string };
+    params: Promise<{ slug: string }>;
 };
 
-// Data Fetching Function
 async function getProduct(slug: string): Promise<Product | null> {
     const id = extractIdFromSlug(slug);
     try {
@@ -26,7 +26,6 @@ async function getProduct(slug: string): Promise<Product | null> {
     return null;
 }
 
-// Dynamic Metadata
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
     const product = await getProduct(slug);
@@ -37,11 +36,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         };
     }
 
+    // CANONICAL: Her zaman yeni SEO URL'ye point et
+    const canonicalPath = getProductUrl(product.name, product.id, product.category, product.slug, product.categorySlug, product.parentSlug);
+
     return {
         title: `${product.name} | MiraTekstil`,
         description: product.description.substring(0, 160),
+        alternates: {
+            canonical: canonicalPath,
+        },
         openGraph: {
             images: [product.imageUrl],
+            url: `https://miratekstiltr.com${canonicalPath}`,
         },
     };
 }
@@ -59,5 +65,26 @@ export default async function ProductPage({ params }: Props) {
         );
     }
 
-    return <ProductDetailPage product={product} />;
+    const productUrl = getProductUrl(product.name, product.id, product.category, product.slug, product.categorySlug, product.parentSlug);
+    const isInStock = product.variants?.some(v => v.stock > 0) ?? false;
+
+    return (
+        <>
+            <JsonLd
+                data={generateProductSchema({
+                    name: product.name,
+                    description: product.description,
+                    imageUrl: product.imageUrl,
+                    price: product.priceFrom,
+                    originalPrice: product.originalPrice,
+                    brand: product.brand,
+                    url: productUrl,
+                    inStock: isInStock,
+                    rating: product.averageRating,
+                    reviewCount: product.reviewCount,
+                })}
+            />
+            <ProductDetailPage product={product} />
+        </>
+    );
 }

@@ -2,14 +2,13 @@
 
 import React, { useMemo } from 'react';
 import Link from 'next/link';
-import Image from 'next/image'; // 👈 EKLENDİ
+import Image from 'next/image';
 import { Product } from '../types';
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
 import { HeartIcon, CartIcon, RulerIcon } from './Icons';
 import StarRating from './StarRating';
-
-import { createSlug } from '@/utils/slugify';
+import { getProductUrl } from '../data/seoCategories';
 
 interface ListingProductCardProps {
   product: Product;
@@ -65,7 +64,7 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index 
 
   return (
     <div className="group relative bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      <Link href={`/product/${createSlug(product.name, product.id)}`} className="block h-full">
+      <Link href={getProductUrl(product.name, product.id, product.category, product.slug, product.categorySlug, product.parentSlug)} className="block h-full">
 
         {/* 👇 GÖRSEL ALANI GÜNCELLENDİ 👇 */}
         <div className="relative aspect-[4/5] overflow-hidden bg-gray-100">
@@ -118,7 +117,7 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index 
         <div className="p-4">
 
 
-         
+
 
           <div className="text-sm text-gray-500 mb-1">{product.brand}</div>
           <h2 className="font-serif text-lg font-medium text-brand-primary mb-1 line-clamp-1 group-hover:text-brand-secondary transition-colors">

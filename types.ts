@@ -34,10 +34,10 @@ export interface Product {
   id: string; // Changed to string for Firestore compatibility
   name: string;
   brand: string;
-  priceFrom: number; 
+  priceFrom: number;
   originalPrice?: number;
   category: string;
-  imageUrl: string; 
+  imageUrl: string;
   images?: string[];
   description: string;
   details: string[];
@@ -57,7 +57,7 @@ export interface Product {
   isFeatured?: boolean;
   isDeal?: boolean;
   discountEndDate?: string | null; // HACI: null eklendi
-  
+
   // Custom Size Fields
   isCustomSize?: boolean;
   pricePerSqM?: number;
@@ -68,6 +68,13 @@ export interface Product {
 
   // New Feature
   showSizeGuide?: boolean;
+
+  // SEO Slug Fields (migration ile eklenir)
+  slug?: string;
+  categorySlug?: string;
+  parentSlug?: string;
+  subcategory?: string;
+  seoTitle?: string;
 }
 
 
@@ -93,8 +100,8 @@ export interface OrderItem {
   selectedColor?: string;
   selectedSize?: string;
   customDimensions?: {
-      width: number;
-      height: number;
+    width: number;
+    height: number;
   };
 }
 
@@ -107,7 +114,7 @@ export interface Order {
   items: OrderItem[];
   total: number;
   shippingAddress: string;
-  
+
   // Added for Notifications
   customerName?: string;
   email?: string;
@@ -150,4 +157,51 @@ export interface User {
   email: string;
   role?: 'admin' | 'customer';
   createdAt?: string;
+}
+
+// SEO Types
+export interface SEOContentBlock {
+  type: 'paragraph' | 'heading' | 'list';
+  content: string;
+  items?: string[]; // for list type
+}
+
+export interface CategoryFAQ {
+  question: string;
+  answer: string;
+}
+
+export interface BreadcrumbItem {
+  name: string;
+  href: string;
+}
+
+export interface SEOCategory {
+  parentSlug: string;
+  categorySlug: string;
+  firebaseCategoryName: string;
+  title: string;
+  metaDescription: string;
+  h1: string;
+  seoBlocks: SEOContentBlock[];
+  faq: CategoryFAQ[];
+  keywords: string[];
+}
+
+export interface SEOParentCategory {
+  slug: string;
+  name: string;
+  title: string;
+  metaDescription: string;
+  h1: string;
+  seoBlocks: SEOContentBlock[];
+  children: { name: string; slug: string; description: string }[];
+}
+
+export interface SEOBlogTopic {
+  slug: string;
+  title: string;
+  metaDescription: string;
+  excerpt: string;
+  content: SEOContentBlock[];
 }
