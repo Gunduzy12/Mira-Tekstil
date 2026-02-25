@@ -411,31 +411,7 @@ const jsonLd = {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <nav aria-label="Breadcrumb" className="container mx-auto px-4 sm:px-6 py-4 text-sm text-gray-500">
-  <ol className="list-none p-0 inline-flex flex-wrap">
-
-    <li className="flex items-center">
-      <Link href="/" className="hover:text-brand-primary">Anasayfa</Link>
-      <ChevronRightIcon className="w-3 h-3 mx-2" />
-    </li>
-
-    {product.parentSlug && (
-      <li className="flex items-center">
-        <Link href={`/${product.parentSlug}`} className="hover:text-brand-primary">
-          {product.category}
-        </Link>
-        <ChevronRightIcon className="w-3 h-3 mx-2" />
-      </li>
-    )}
-
-    <li className="flex items-center">
-      <span className="text-gray-700 font-medium" aria-current="page">
-        {product.name}
-      </span>
-    </li>
-
-  </ol>
-</nav>
+           
 
             <div className="container mx-auto px-4 sm:px-6 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
