@@ -1,14 +1,23 @@
 import { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-    const baseUrl = 'https://miratekstiltr.com';
+  const baseUrl = 'https://www.miratekstiltr.com';
 
-    return {
-        rules: {
-            userAgent: '*',
-            allow: '/',
-            disallow: ['/account/', '/checkout/', '/admin/', '/api/', '/shop'],
-        },
-        sitemap: `${baseUrl}/sitemap.xml`,
-    };
+  return {
+    rules: [
+      {
+        userAgent: '*',
+        allow: '/',
+        disallow: [
+          '/account/',
+          '/checkout/',
+          '/admin/',
+          '/api/',
+          '/shop',      // /shop
+          '/shop?',     // /shop?category=...
+        ],
+      },
+    ],
+    sitemap: `${baseUrl}/sitemap.xml`,
+  };
 }
