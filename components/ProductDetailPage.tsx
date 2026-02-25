@@ -332,72 +332,78 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
 
 
     // JSON-LD Structured Data for SEO
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@graph': [
-            {
-                '@type': 'BreadcrumbList',
-                'itemListElement': [
-                    {
-                        '@type': 'ListItem',
-                        'position': 1,
-                        'name': 'Anasayfa',
-                        'item': 'https://miratekstil.com'
-                    },
-                    {
-                        '@type': 'ListItem',
-                        'position': 2,
-                        'name': 'Mağaza',
-                        'item': 'https://miratekstil.com/shop'
-                    },
-                    {
-                        '@type': 'ListItem',
-                        'position': 3,
-                        'name': product.name,
-                        'item': `https://miratekstil.com/product/${product.id}` // Ideally slug, but ID is safe fallback or use window loc if client side
-                    }
-                ]
-            },
-            {
-                '@type': 'Product',
-                name: product.name,
-                image: allImages,
-                description: product.description,
-                sku: product.id,
-                mpn: product.id,
-                brand: {
-                    '@type': 'Brand',
-                    name: product.brand || 'MiraTekstil'
-                },
-                offers: {
-                    '@type': 'Offer',
-                    priceCurrency: 'TRY',
-                    price: displayPrice.toFixed(2),
-                    availability: (selectedVariant?.stock || 0) > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-                    itemCondition: 'https://schema.org/NewCondition',
-                    url: `https://miratekstil.com/product/${product.id}`
-                },
-                aggregateRating: product.averageRating ? {
-                    '@type': 'AggregateRating',
-                    ratingValue: product.averageRating,
-                    reviewCount: reviews.length > 0 ? reviews.length : 1
-                } : undefined,
-                review: reviews.map(r => ({
-                    '@type': 'Review',
-                    author: {
-                        '@type': 'Person',
-                        name: r.author
-                    },
-                    datePublished: r.date,
-                    reviewBody: r.comment,
-                    reviewRating: {
-                        '@type': 'Rating',
-                        ratingValue: r.rating
-                    }
-                }))
-            }
-        ]
-    };
+const BASE_URL = "https://www.miratekstiltr.com";
+
+const productPath =
+  product.parentSlug && product.categorySlug && product.slug
+    ? `/${product.parentSlug}/${product.categorySlug}/${product.slug}`
+    : `/${product.slug || product.id}`;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Anasayfa',
+          item: BASE_URL
+        },
+        ...(product.parentSlug ? [{
+          '@type': 'ListItem',
+          position: 2,
+          name: product.category,
+          item: `${BASE_URL}/${product.parentSlug}`
+        }] : []),
+        {
+          '@type': 'ListItem',
+          position: product.parentSlug ? 3 : 2,
+          name: product.name,
+          item: `${BASE_URL}${productPath}`
+        }
+      ]
+    },
+    {
+      '@type': 'Product',
+      name: product.name,
+      image: allImages,
+      description: product.description,
+      sku: product.id,
+      mpn: product.id,
+      brand: {
+        '@type': 'Brand',
+        name: product.brand || 'MiraTekstil'
+      },
+      offers: {
+        '@type': 'Offer',
+        priceCurrency: 'TRY',
+        price: displayPrice.toFixed(2),
+        availability:
+          (selectedVariant?.stock || 0) > 0
+            ? 'https://schema.org/InStock'
+            : 'https://schema.org/OutOfStock',
+        itemCondition: 'https://schema.org/NewCondition',
+        url: `${BASE_URL}${productPath}`
+      },
+      aggregateRating: product.averageRating
+        ? {
+            '@type': 'AggregateRating',
+            ratingValue: product.averageRating,
+            reviewCount: reviews.length || 1
+          }
+        : undefined,
+      review: reviews.map(r => ({
+        '@type': 'Review',
+        author: { '@type': 'Person', name: r.author },
+        datePublished: r.date,
+        reviewBody: r.comment,
+        reviewRating: { '@type': 'Rating', ratingValue: r.rating }
+      }))
+    }
+  ]
+};
 
     return (
         <div className="bg-brand-bg">
@@ -406,20 +412,30 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
             <nav aria-label="Breadcrumb" className="container mx-auto px-4 sm:px-6 py-4 text-sm text-gray-500">
-                <ol className="list-none p-0 inline-flex">
-                    <li className="flex items-center">
-                        <Link href="/" className="hover:text-brand-primary" title="Anasayfa">Anasayfa</Link>
-                        <ChevronRightIcon className="w-3 h-3 mx-2" />
-                    </li>
-                    <li className="flex items-center">
-                        <Link href="/shop" className="hover:text-brand-primary" title="Mağaza">Mağaza</Link>
-                        <ChevronRightIcon className="w-3 h-3 mx-2" />
-                    </li>
-                    <li className="flex items-center">
-                        <span className="text-gray-700 font-medium" aria-current="page">{product.name}</span>
-                    </li>
-                </ol>
-            </nav>
+  <ol className="list-none p-0 inline-flex flex-wrap">
+
+    <li className="flex items-center">
+      <Link href="/" className="hover:text-brand-primary">Anasayfa</Link>
+      <ChevronRightIcon className="w-3 h-3 mx-2" />
+    </li>
+
+    {product.parentSlug && (
+      <li className="flex items-center">
+        <Link href={`/${product.parentSlug}`} className="hover:text-brand-primary">
+          {product.category}
+        </Link>
+        <ChevronRightIcon className="w-3 h-3 mx-2" />
+      </li>
+    )}
+
+    <li className="flex items-center">
+      <span className="text-gray-700 font-medium" aria-current="page">
+        {product.name}
+      </span>
+    </li>
+
+  </ol>
+</nav>
 
             <div className="container mx-auto px-4 sm:px-6 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
