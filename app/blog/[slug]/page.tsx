@@ -57,6 +57,22 @@ export default async function BlogArticlePage({ params }: Props) {
                 />
 
                 <article>
+                    {/* Estetik Banner (CTR ve Dwell Time Artırıcı) */}
+                    <div className="relative w-full h-64 md:h-72 rounded-2xl overflow-hidden mb-8 bg-cover bg-center flex flex-col justify-center items-center text-center p-6 shadow-lg border border-brand-border/60" style={{ backgroundImage: "url('/perde_hava_durumu_banner.png')" }}>
+                        <div className="absolute inset-0 bg-black/40"></div>
+                        <div className="relative z-10 space-y-3">
+                            <span className="inline-block text-[10px] font-bold uppercase tracking-widest text-brand-secondary bg-white/95 px-3 py-1 rounded-full shadow-sm">
+                                MİRATEKSTİL BLOG REHBERİ
+                            </span>
+                            <h2 className="text-xl md:text-3xl font-serif font-bold text-white max-w-2xl drop-shadow-md leading-tight">
+                                {topic.title.split('|')[0].trim()}
+                            </h2>
+                            <p className="text-xs md:text-sm text-gray-200 max-w-lg font-light line-clamp-2">
+                                {topic.excerpt}
+                            </p>
+                        </div>
+                    </div>
+
                     <h1 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary mb-6 leading-tight">
                         {topic.title.split('|')[0].trim()}
                     </h1>

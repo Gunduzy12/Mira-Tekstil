@@ -27,9 +27,11 @@ const CategorySEOContent: React.FC<CategorySEOContentProps> = ({ seoBlocks, faq 
                             );
                         case 'paragraph':
                             return (
-                                <p key={index} className="text-gray-600 leading-relaxed mb-4">
-                                    {block.content}
-                                </p>
+                                <p 
+                                    key={index} 
+                                    className="text-gray-600 leading-relaxed mb-4"
+                                    dangerouslySetInnerHTML={{ __html: block.content }}
+                                />
                             );
                         case 'list':
                             return (

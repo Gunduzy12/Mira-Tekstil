@@ -6,9 +6,15 @@ import { useProducts } from '../context/ProductContext';
 import { ChevronRightIcon } from '../components/Icons';
 import { getProductUrl } from '../data/seoCategories';
 import Image from 'next/image';
+import { Product } from '../types';
 
-const HomePage: React.FC = () => {
-    const { products } = useProducts();
+interface HomePageProps {
+    initialProducts?: Product[];
+}
+
+const HomePage: React.FC<HomePageProps> = ({ initialProducts }) => {
+    const { products: contextProducts } = useProducts();
+    const products = (initialProducts && initialProducts.length > 0) ? initialProducts : contextProducts;
 
     return (
         <div className="bg-brand-bg text-brand-primary">
@@ -256,6 +262,27 @@ const HomePage: React.FC = () => {
                     >
                         Koleksiyonu Keşfet
                     </Link>
+                </div>
+            </section>
+
+            {/* Meteoroloji Partneri Bilgi Çubuğu (Subtle Branded Backlink) */}
+            <section className="bg-white py-6 border-t border-brand-border">
+                <div className="max-w-5xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+                    <div className="flex items-center gap-2">
+                        <span>MiraTekstil - Ev Tekstili & Perde Sistemleri</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                        <span>Meteoroloji Partnerimiz:</span>
+                        <a 
+                            href="https://havapusula.com.tr" 
+                            target="_blank" 
+                            rel="dofollow" 
+                            className="font-bold text-gray-500 hover:text-brand-secondary hover:underline transition-colors"
+                            title="Hava Durumu"
+                        >
+                            HavaPusula
+                        </a>
+                    </div>
                 </div>
             </section>
         </div>

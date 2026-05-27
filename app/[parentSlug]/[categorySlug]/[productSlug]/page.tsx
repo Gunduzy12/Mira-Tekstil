@@ -132,6 +132,8 @@ export default async function ProductPage({ params }: Props) {
                     rating: product.averageRating,
                     reviewCount: product.reviewCount,
                     category: product.subcategory || product.category,
+                    sku: product.variants?.[0]?.sku,
+                    reviews: product.reviews,
                 })}
             />
 

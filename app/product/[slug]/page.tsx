@@ -82,6 +82,8 @@ export default async function ProductPage({ params }: Props) {
                     inStock: isInStock,
                     rating: product.averageRating,
                     reviewCount: product.reviewCount,
+                    sku: product.variants?.[0]?.sku,
+                    reviews: product.reviews,
                 })}
             />
             <ProductDetailPage product={product} />

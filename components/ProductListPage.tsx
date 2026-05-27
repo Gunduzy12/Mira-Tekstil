@@ -7,6 +7,7 @@ import { useCategories } from '../context/CategoryContext';
 import { ChevronDownIcon, ChevronUpIcon, SortIcon } from '../components/Icons';
 import ListingProductCard from '../components/ListingProductCard';
 import ProductSkeleton from './ProductSkeleton'; // 👈 YENİ: İskelet dosyasını import ettik
+import { Product, Category } from '../types';
 
 // Filtre Grupları Bileşeni
 const FilterGroup: React.FC<{ title: string; children: React.ReactNode; defaultOpen?: boolean }> = ({ title, children, defaultOpen = true }) => {
@@ -25,11 +26,19 @@ const FilterGroup: React.FC<{ title: string; children: React.ReactNode; defaultO
 };
 
 // Ana İçerik Bileşeni
-const ProductListPageContent: React.FC = () => {
+interface ProductListPageContentProps {
+    initialProducts?: Product[];
+    initialCategories?: Category[];
+}
+
+const ProductListPageContent: React.FC<ProductListPageContentProps> = ({ initialProducts, initialCategories }) => {
     const searchParams = useSearchParams();
     const router = useRouter();
-    const { products } = useProducts();
-    const { categories } = useCategories();
+    const { products: contextProducts } = useProducts();
+    const { categories: contextCategories } = useCategories();
+
+    const products = (initialProducts && initialProducts.length > 0) ? initialProducts : contextProducts;
+    const categories = (initialCategories && initialCategories.length > 0) ? initialCategories : contextCategories;
 
     const initialCategory = searchParams.get('category') || 'Tümü';
     const initialSearchQuery = searchParams.get('q') || '';
@@ -248,7 +257,7 @@ const ProductListPageContent: React.FC = () => {
 };
 
 // Ana Export: Suspense ve Skeleton ile sarmalanmış hali
-const ProductListPage = () => (
+const ProductListPage = ({ initialProducts, initialCategories }: { initialProducts?: Product[]; initialCategories?: Category[] }) => (
     <Suspense
         fallback={
             // 👈 Beyaz ekran yerine bu düzen yüklenecek (FCP Çözümü)
@@ -272,7 +281,7 @@ const ProductListPage = () => (
             </div>
         }
     >
-        <ProductListPageContent />
+        <ProductListPageContent initialProducts={initialProducts} initialCategories={initialCategories} />
     </Suspense>
 );
 

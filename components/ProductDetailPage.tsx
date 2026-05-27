@@ -15,6 +15,7 @@ import StarRating from '../components/StarRating';
 import InteractiveStarRating from '../components/InteractiveStarRating';
 import { sendFormToEmail } from '../services/emailService';
 import SizeGuideModal from '../components/SizeGuideModal';
+import { WeatherWidget } from './WeatherWidget';
 
 interface ProductDetailPageProps {
     product: Product;
@@ -667,6 +668,11 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                                 <svg className="w-5 h-5 text-brand-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                                 <span>Hızlı Kargo</span>
                             </div>
+                        </div>
+
+                        {/* Hava Durumu ve Akıllı Perde Önerisi (HavaPusula Backlink) */}
+                        <div className="mt-8">
+                            <WeatherWidget productCategory={product.category} productName={product.name} />
                         </div>
                     </main>
                 </div>
