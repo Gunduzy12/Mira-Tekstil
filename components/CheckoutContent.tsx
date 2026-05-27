@@ -146,11 +146,11 @@ const CheckoutContent: React.FC = () => {
                     id: item.productId,
                     name: item.productName,
                     price: item.variant.price,
-                    imageUrl: item.variant.imageUrl || item.productImageUrl,
+                    imageUrl: item.variant.imageUrl || item.productImageUrl || null,
                     quantity: item.quantity,
-                    selectedColor: item.variant.color,
-                    selectedSize: item.variant.size,
-                    customDimensions: item.customDimensions
+                    selectedColor: item.variant.color || null,
+                    selectedSize: item.variant.size || null,
+                    customDimensions: item.customDimensions || null
                 })),
                 total: total,
                 shippingAddress: shippingAddress,
@@ -159,7 +159,7 @@ const CheckoutContent: React.FC = () => {
                 phone: formData.phone,
                 userId: user?.id || null, // Varsa user ID'si
                 trackingNumber: '',
-                shippingCompany: undefined
+                shippingCompany: null
             };
 
             await setDoc(doc(db, 'orders', orderId), orderData);
