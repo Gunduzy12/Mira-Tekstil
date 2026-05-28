@@ -19,13 +19,13 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://miratekstiltr.com'),
+  metadataBase: new URL('https://www.miratekstiltr.com'),
   alternates: {
     canonical: "/",
   },
   title: "MiraTekstil | Perde Modelleri, Tül Perde & Lüks Ev Tekstili",
   description: "Eviniz için en şık perde modelleri, tül perde, blackout perde ve ışık geçirmeyen perde seçenekleri MiraTekstil'de. En son çıkan perde modelleri ve fiyatları için tıklayın.",
-  authors: [{ name: 'MiraTekstil', url: 'https://miratekstiltr.com' }],
+  authors: [{ name: 'MiraTekstil', url: 'https://www.miratekstiltr.com' }],
   publisher: 'MiraTekstil',
   robots: {
     index: true,
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "MiraTekstil | Perde Modelleri, Tül Perde & Lüks Ev Tekstili",
     description: "Eviniz için en şık perde modelleri, tül perde, blackout perde ve ışık geçirmeyen perde seçenekleri MiraTekstil'de.",
-    url: 'https://miratekstiltr.com',
+    url: 'https://www.miratekstiltr.com',
     siteName: 'MiraTekstil',
     locale: 'tr_TR',
     type: 'website',

@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
         openGraph: {
             images: [product.imageUrl],
-            url: `https://miratekstiltr.com${canonicalPath}`,
+            url: `https://www.miratekstiltr.com${canonicalPath}`,
         },
     };
 }

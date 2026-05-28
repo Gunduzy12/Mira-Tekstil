@@ -6,7 +6,7 @@ import { blogTopics } from '../data/seoBlogTopics';
 import { Product } from '../types';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-    const baseUrl = 'https://miratekstiltr.com';
+    const baseUrl = 'https://www.miratekstiltr.com';
 
     // Statik sayfalar
     const staticRoutes: MetadataRoute.Sitemap = [

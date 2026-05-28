@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: 'Perde Rehberi & Blog | MiraTekstil',
         description: 'Perde seçimi, ölçü alma, dekorasyon önerileri ve ev tekstili hakkında kapsamlı rehberler.',
-        url: 'https://miratekstiltr.com/blog',
+        url: 'https://www.miratekstiltr.com/blog',
         siteName: 'MiraTekstil',
         locale: 'tr_TR',
         type: 'website',

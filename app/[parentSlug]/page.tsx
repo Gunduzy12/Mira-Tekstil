@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         openGraph: {
             title: parent.title,
             description: parent.metaDescription,
-            url: `https://miratekstiltr.com/${parent.slug}`,
+            url: `https://www.miratekstiltr.com/${parent.slug}`,
             siteName: 'MiraTekstil',
             locale: 'tr_TR',
             type: 'website',

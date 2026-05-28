@@ -1,6 +1,6 @@
 import { SEOCategory, SEOParentCategory } from '../types';
 
-const BASE_URL = 'https://miratekstiltr.com';
+const BASE_URL = 'https://www.miratekstiltr.com';
 
 // =============================================
 // ÜST KATEGORİLER

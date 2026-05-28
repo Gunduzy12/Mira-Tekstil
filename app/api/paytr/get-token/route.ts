@@ -74,8 +74,8 @@ export async function POST(req: NextRequest) {
         const test_mode = "0"; // Dikkat: Test modu kapalı
         const debug_on = "1";
         const timeout_limit = "30";
-        const merchant_ok_url = "https://miratekstiltr.com/?view=paymentSuccess"; // Bu URL'ler prodüksiyonda güncellenmeli veya env'den gelmeli
-        const merchant_fail_url = "https://miratekstiltr.com/?view=paymentFailure";
+        const merchant_ok_url = "https://www.miratekstiltr.com/?view=paymentSuccess"; // Bu URL'ler prodüksiyonda güncellenmeli veya env'den gelmeli
+        const merchant_fail_url = "https://www.miratekstiltr.com/?view=paymentFailure";
 
         // Hash Oluşturma Sırası
         const hash_str =

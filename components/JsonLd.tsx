@@ -19,7 +19,7 @@ export default JsonLd;
 // SCHEMA GENERATORS
 // =============================================
 
-const BASE_URL = 'https://miratekstiltr.com';
+const BASE_URL = 'https://www.miratekstiltr.com';
 
 export function generateOrganizationSchema() {
     return {

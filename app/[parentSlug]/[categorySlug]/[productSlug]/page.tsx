@@ -86,7 +86,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
             title: displayTitle,
             description: product.description?.substring(0, 160) || '',
             images: [product.imageUrl],
-            url: `https://miratekstiltr.com${canonicalUrl}`,
+            url: `https://www.miratekstiltr.com${canonicalUrl}`,
             siteName: 'MiraTekstil',
             locale: 'tr_TR',
             type: 'website',
