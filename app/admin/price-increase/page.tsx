@@ -19,6 +19,7 @@ export default function PriceIncreasePage() {
     const [dryRun, setDryRun] = useState(true);
     const [progress, setProgress] = useState({ current: 0, total: 0 });
     const [summary, setSummary] = useState({ updated: 0, total: 0 });
+    const [revalidateLoading, setRevalidateLoading] = useState(false);
 
     const ZAM_ORANI = 1.075; // %7.5
 
@@ -40,6 +41,25 @@ export default function PriceIncreasePage() {
         } catch (err: any) {
             setStatus(`❌ Giriş hatası: ${err.message}`);
             addLog(`Giriş hatası: ${err.message}`, 'error');
+        }
+    }
+
+    async function handleRevalidate() {
+        setRevalidateLoading(true);
+        addLog('Web sitesinin önbelleği (Anasayfa, Mağaza ve Ürünler) temizleniyor...', 'warn');
+        try {
+            const res = await fetch('/api/revalidate', { method: 'POST' });
+            const data = await res.json();
+            if (data.success) {
+                addLog('✅ Web sitesi önbelleği başarıyla sıfırlandı! Yeni fiyatlar tüm sitede anında yayında.', 'success');
+                setStatus('🎉 Tüm site güncellendi ve yeni fiyatlar anında yayına alındı!');
+            } else {
+                addLog(`⚠️ Önbellek temizleme uyarısı: ${data.error || 'Bilinmeyen Hata'}`, 'warn');
+            }
+        } catch (err: any) {
+            addLog(`❌ Önbellek temizleme hatası: ${err.message}`, 'error');
+        } finally {
+            setRevalidateLoading(false);
         }
     }
 
@@ -163,6 +183,10 @@ export default function PriceIncreasePage() {
                 : `Firestore güncellemesi tamamlandı! ${guncellenenSayi} ürünün fiyatları %7.5 artırıldı.`,
                 'success'
             );
+
+            if (!dryRun) {
+                await handleRevalidate();
+            }
 
         } catch (err: any) {
             setStatus(`❌ Hata oluştu: ${err.message}`);
@@ -294,6 +318,19 @@ export default function PriceIncreasePage() {
                                             : '🚀 Canlı Güncellemeyi Başlat (%7.5 ZAM)'
                                 }
                             </button>
+
+                            {auth.currentUser && !running && summary.updated > 0 && (
+                                <button
+                                    onClick={handleRevalidate}
+                                    disabled={revalidateLoading}
+                                    className={`w-full font-bold py-3 rounded-lg transition-all shadow-lg text-sm tracking-wide border border-indigo-500 text-indigo-400 hover:bg-indigo-950/30 flex justify-center items-center space-x-2 ${
+                                        revalidateLoading ? 'opacity-50 cursor-not-allowed' : ''
+                                    }`}
+                                >
+                                    <span>🔄</span>
+                                    <span>{revalidateLoading ? 'Önbellek Temizleniyor...' : 'Sitedeki Önbelleği Temizle (Anında Yayınla)'}</span>
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
