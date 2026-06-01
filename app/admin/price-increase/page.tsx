@@ -319,7 +319,7 @@ export default function PriceIncreasePage() {
                                 }
                             </button>
 
-                            {auth.currentUser && !running && summary.updated > 0 && (
+                            {auth.currentUser && !running && (
                                 <button
                                     onClick={handleRevalidate}
                                     disabled={revalidateLoading}
