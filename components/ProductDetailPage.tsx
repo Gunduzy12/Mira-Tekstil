@@ -47,8 +47,24 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
     const [customHeight, setCustomHeight] = useState<number>(product.minHeight || 200);
     const [calculatedPrice, setCalculatedPrice] = useState<number>(product.priceFrom);
 
-    // Ref for scrolling to details
+    // Refs for scrolling to selections
     const detailsRef = useRef<HTMLDivElement>(null);
+    const colorSectionRef = useRef<HTMLDivElement>(null);
+    const sizeSectionRef = useRef<HTMLDivElement>(null);
+
+    // Color/Size Warnings UX States
+    const [showColorWarning, setShowColorWarning] = useState(false);
+    const [showSizeWarning, setShowSizeWarning] = useState(false);
+
+    const onSelectColor = (color: string) => {
+        setSelectedColor(color);
+        setShowColorWarning(false);
+    };
+
+    const onSelectSize = (size: string) => {
+        setSelectedSize(size);
+        setShowSizeWarning(false);
+    };
 
     const allImages = useMemo(() => {
         const images = [product.imageUrl, ...(product.images || []), ...product.variants.map(v => v.imageUrl).filter((url): url is string => !!url)];
@@ -207,6 +223,24 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
     }, [selectedColor, product.variants]);
 
     const handleAddToCart = () => {
+        const hasColors = product.variants.some(v => v.color);
+        const hasSizes = !product.isCustomSize && product.variants.some(v => v.size);
+
+        if (hasColors && !selectedColor) {
+            setShowColorWarning(true);
+            showNotification('Lütfen siparişiniz için bir renk seçin.', 'error');
+            colorSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+
+        if (hasSizes && !selectedSize) {
+            setShowColorWarning(false);
+            setShowSizeWarning(true);
+            showNotification('Lütfen siparişiniz için bir ebat seçin.', 'error');
+            sizeSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+
         if (!selectedVariant) {
             showNotification('Lütfen mevcut tüm seçenekleri belirtin.', 'error');
             return;
@@ -319,6 +353,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
     }
 
     const canAddToCart = selectedVariant && selectedVariant.stock > 0;
+    const isOutOfStock = selectedVariant && selectedVariant.stock === 0;
     const inputClasses = "w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-brand-secondary focus:border-brand-secondary transition-all shadow-sm";
 
     // Fiyat Hesaplama
@@ -508,13 +543,27 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                         </button>
 
                         {colorOptions.length > 0 && (
-                            <div className="mb-6">
-                                <p className="text-sm font-semibold text-brand-primary mb-3">Renk: <span className="font-normal text-brand-accent ml-1">{selectedColor}</span></p>
+                            <div 
+                                ref={colorSectionRef}
+                                className={`mb-6 p-3 rounded-xl transition-all duration-350 ${
+                                    showColorWarning 
+                                        ? 'border-2 border-red-500 bg-red-50/50 animate-pulse' 
+                                        : 'border-2 border-transparent'
+                                }`}
+                            >
+                                <p className="text-sm font-semibold text-brand-primary mb-3">
+                                    Renk: <span className="font-normal text-brand-accent ml-1">{selectedColor}</span>
+                                    {showColorWarning && (
+                                        <span className="text-red-500 text-xs font-bold ml-2 animate-bounce">
+                                            (Lütfen bir renk seçin!)
+                                        </span>
+                                    )}
+                                </p>
                                 <div className="flex flex-wrap gap-3" role="radiogroup" aria-label="Renk Seçenekleri">
                                     {colorOptions.map(({ color, imageUrl }) => (
                                         <button
                                             key={color}
-                                            onClick={() => setSelectedColor(color)}
+                                            onClick={() => onSelectColor(color)}
                                             className={`w-20 h-20 border-2 rounded-lg p-1 transition-all relative bg-white ${selectedColor === color ? 'border-brand-secondary ring-1 ring-brand-secondary scale-105' : 'border-brand-border hover:border-gray-400'}`}
                                             title={color}
                                             role="radio"
@@ -528,13 +577,27 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                         )}
 
                         {!product.isCustomSize && sizeOptions.length > 0 && (
-                            <div className="mb-6">
-                                <label className="text-sm font-semibold text-brand-primary mb-3 block">Boyut / Ebat</label>
+                            <div 
+                                ref={sizeSectionRef}
+                                className={`mb-6 p-3 rounded-xl transition-all duration-350 ${
+                                    showSizeWarning 
+                                        ? 'border-2 border-red-500 bg-red-50/50 animate-pulse' 
+                                        : 'border-2 border-transparent'
+                                }`}
+                            >
+                                <label className="text-sm font-semibold text-brand-primary mb-3 block">
+                                    Boyut / Ebat
+                                    {showSizeWarning && (
+                                        <span className="text-red-500 text-xs font-bold ml-2 animate-bounce">
+                                            (Lütfen bir ebat seçin!)
+                                        </span>
+                                    )}
+                                </label>
                                 <div className="flex flex-wrap gap-3" role="radiogroup" aria-label="Boyut Seçenekleri">
                                     {sizeOptions.map(({ size, available }) => (
                                         <button
                                             key={size}
-                                            onClick={() => setSelectedSize(size)}
+                                            onClick={() => onSelectSize(size)}
                                             disabled={!available}
                                             role="radio"
                                             aria-checked={selectedSize === size}
@@ -645,10 +708,16 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                         <div className="flex items-stretch gap-4 my-8 pb-8 border-b border-brand-border">
                             <button
                                 onClick={handleAddToCart}
-                                disabled={!canAddToCart}
+                                disabled={isOutOfStock}
                                 className="flex-1 font-bold py-4 px-6 bg-brand-primary text-white rounded-md hover:bg-brand-dark transition-all disabled:opacity-50 disabled:cursor-not-allowed text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 active:translate-y-0"
                             >
-                                {canAddToCart ? (product.isCustomSize ? `Sepete Ekle (${calculatedPrice.toFixed(2)} TL)` : 'Sepete Ekle') : (selectedVariant && selectedVariant.stock === 0 ? 'Tükendi' : 'Seçenekleri Belirleyin')}
+                                {isOutOfStock 
+                                    ? 'Tükendi' 
+                                    : (product.isCustomSize 
+                                        ? `Sepete Ekle (${calculatedPrice.toFixed(2)} TL)` 
+                                        : 'Sepete Ekle'
+                                      )
+                                }
                             </button>
                             <button
                                 onClick={handleWishlistToggle}
