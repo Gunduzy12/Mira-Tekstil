@@ -190,7 +190,14 @@ const AdminDashboard: React.FC = () => {
                     <NavItem view="reviews" label="Yorumlar & Sorular" icon={<ChatBubbleIcon className="h-5 w-5" />} />
                     <NavItem view="customers" label="Müşteriler" icon={<CustomersIcon className="h-5 w-5" />} />
                 </nav>
-                <div className="p-4 border-t border-gray-700">
+                <div className="p-4 border-t border-gray-700 space-y-2">
+                    <button
+                        onClick={() => router.push('/admin/price-increase')}
+                        className="text-sm text-amber-400 hover:text-amber-300 text-center block w-full py-2 hover:bg-white/5 rounded transition-colors font-semibold flex items-center justify-center space-x-2"
+                    >
+                        <span>⚡</span>
+                        <span>Fiyat Güncelleme Aracı</span>
+                    </button>
                     <button
                         onClick={() => router.push('/')}
                         className="text-sm text-gray-400 hover:text-white text-center block w-full py-2 hover:bg-white/5 rounded transition-colors"
