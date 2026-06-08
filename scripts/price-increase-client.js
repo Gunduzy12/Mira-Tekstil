@@ -1,6 +1,6 @@
 /**
  * Fiyat Güncelleme Scripti - Firebase Client SDK (Node.js)
- * Tüm ürünlerin fiyatlarına %7.5 zam yapar.
+ * Tüm ürünlerin fiyatlarına %10 zam yapar.
  * 
  * Güncellenecek alanlar:
  *   - priceFrom
@@ -21,7 +21,7 @@ const { getFirestore, collection, getDocs, writeBatch, doc } = require('firebase
 const envPath = path.resolve(__dirname, '../.env.local');
 require('dotenv').config({ path: envPath });
 
-const ZAM_ORANI = 1.075; // %7.5
+const ZAM_ORANI = 1.10; // %10
 const DRY_RUN = false; // Gerçekten güncellemek için false yapın, test için true kalsın.
 
 // Firebase config
@@ -48,7 +48,7 @@ function zamUygula(fiyat) {
 async function fiyatGuncelle() {
     console.log('========================================');
     console.log(`   MiraTekstil Fiyat Güncelleme Aracı`);
-    console.log(`   Zam Oranı: %7.5`);
+    console.log(`   Zam Oranı: %10`);
     console.log(`   Mod: ${DRY_RUN ? 'DRY-RUN (Simülasyon)' : 'CANLI (Firestore Güncellenecek)'}`);
     console.log('========================================\n');
 
@@ -151,7 +151,7 @@ async function fiyatGuncelle() {
         console.log(`✅ Başarıyla tamamlandı!`);
     }
     console.log(`   Etkilenen/Güncellenen ürün sayısı: ${guncellenenUrunSayisi}`);
-    console.log(`   Zam oranı: %7.5`);
+    console.log(`   Zam oranı: %10`);
     console.log(`   Mod: ${DRY_RUN ? 'DRY-RUN (Simülasyon - Veritabanına yazılmadı)' : 'CANLI (Firestore Güncellendi)'}`);
     console.log('========================================');
 

@@ -1,6 +1,6 @@
 /**
  * Fiyat Güncelleme Scripti - Firebase Admin SDK
- * Tüm ürünlerin fiyatlarına %7.5 zam yapar.
+ * Tüm ürünlerin fiyatlarına %10 zam yapar.
  * 
  * Güncellenecek alanlar:
  *   - variants[].price
@@ -15,7 +15,7 @@ const admin = require('firebase-admin');
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../.env.local') });
 
-const ZAM_ORANI = 1.075; // %7.5
+const ZAM_ORANI = 1.10; // %10
 
 admin.initializeApp({
     projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
@@ -32,7 +32,7 @@ function zamUygula(fiyat) {
 async function fiyatGuncelle() {
     console.log('========================================');
     console.log(`   MiraTekstil Fiyat Güncelleme Aracı`);
-    console.log(`   Zam Oranı: %7.5`);
+    console.log(`   Zam Oranı: %10`);
     console.log('========================================\n');
 
     const snapshot = await db.collection('products').get();
@@ -126,7 +126,7 @@ async function fiyatGuncelle() {
         console.log(`✅ Başarıyla tamamlandı!`);
     }
     console.log(`   Güncellenen ürün sayısı: ${guncellenenUrunSayisi}`);
-    console.log(`   Zam oranı: %7.5`);
+    console.log(`   Zam oranı: %10`);
     console.log('========================================');
 
     process.exit(0);

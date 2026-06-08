@@ -16,6 +16,35 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
+const replaceColorInName = (productName: string, selectedColor?: string) => {
+  if (!selectedColor) return productName;
+
+  // Türkçe karakter duyarlı renk kelimeleri listesi
+  const colors = [
+    'bej', 'beyaz', 'siyah', 'gri', 'krem', 'kahverengi', 'mavi',
+    'kırmızı', 'yeşil', 'pembe', 'mor', 'turuncu', 'sarı', 'lacivert',
+    'bordo', 'füme', 'ekru', 'antrasit', 'vizon'
+  ];
+
+  let updatedName = productName;
+  const nameLower = productName.toLowerCase();
+
+  for (const color of colors) {
+    const index = nameLower.indexOf(color);
+    if (index !== -1) {
+      // Rengi düzgün formatta (İlk harf büyük, diğerleri küçük) hazırlayalım
+      const formattedColor = selectedColor.charAt(0).toUpperCase() + selectedColor.slice(1).toLowerCase();
+      
+      // Orijinal isimdeki renk kelimesini bulup değiştirelim
+      const originalColorWord = productName.substring(index, index + color.length);
+      updatedName = productName.replace(originalColorWord, formattedColor);
+      break;
+    }
+  }
+
+  return updatedName;
+};
+
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const { showNotification } = useNotification();
@@ -44,10 +73,12 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           };
       }
 
+      const finalName = replaceColorInName(product.name, variant.color);
+
       const newCartItem: CartItem = {
         cartItemId,
         productId: product.id,
-        productName: product.name,
+        productName: finalName,
         quantity,
         variant,
         productImageUrl: product.imageUrl,
@@ -55,7 +86,9 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       };
       return [...prevItems, newCartItem];
     });
-    showNotification(`'${product.name}' sepete eklendi.`, 'success');
+
+    const finalName = replaceColorInName(product.name, variant.color);
+    showNotification(`'${finalName}' sepete eklendi.`, 'success');
   }, [showNotification]);
 
   const removeFromCart = useCallback((cartItemId: string) => {

@@ -21,7 +21,7 @@ export default function PriceIncreasePage() {
     const [summary, setSummary] = useState({ updated: 0, total: 0 });
     const [revalidateLoading, setRevalidateLoading] = useState(false);
 
-    const ZAM_ORANI = 1.075; // %7.5
+    const ZAM_ORANI = 1.10; // %10
 
     function addLog(text: string, type: LogLine['type'] = 'info') {
         setLogs(prev => [...prev, { text, type }]);
@@ -180,7 +180,7 @@ export default function PriceIncreasePage() {
             );
             addLog(dryRun
                 ? `Simülasyon başarıyla bitti. Toplam ${guncellenenSayi} üründe fiyat artışı simüle edildi.`
-                : `Firestore güncellemesi tamamlandı! ${guncellenenSayi} ürünün fiyatları %7.5 artırıldı.`,
+                : `Firestore güncellemesi tamamlandı! ${guncellenenSayi} ürünün fiyatları %10 artırıldı.`,
                 'success'
             );
 
@@ -205,7 +205,7 @@ export default function PriceIncreasePage() {
                         <span className="text-2xl">⚡</span>
                         <div>
                             <h1 className="text-xl font-bold text-white tracking-wide">MiraTekstil Fiyat Yönetim Modülü</h1>
-                            <p className="text-xs text-slate-400">Toplu Fiyat Güncelleme & %7.5 Zam Aracı</p>
+                            <p className="text-xs text-slate-400">Toplu Fiyat Güncelleme & %10 Zam Aracı</p>
                         </div>
                     </div>
                     <div className="text-sm bg-slate-800/80 px-3 py-1.5 rounded-md border border-slate-700">
@@ -284,11 +284,11 @@ export default function PriceIncreasePage() {
                             <div className="text-xs text-slate-400 space-y-2 border-t border-slate-800 pt-4">
                                 <p className="flex justify-between">
                                     <span>Zam Miktarı:</span>
-                                    <span className="font-bold text-emerald-400">%7.5 Artış</span>
+                                    <span className="font-bold text-emerald-400">%10 Artış</span>
                                 </p>
                                 <p className="flex justify-between">
                                     <span>Çarpan Oranı:</span>
-                                    <span className="font-mono text-slate-300">1.075</span>
+                                    <span className="font-mono text-slate-300">1.10</span>
                                 </p>
                                 <p className="flex justify-between">
                                     <span>Kapsanan Alanlar:</span>
@@ -315,7 +315,7 @@ export default function PriceIncreasePage() {
                                         ? '🔒 Önce Giriş Yapın'
                                         : dryRun 
                                             ? '🔍 Simülasyonu Başlat' 
-                                            : '🚀 Canlı Güncellemeyi Başlat (%7.5 ZAM)'
+                                            : '🚀 Canlı Güncellemeyi Başlat (%10 ZAM)'
                                 }
                             </button>
 
