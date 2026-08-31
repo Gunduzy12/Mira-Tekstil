@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { db, auth } from '@/firebaseConfig';
@@ -21,7 +21,8 @@ export default function PriceIncreasePage() {
     const [summary, setSummary] = useState({ updated: 0, total: 0 });
     const [revalidateLoading, setRevalidateLoading] = useState(false);
 
-    const ZAM_ORANI = 1.10; // %10
+    const [rateInput, setRateInput] = useState<number>(6); // Varsayılan %6
+    const ZAM_ORANI = 1 + (rateInput / 100);
 
     function addLog(text: string, type: LogLine['type'] = 'info') {
         setLogs(prev => [...prev, { text, type }]);
@@ -180,7 +181,7 @@ export default function PriceIncreasePage() {
             );
             addLog(dryRun
                 ? `Simülasyon başarıyla bitti. Toplam ${guncellenenSayi} üründe fiyat artışı simüle edildi.`
-                : `Firestore güncellemesi tamamlandı! ${guncellenenSayi} ürünün fiyatları %10 artırıldı.`,
+                : `Firestore güncellemesi tamamlandı! ${guncellenenSayi} ürünün fiyatları %${rateInput} artırıldı. `,
                 'success'
             );
 
@@ -205,7 +206,7 @@ export default function PriceIncreasePage() {
                         <span className="text-2xl">⚡</span>
                         <div>
                             <h1 className="text-xl font-bold text-white tracking-wide">MiraTekstil Fiyat Yönetim Modülü</h1>
-                            <p className="text-xs text-slate-400">Toplu Fiyat Güncelleme & %10 Zam Aracı</p>
+                            <p className="text-xs text-slate-400">Toplu Fiyat Güncelleme & %{rateInput} Zam Aracı</p>
                         </div>
                     </div>
                     <div className="text-sm bg-slate-800/80 px-3 py-1.5 rounded-md border border-slate-700">
@@ -262,6 +263,25 @@ export default function PriceIncreasePage() {
                         </h2>
 
                         <div className="space-y-5">
+                                                        {/* Zam Oranı Girdisi */}
+                            <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-4">
+                                <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">
+                                    Zam Oranı (%)
+                                </label>
+                                <input
+                                    type="number"
+                                    min="0.1"
+                                    max="100"
+                                    step="0.1"
+                                    value={rateInput}
+                                    onChange={e => setRateInput(parseFloat(e.target.value) || 0)}
+                                    className="w-full bg-slate-950 border border-slate-800 focus:border-amber-500 rounded-lg px-4 py-2.5 outline-none transition-all text-sm font-semibold text-white"
+                                />
+                                <span className="text-[10px] text-slate-500 mt-1 block">
+                                    Örn: 6 (yani %6 zam yapar). Çarpan: {(1 + rateInput/100).toFixed(3)}
+                                </span>
+                            </div>
+
                             {/* Mod Seçimi */}
                             <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-4">
                                 <label className="flex items-start space-x-3 cursor-pointer select-none">
@@ -284,11 +304,11 @@ export default function PriceIncreasePage() {
                             <div className="text-xs text-slate-400 space-y-2 border-t border-slate-800 pt-4">
                                 <p className="flex justify-between">
                                     <span>Zam Miktarı:</span>
-                                    <span className="font-bold text-emerald-400">%10 Artış</span>
+                                    <span className="font-bold text-emerald-400">%{rateInput} Artış</span>
                                 </p>
                                 <p className="flex justify-between">
                                     <span>Çarpan Oranı:</span>
-                                    <span className="font-mono text-slate-300">1.10</span>
+                                    <span className="font-mono text-slate-300">{ZAM_ORANI.toFixed(3)}</span>
                                 </p>
                                 <p className="flex justify-between">
                                     <span>Kapsanan Alanlar:</span>
@@ -315,7 +335,7 @@ export default function PriceIncreasePage() {
                                         ? '🔒 Önce Giriş Yapın'
                                         : dryRun 
                                             ? '🔍 Simülasyonu Başlat' 
-                                            : '🚀 Canlı Güncellemeyi Başlat (%10 ZAM)'
+                                            : `🚀 Canlı Güncellemeyi Başlat (%${rateInput} ZAM)`
                                 }
                             </button>
 
@@ -424,3 +444,5 @@ export default function PriceIncreasePage() {
         </div>
     );
 }
+
+

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useRouter } from 'next/navigation';
@@ -353,7 +353,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
     }
 
     const canAddToCart = selectedVariant && selectedVariant.stock > 0;
-    const isOutOfStock = selectedVariant && selectedVariant.stock === 0;
+    const isOutOfStock = selectedVariant ? selectedVariant.stock === 0 : false;
     const inputClasses = "w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-brand-secondary focus:border-brand-secondary transition-all shadow-sm";
 
     // Fiyat Hesaplama
@@ -904,3 +904,4 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
 };
 
 export default ProductDetailPage;
+
