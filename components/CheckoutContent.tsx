@@ -85,7 +85,7 @@ const CheckoutContent: React.FC = () => {
         return discount > cartTotal ? cartTotal : discount;
     }, [cartTotal, activeCoupon]);
 
-    const shippingCost = 0; // TEST: Gecici olarak 0 TL yapildi
+    const shippingCost = (cartTotal - discountAmount) > 500 ? 0 : 50;
     const subTotalAfterDiscount = cartTotal - discountAmount;
     const total = Math.max(0, subTotalAfterDiscount + shippingCost);
 
