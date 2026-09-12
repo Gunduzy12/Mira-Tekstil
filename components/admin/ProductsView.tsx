@@ -1,4 +1,4 @@
-
+﻿
 import React, { useState } from 'react';
 import { useProducts } from '../../context/ProductContext';
 import { Product } from '../../types';
@@ -32,13 +32,16 @@ const ProductsView: React.FC = () => {
 
   const handleSaveProduct = async (productData: Product | Omit<Product, 'id'>) => {
     if (productToEdit) {
-      // Update existing
       await updateProduct(productData as Product);
     } else {
-      // Add new
       await addProduct(productData as Omit<Product, 'id'>);
     }
     setIsModalOpen(false);
+    try {
+      await fetch('/api/revalidate', { method: 'POST' });
+    } catch (e) {
+      console.error('Revalidation error:', e);
+    }
   };
 
   const getPriceRange = (product: Product): string => {

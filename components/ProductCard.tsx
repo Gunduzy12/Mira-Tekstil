@@ -84,7 +84,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProduct }) =
           className="overflow-hidden bg-white relative border border-brand-border rounded-lg aspect-[4/5]"
         >
           <img
-            src={product.imageUrl}
+            src={product.imageUrl && product.imageUrl.trim() !== '' ? product.imageUrl : '/perde_hava_durumu_banner.png'}
             alt={product.name}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
           />

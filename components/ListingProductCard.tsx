@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useMemo } from 'react';
 import Link from 'next/link';
@@ -69,7 +69,7 @@ const ListingProductCard: React.FC<ListingProductCardProps> = ({ product, index 
         {/* 👇 GÖRSEL ALANI GÜNCELLENDİ 👇 */}
         <div className="relative aspect-[4/5] overflow-hidden bg-gray-100">
           <Image
-            src={product.imageUrl}
+            src={product.imageUrl && product.imageUrl.trim() !== '' ? product.imageUrl : '/perde_hava_durumu_banner.png'}
             alt={product.name}
             fill // 👈 Kapsayıcıya (aspect-[4/5]) tam oturur
             priority={isPriority} // 👈 9.7sn sorununu çözen kod
