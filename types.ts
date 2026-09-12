@@ -1,4 +1,4 @@
-export interface Review {
+﻿export interface Review {
   id: number;
   author: string;
   rating: number; // 1 to 5
@@ -110,7 +110,7 @@ export type ShippingCompany = 'Yurtiçi Kargo' | 'Aras Kargo' | 'MNG Kargo' | 'S
 export interface Order {
   id: string;
   date: string;
-  status: 'Teslim Edildi' | 'Yolda' | 'İşleniyor' | 'Kargolandı' | 'Ödeme Bekleniyor';
+  status: 'Teslim Edildi' | 'Yolda' | 'İşleniyor' | 'Kargolandı' | 'Ödeme Bekleniyor' | 'Ödeme Başarısız';
   items: OrderItem[];
   total: number;
   shippingAddress: string;
@@ -123,6 +123,14 @@ export interface Order {
 
   trackingNumber?: string;
   shippingCompany?: ShippingCompany;
+
+  // Payment Tracking
+  isPaid?: boolean;
+  paymentId?: string;
+  paymentDate?: string;
+  paymentAmount?: string;
+  paymentMethod?: string;
+  failedReason?: string;
 }
 
 export interface ReturnRequest {

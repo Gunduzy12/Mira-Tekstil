@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+﻿import React, { useMemo } from 'react';
 import Link from 'next/link';
 import { Product } from '../types';
 import { useWishlist } from '../context/WishlistContext';
@@ -9,7 +9,7 @@ import { getProductUrl } from '../data/seoCategories';
 
 interface ProductCardProps {
   product: Product;
-  onSelectProduct: (product: Product) => void;
+  onSelectProduct?: (product: Product) => void;
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onSelectProduct }) => {

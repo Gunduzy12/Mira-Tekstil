@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
@@ -142,6 +142,7 @@ const CheckoutContent: React.FC = () => {
                 id: orderId,
                 date: new Date().toISOString(),
                 status: 'Ödeme Bekleniyor', // Henüz ödeme yapılmadı
+                isPaid: false,
                 items: cartItems.map(item => ({
                     id: item.productId,
                     name: item.productName,
@@ -174,7 +175,7 @@ const CheckoutContent: React.FC = () => {
 
         // 2. PayTR Başlat
         try {
-            await sendFormToEmail('Yeni Sipariş Denemesi (Ödeme Bekleniyor)', {
+            await sendFormToEmail('⚠️ YENİ SİPARİŞ DENEMESİ (ÖDEME HENÜZ ALINMADI)', {
                 orderId: orderId,
                 customerName: fullName,
                 email: formData.email,

@@ -1,4 +1,4 @@
-
+﻿
 import React from 'react';
 import { useOrders } from '../../context/OrderContext';
 import { useProducts } from '../../context/ProductContext';
@@ -22,7 +22,8 @@ const DashboardView: React.FC = () => {
   );
 
   const StatusBadge: React.FC<{ status: Order['status'] }> = ({ status }) => {
-    const colorClasses = {
+    const colorClasses: Record<string, string> = {
+      'Ödeme Başarısız': 'bg-rose-100 text-rose-800',
       'Teslim Edildi': 'bg-green-100 text-green-800',
       'Yolda': 'bg-blue-100 text-blue-800',
       'Kargolandı': 'bg-blue-100 text-blue-800',
