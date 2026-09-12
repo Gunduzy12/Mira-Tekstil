@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
             });
         }
 
-        console.log("🔔 PayTR Callback Received:", data.merchant_oid, data.status);
+        console.log("📥 PayTR Callback Received:", data.merchant_oid, data.status);
 
         const merchant_key = process.env.PAYTR_MERCHANT_KEY;
         const merchant_salt = process.env.PAYTR_MERCHANT_SALT;
@@ -108,7 +108,7 @@ export async function POST(req: NextRequest) {
                 to_name: "Yönetici",
                 to_email: "yilmazbaris814@gmail.com",
                 from_name: "MiraTekstil Sistem",
-                subject: `💰 ÖDEME ONAYLANDI (HAZIRLANACAK) - #${data.merchant_oid}`,
+                subject: `🎉 ÖDEME ONAYLANDI (HAZIRLANACAK) - #${data.merchant_oid}`,
                 message: `Sipariş #${data.merchant_oid} için PayTR ödemesi BAŞARILI! Tutar: ${data.total_amount} TL. Bu siparişi hazırlayıp kargolayabilirsiniz.`,
                 reply_to: clientEmail || "yilmazbaris814@gmail.com"
             });
