@@ -5,6 +5,18 @@ import { seoCategories, seoParentCategories, getProductUrl } from '../data/seoCa
 import { blogTopics } from '../data/seoBlogTopics';
 import { Product } from '../types';
 
+export const revalidate = 3600;
+
+function isIndexableProduct(product: Product): boolean {
+    const searchableName = `${product.name || ''} ${product.slug || ''}`;
+
+    return Boolean(
+        product.name?.trim() &&
+        product.imageUrl?.trim() &&
+        !/\btest\b/i.test(searchableName)
+    );
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const baseUrl = 'https://www.miratekstiltr.com';
 
@@ -62,22 +74,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     let productRoutes: MetadataRoute.Sitemap = [];
     try {
         const productsSnapshot = await getDocs(collection(db, 'products'));
-        productRoutes = productsSnapshot.docs.map(doc => {
-            const product = doc.data() as Product;
-            const productUrl = getProductUrl(
-                product.name,
-                doc.id,
-                product.category,
-                (product as Product).slug,
-                (product as Product).categorySlug,
-                (product as Product).parentSlug
-            );
-            return {
-                url: `${baseUrl}${productUrl}`,
-                changeFrequency: 'weekly' as const,
-                priority: 0.8,
-            };
-        });
+        productRoutes = productsSnapshot.docs
+            .map(doc => ({ id: doc.id, ...doc.data() } as Product))
+            .filter(isIndexableProduct)
+            .map(product => {
+                const productUrl = getProductUrl(
+                    product.name,
+                    product.id,
+                    product.category,
+                    product.slug,
+                    product.categorySlug,
+                    product.parentSlug
+                );
+                return {
+                    url: `${baseUrl}${productUrl}`,
+                    changeFrequency: 'weekly' as const,
+                    priority: 0.8,
+                };
+            });
     } catch (error) {
         console.error("Sitemap ürünleri çekerken hata:", error);
     }

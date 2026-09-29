@@ -1,6 +1,6 @@
 import { notFound, permanentRedirect } from 'next/navigation';
 import { db } from '@/firebaseConfig';
-import { doc, getDoc } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore';
 import { Product } from '@/types';
 import { extractIdFromSlug } from '@/utils/slugify';
 import { getProductUrl } from '@/data/seoCategories';
@@ -17,6 +17,18 @@ async function getProduct(slug: string): Promise<Product | null> {
 
         if (docSnap.exists()) {
             return { id: docSnap.id, ...docSnap.data() } as Product;
+        }
+
+        // Bazı eski bağlantılar belge kimliği olmadan yalnızca ürün slug'ını içerir.
+        const slugQuery = query(
+            collection(db, 'products'),
+            where('slug', '==', slug)
+        );
+        const slugSnapshot = await getDocs(slugQuery);
+
+        if (!slugSnapshot.empty) {
+            const slugDoc = slugSnapshot.docs[0];
+            return { id: slugDoc.id, ...slugDoc.data() } as Product;
         }
     } catch (error) {
         console.error("Error fetching product:", error);
