@@ -1,8 +1,7 @@
 ﻿"use client";
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import Image from 'next/image';
 import { Product, Review, Question } from '../types';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
@@ -34,7 +33,6 @@ const maskName = (name: string) => {
 };
 
 const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
-    const router = useRouter();
     const [reviews, setReviews] = useState<Review[]>(product.reviews);
     const [questions, setQuestions] = useState<Question[]>(product.questions || []);
     const [activeTab, setActiveTab] = useState<'description' | 'reviews' | 'qa'>('description');
@@ -102,12 +100,12 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
         const uniqueSizes = Array.from(new Set(product.variants.map(v => v.size).filter(s => !!s)));
 
         // Only set default if nothing is selected yet or if options changed significantly
-        if (!selectedColor && uniqueColors.length > 0) {
-            setSelectedColor(uniqueColors.length === 1 ? (uniqueColors[0] as string) : null);
-        }
-        if (!selectedSize && uniqueSizes.length > 0) {
-            setSelectedSize(uniqueSizes.length === 1 ? (uniqueSizes[0] as string) : null);
-        }
+        setSelectedColor(currentColor => currentColor && uniqueColors.includes(currentColor)
+            ? currentColor
+            : (uniqueColors.length === 1 ? (uniqueColors[0] as string) : null));
+        setSelectedSize(currentSize => currentSize && uniqueSizes.includes(currentSize)
+            ? currentSize
+            : (uniqueSizes.length === 1 ? (uniqueSizes[0] as string) : null));
 
         setQuantity(1);
         setReviews(product.reviews);
@@ -148,7 +146,9 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
     const sizeOptions = useMemo(() => {
         if (product.isCustomSize) return [];
 
-        const allSizes = [...new Set(product.variants.map(v => v.size).filter(Boolean as any as (v: string | undefined) => v is string))];
+        const allSizes = [...new Set(product.variants
+            .map(v => v.size)
+            .filter((size): size is string => typeof size === 'string' && size.length > 0))];
         if (!selectedColor) {
             return allSizes.map(size => ({ size, available: true }));
         }
@@ -352,7 +352,6 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
         }
     }
 
-    const canAddToCart = selectedVariant && selectedVariant.stock > 0;
     const isOutOfStock = selectedVariant ? selectedVariant.stock === 0 : false;
     const inputClasses = "w-full p-3 bg-white border border-gray-300 rounded-lg text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-brand-secondary focus:border-brand-secondary transition-all shadow-sm";
 
@@ -367,96 +366,8 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
         : product.originalPrice;
 
 
-    // JSON-LD Structured Data for SEO
-    const jsonLd = {
-        '@context': 'https://schema.org',
-        '@graph': [
-            {
-                '@type': 'BreadcrumbList',
-                'itemListElement': [
-                    {
-                        '@type': 'ListItem',
-                        'position': 1,
-                        'name': 'Anasayfa',
-                        'item': 'https://miratekstil.com'
-                    },
-                    {
-                        '@type': 'ListItem',
-                        'position': 2,
-                        'name': 'Mağaza',
-                        'item': 'https://miratekstil.com/shop'
-                    },
-                    {
-                        '@type': 'ListItem',
-                        'position': 3,
-                        'name': product.name,
-                        'item': `https://miratekstil.com/product/${product.id}` // Ideally slug, but ID is safe fallback or use window loc if client side
-                    }
-                ]
-            },
-            {
-                '@type': 'Product',
-                name: product.name,
-                image: allImages,
-                description: product.description,
-                sku: product.id,
-                mpn: product.id,
-                brand: {
-                    '@type': 'Brand',
-                    name: product.brand || 'MiraTekstil'
-                },
-                offers: {
-                    '@type': 'Offer',
-                    priceCurrency: 'TRY',
-                    price: displayPrice.toFixed(2),
-                    availability: (selectedVariant?.stock || 0) > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
-                    itemCondition: 'https://schema.org/NewCondition',
-                    url: `https://miratekstil.com/product/${product.id}`
-                },
-                aggregateRating: product.averageRating ? {
-                    '@type': 'AggregateRating',
-                    ratingValue: product.averageRating,
-                    reviewCount: reviews.length > 0 ? reviews.length : 1
-                } : undefined,
-                review: reviews.map(r => ({
-                    '@type': 'Review',
-                    author: {
-                        '@type': 'Person',
-                        name: r.author
-                    },
-                    datePublished: r.date,
-                    reviewBody: r.comment,
-                    reviewRating: {
-                        '@type': 'Rating',
-                        ratingValue: r.rating
-                    }
-                }))
-            }
-        ]
-    };
-
     return (
         <div className="bg-brand-bg">
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
-            <nav aria-label="Breadcrumb" className="container mx-auto px-4 sm:px-6 py-4 text-sm text-gray-500">
-                <ol className="list-none p-0 inline-flex">
-                    <li className="flex items-center">
-                        <Link href="/" className="hover:text-brand-primary" title="Anasayfa">Anasayfa</Link>
-                        <ChevronRightIcon className="w-3 h-3 mx-2" />
-                    </li>
-                    <li className="flex items-center">
-                        <Link href="/shop" className="hover:text-brand-primary" title="Mağaza">Mağaza</Link>
-                        <ChevronRightIcon className="w-3 h-3 mx-2" />
-                    </li>
-                    <li className="flex items-center">
-                        <span className="text-gray-700 font-medium" aria-current="page">{product.name}</span>
-                    </li>
-                </ol>
-            </nav>
-
             <div className="container mx-auto px-4 sm:px-6 py-8">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
 
@@ -464,10 +375,13 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                     <div className="lg:col-span-5">
                         <div className="relative mb-4 border border-brand-border rounded-lg overflow-hidden bg-white shadow-sm">
                             <div className="aspect-[4/5] w-full relative group">
-                                <img
+                                <Image
                                     src={mainImage}
                                     alt={`${product.name} - MiraTekstil ${selectedColor ? selectedColor : ''}`}
-                                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    fill
+                                    priority
+                                    sizes="(max-width: 1024px) 100vw, 42vw"
+                                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                                 />
                                 {displayOriginalPrice && displayOriginalPrice > displayPrice && (
                                     <div className="absolute top-4 left-4 bg-red-600 text-white font-bold px-3 py-1 rounded shadow-lg z-10 animate-pulse">
@@ -486,7 +400,13 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                                     className={`relative aspect-square border-2 rounded-md transition-all overflow-hidden bg-white ${img === mainImage ? 'border-brand-secondary ring-1 ring-brand-secondary opacity-100' : 'border-transparent hover:border-gray-300 opacity-80 hover:opacity-100'}`}
                                     aria-label={`${product.name} görseli ${index + 1}`}
                                 >
-                                    <img src={img} alt={`${product.name} detay ${index + 1}`} className="w-full h-full object-cover" />
+                                    <Image
+                                        src={img}
+                                        alt={`${product.name} detay görseli ${index + 1}`}
+                                        fill
+                                        sizes="(max-width: 768px) 18vw, 8vw"
+                                        className="object-cover"
+                                    />
                                 </button>
                             ))}
                         </div>
@@ -569,7 +489,13 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                                             role="radio"
                                             aria-checked={selectedColor === color}
                                         >
-                                            <img src={imageUrl} alt={color} className="w-full h-full object-cover rounded-sm" />
+                                            <Image
+                                                src={imageUrl}
+                                                alt={`${product.name} ${color} renk seçeneği`}
+                                                fill
+                                                sizes="80px"
+                                                className="object-cover rounded-sm p-1"
+                                            />
                                         </button>
                                     ))}
                                 </div>
@@ -883,7 +809,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                                             <textarea id="question" rows={5} value={qaQuestion} onChange={(e) => setQaQuestion(e.target.value)} className={inputClasses} required placeholder="Ürün hakkında merak ettiklerinizi sorun..."></textarea>
                                             <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
                                                 <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-                                                KVKK gereği isminiz "Ah*** Yı***" şeklinde maskelenerek gösterilecektir.
+                                                KVKK gereği isminiz &quot;Ah*** Yı***&quot; şeklinde maskelenerek gösterilecektir.
                                             </p>
                                         </div>
                                         <button type="submit" disabled={isSubmittingQa} className="w-full bg-brand-primary text-white py-3 px-4 rounded-md hover:bg-brand-dark transition-colors disabled:opacity-50 font-medium">

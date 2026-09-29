@@ -61,7 +61,7 @@ const Footer: React.FC = () => {
               <li><Link href="/blog/blackout-perde-mi-tul-perde-mi" className="hover:text-white transition-colors" title="Blackout Perde mi Tül Perde mi?">Blackout vs Tül Perde</Link></li>
               <li><Link href="/blog/yatak-odasi-icin-en-iyi-perde" className="hover:text-white transition-colors" title="Yatak Odası İçin En İyi Perde">Yatak Odası Perdesi</Link></li>
               <li><Link href="/blog/perde-olcusu-nasil-alinir" className="hover:text-white transition-colors" title="Perde Ölçüsü Nasıl Alınır">Perde Ölçüsü Rehberi</Link></li>
-              <li><Link href="/blog/salon-perde-secimi" className="hover:text-white transition-colors" title="Salon Perde Seçimi 2025">Salon Perde Seçimi</Link></li>
+              <li><Link href="/blog/salon-perde-secimi" className="hover:text-white transition-colors" title="Salon Perde Seçimi 2026">Salon Perde Seçimi</Link></li>
               <li><Link href="/about" className="hover:text-white transition-colors" title="Hakkımızda">Hakkımızda</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors" title="İletişim">İletişim</Link></li>
             </ul>
@@ -91,7 +91,7 @@ const Footer: React.FC = () => {
         </div>
         <div className="mt-16 border-t border-gray-700 pt-8 text-center text-sm text-gray-500">
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-4">
-            <p>&copy; 2025 Yusuf Gündüz Developer. Tüm hakları saklıdır.</p>
+            <p>&copy; {new Date().getFullYear()} MiraTekstil. Tüm hakları saklıdır.</p>
             <span className="hidden sm:inline text-gray-600">|</span>
             <Link href="/admin" className="hover:text-white transition-colors" title="Yönetici Paneli Girişi" rel="nofollow">Yönetici Paneli</Link>
           </div>

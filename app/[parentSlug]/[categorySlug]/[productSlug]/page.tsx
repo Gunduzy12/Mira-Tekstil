@@ -8,6 +8,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import RelatedProducts from '@/components/RelatedProducts';
 import JsonLd, { generateProductSchema } from '@/components/JsonLd';
 import ProductDetailPage from '@/components/ProductDetailPage';
+import { getProductMetaDescription, getProductMetaTitle } from '@/utils/seo';
 
 export const revalidate = 3600;
 
@@ -74,22 +75,29 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const canonicalParentSlug = product.parentSlug || parentSlug;
     const canonicalUrl = `/${canonicalParentSlug}/${canonicalCatSlug}/${canonicalSlug}`;
 
-    const displayTitle = product.seoTitle || product.name;
+    const displayTitle = getProductMetaTitle(product);
+    const metaDescription = getProductMetaDescription(product);
 
     return {
-        title: `${displayTitle} | MiraTekstil`,
-        description: product.description?.substring(0, 160) || '',
+        title: displayTitle,
+        description: metaDescription,
         alternates: {
             canonical: canonicalUrl,
         },
         openGraph: {
             title: displayTitle,
-            description: product.description?.substring(0, 160) || '',
-            images: [product.imageUrl],
+            description: metaDescription,
+            images: [{ url: product.imageUrl, alt: product.name }],
             url: `https://www.miratekstiltr.com${canonicalUrl}`,
             siteName: 'MiraTekstil',
             locale: 'tr_TR',
             type: 'website',
+        },
+        twitter: {
+            card: 'summary_large_image',
+            title: displayTitle,
+            description: metaDescription,
+            images: [product.imageUrl],
         },
     };
 }
@@ -123,7 +131,7 @@ export default async function ProductPage({ params }: Props) {
                 data={generateProductSchema({
                     name: product.name,
                     description: product.description,
-                    imageUrl: product.imageUrl,
+                    imageUrl: [...new Set([product.imageUrl, ...(product.images || [])].filter(Boolean))],
                     price: product.priceFrom,
                     originalPrice: product.originalPrice,
                     brand: product.brand,

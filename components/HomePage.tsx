@@ -1,25 +1,28 @@
-"use client";
-
 import React from 'react';
 import Link from 'next/link';
-import { useProducts } from '../context/ProductContext';
-import { ChevronRightIcon } from '../components/Icons';
 import { getProductUrl } from '../data/seoCategories';
 import Image from 'next/image';
 import { Product } from '../types';
 
 interface HomePageProps {
-    initialProducts?: Product[];
+    initialProducts: Product[];
 }
 
 const HomePage: React.FC<HomePageProps> = ({ initialProducts }) => {
-    const { products: contextProducts } = useProducts();
-    const products = (initialProducts && initialProducts.length > 0) ? initialProducts : contextProducts;
+    const products = initialProducts;
 
     return (
         <div className="bg-brand-bg text-brand-primary">
             {/* Hero Section */}
-            <header className="relative h-[75vh] bg-cover bg-center flex items-center" style={{ backgroundImage: "url('https://imgur.com/RHzDAQB.png')" }} role="banner">
+            <header className="relative h-[75vh] flex items-center overflow-hidden" role="banner">
+                <Image
+                    src="https://i.imgur.com/RHzDAQB.png"
+                    alt="MiraTekstil perde koleksiyonu ile dekore edilmiş modern salon"
+                    fill
+                    priority
+                    sizes="100vw"
+                    className="object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-transparent"></div>
                 <div className="relative container mx-auto px-6 h-full flex flex-col justify-center items-center text-center text-white pt-10">
 
@@ -27,7 +30,7 @@ const HomePage: React.FC<HomePageProps> = ({ initialProducts }) => {
                         <div className="absolute -inset-1 bg-gradient-to-r from-brand-secondary/20 to-brand-light/20 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
                         <div className="relative px-8 py-3 bg-black/40 backdrop-blur-md rounded-full border border-brand-secondary/30 ring-1 ring-white/10 shadow-2xl flex items-center justify-center">
                             <span className="text-brand-secondary font-serif tracking-[0.25em] text-xs md:text-sm font-bold uppercase drop-shadow-md">
-                                MiraTekstil 2025 Perde Koleksiyonu
+                                MiraTekstil 2026 Perde Koleksiyonu
                             </span>
                         </div>
                     </div>
@@ -213,12 +216,12 @@ const HomePage: React.FC<HomePageProps> = ({ initialProducts }) => {
 
                     <div className="text-gray-600 leading-relaxed space-y-6">
                         <p>
-                            Evinizin dekorasyonunu tamamlayan en önemli unsurlardan biri olan <strong>perde</strong>, hem estetik hem de fonksiyonel bir görev üstlenir. Doğru perde seçimi, odanızın atmosferini tamamen değiştirebilir. Işık kontrolünden gürültü yalıtımına, mahremiyetten enerji tasarrufuna kadar birçok faydası bulunan perdeler, yaşam alanlarınızın vazgeçilmez aksesuarlarıdır.
+                            Evinizin dekorasyonunu tamamlayan en önemli unsurlardan biri olan <strong>perde</strong>, hem estetik hem de işlevsel bir görev üstlenir. Doğru perde seçimi odanın ışık seviyesini, mahremiyetini ve genel görünümünü değiştirebilir. İhtiyacınıza uygun kumaş, renk ve ölçüyü birlikte değerlendirmek daha iyi sonuç verir.
                         </p>
 
                         <h3 className="text-xl font-serif text-brand-primary mt-8">Hangi Oda İçin Hangi Perde?</h3>
                         <p>
-                            <strong>Yatak odası</strong> için <strong>karartma blackout perde</strong> en ideal seçimdir. Güneş ışığını tamamen keserek kaliteli uyku ortamı sağlar. Özellikle güneye bakan yatak odalarında <strong>güneş geçirmeyen perde</strong> modelleri tercih edilmelidir. Bebek ve çocuk odalarında da gündüz uykusu için blackout perde şarttır.
+                            <strong>Yatak odası</strong> için dış aydınlatmayı azaltan <strong>karartma blackout perde</strong> modelleri değerlendirilebilir. Kumaşın karartma düzeyi kadar doğru en ve boy ölçüsü de kenarlardan gelen ışığı azaltmada önemlidir. Gündüz mahremiyeti için tül, daha güçlü ışık kontrolü için blackout perde birlikte kullanılabilir.
                         </p>
                         <p>
                             <strong>Salon</strong> ve oturma odaları için <strong>parlak saten perde</strong> modelleri zarif bir tercihdir. Saten kumaşın doğal parlaklığı, ışıkla buluştuğunda odanıza sofistike bir ambiyans yaratır. <strong>Salon için saten perde</strong> seçerken mobilya ve duvar renkleriyle uyumu gözetmelisiniz.
@@ -229,7 +232,7 @@ const HomePage: React.FC<HomePageProps> = ({ initialProducts }) => {
 
                         <h3 className="text-xl font-serif text-brand-primary mt-8">Özel Ölçü Perde Avantajı</h3>
                         <p>
-                            Her pencerenin boyutu farklıdır ve standart ölçüler her zaman uyum sağlamaz. <strong>Özel ölçü tül perde dikimi</strong> ve <strong>özel dikim saten perde</strong> hizmetimiz sayesinde pencerelerinize birebir oturan, kusursuz perdeler elde edebilirsiniz. Özel ölçü perde, hem estetik açıdan hem de ışık sızmasını önleme konusunda büyük avantaj sağlar.
+                            Her pencerenin boyutu farklıdır ve standart ölçüler her zaman uyum sağlamaz. <strong>Özel ölçü tül perde dikimi</strong> ve <strong>özel dikim saten perde</strong> seçenekleri, korniş ve pencere ölçüsüne daha uygun bir görünüm sağlar. Siparişten önce en, boy ve pile bilgisini dikkatle kontrol edin.
                         </p>
 
                         <h3 className="text-xl font-serif text-brand-primary mt-8">Çocuk Odası Dekorasyonu</h3>
@@ -243,7 +246,7 @@ const HomePage: React.FC<HomePageProps> = ({ initialProducts }) => {
                         </p>
 
                         <p>
-                            Perde ve ev tekstili ihtiyaçlarınız için MiraTekstil koleksiyonumuzu keşfedin. 500 TL üzeri siparişlerde <strong>ücretsiz kargo</strong>, kolay iade ve güvenli ödeme seçenekleri ile alışveriş keyfinizi yaşayın.
+                            Perde ve ev tekstili ihtiyaçlarınız için MiraTekstil koleksiyonunu keşfedin. 500 TL üzeri siparişlerde <strong>ücretsiz kargo</strong> ve güvenli ödeme seçeneklerinden yararlanın.
                         </p>
                     </div>
                 </div>
@@ -254,7 +257,7 @@ const HomePage: React.FC<HomePageProps> = ({ initialProducts }) => {
                 <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
                 <div className="container mx-auto px-6 text-center relative z-10">
                     <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6 text-white">Evinizi Yenilemeye Hazır Mısınız?</h2>
-                    <p className="text-xl opacity-80 mb-10 max-w-2xl mx-auto font-light text-gray-300">Yeni sezon ürünlerimizde geçerli %20 indirim fırsatını kaçırmayın. Sınırlı süre için geçerlidir.</p>
+                    <p className="text-xl opacity-80 mb-10 max-w-2xl mx-auto font-light text-gray-300">Blackout, tül, saten ve özel ölçü perde seçeneklerini bir arada inceleyin.</p>
                     <Link
                         href="/perde"
                         className="bg-brand-secondary text-white font-bold py-4 px-10 rounded-full hover:bg-white hover:text-brand-primary transition-all duration-300 shadow-xl transform hover:scale-105 border border-transparent hover:border-white inline-block"
@@ -276,7 +279,7 @@ const HomePage: React.FC<HomePageProps> = ({ initialProducts }) => {
                         <a 
                             href="https://havapusula.com.tr" 
                             target="_blank" 
-                            rel="dofollow" 
+                            rel="noopener noreferrer"
                             className="font-bold text-gray-500 hover:text-brand-secondary hover:underline transition-colors"
                             title="Hava Durumu"
                         >

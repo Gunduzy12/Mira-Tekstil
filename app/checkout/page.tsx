@@ -4,6 +4,10 @@ import CheckoutContent from '@/components/CheckoutContent';
 export const metadata: Metadata = {
     title: 'Ödeme | MiraTekstil',
     description: 'Güvenli ödeme ile siparişinizi tamamlayın.',
+    robots: {
+        index: false,
+        follow: false,
+    },
 };
 
 export default function CheckoutPage() {

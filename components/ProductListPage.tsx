@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect, Suspense } from 'react';
+import React, { useState, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useProducts } from '../context/ProductContext';
 import { useCategories } from '../context/CategoryContext';
@@ -43,17 +43,10 @@ const ProductListPageContent: React.FC<ProductListPageContentProps> = ({ initial
     const initialCategory = searchParams.get('category') || 'Tümü';
     const initialSearchQuery = searchParams.get('q') || '';
 
-    const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
+    const selectedCategory = initialCategory;
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 5000]);
     const [sortOption, setSortOption] = useState<string>('featured');
     const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
-
-    // URL Parametrelerini State ile Eşle
-    useEffect(() => {
-        const cat = searchParams.get('category');
-        if (cat) setSelectedCategory(cat);
-        else if (!searchParams.has('view')) setSelectedCategory('Tümü');
-    }, [searchParams]);
 
     const updateUrl = (newCategory: string) => {
         const params = new URLSearchParams(searchParams.toString());
@@ -66,7 +59,6 @@ const ProductListPageContent: React.FC<ProductListPageContentProps> = ({ initial
     };
 
     const handleCategoryChange = (category: string) => {
-        setSelectedCategory(category);
         updateUrl(category);
     };
 
@@ -121,10 +113,10 @@ const ProductListPageContent: React.FC<ProductListPageContentProps> = ({ initial
             <div className="container mx-auto px-6 py-12">
                 <header className="mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
                     <div>
-                        <h1 className="text-3xl font-serif font-bold text-brand-primary">Mağaza</h1>
+                        <h1 className="text-3xl font-serif font-bold text-brand-primary">Perde ve Ev Tekstili Ürünleri</h1>
                         <p className="text-gray-500 mt-2">
                             {filteredProducts.length} ürün listeleniyor
-                            {initialSearchQuery && <span className="font-semibold"> ("{initialSearchQuery}" için sonuçlar)</span>}
+                            {initialSearchQuery && <span className="font-semibold"> (&quot;{initialSearchQuery}&quot; için sonuçlar)</span>}
                             {selectedCategory !== 'Tümü' && !initialSearchQuery && <span className="font-semibold"> ({selectedCategory})</span>}
                         </p>
                     </div>
@@ -241,7 +233,6 @@ const ProductListPageContent: React.FC<ProductListPageContentProps> = ({ initial
                                         handleCategoryChange('Tümü');
                                         setPriceRange([0, 5000]);
                                         setSortOption('featured');
-                                        router.push('/shop');
                                     }}
                                     className="mt-4 text-brand-secondary font-medium hover:underline"
                                 >

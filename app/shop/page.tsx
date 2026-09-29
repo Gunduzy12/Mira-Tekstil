@@ -8,8 +8,16 @@ import { Product, Category } from '@/types';
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-    title: 'Mağaza - Tüm Ürünler | MiraTekstil',
-    description: 'MiraTekstil mağazasındaki tüm ürünleri inceleyin. Filtreleme seçenekleri ile aradığınız ürünü kolayca bulun.',
+    title: 'Perde ve Ev Tekstili Ürünleri | MiraTekstil',
+    description: 'Blackout, tül, saten, özel ölçü perde ve ev tekstili ürünlerini güncel fiyatlarla inceleyin. Renk, ölçü ve fiyat seçeneklerini karşılaştırın.',
+    alternates: {
+        canonical: '/shop',
+    },
+    openGraph: {
+        title: 'Perde ve Ev Tekstili Ürünleri | MiraTekstil',
+        description: 'Blackout, tül, saten, özel ölçü perde ve ev tekstili ürünlerini güncel fiyatlarla inceleyin.',
+        url: 'https://www.miratekstiltr.com/shop',
+    },
     robots: {
         index: true,
         follow: true,

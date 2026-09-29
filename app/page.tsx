@@ -1,9 +1,16 @@
 import HomePage from '@/components/HomePage';
+import type { Metadata } from 'next';
 import { db } from '@/firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import { Product } from '@/types';
 
 export const revalidate = 3600;
+
+export const metadata: Metadata = {
+    alternates: {
+        canonical: '/',
+    },
+};
 
 async function getProducts(): Promise<Product[]> {
     try {

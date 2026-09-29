@@ -1,7 +1,5 @@
 import { SEOCategory, SEOParentCategory } from '../types';
 
-const BASE_URL = 'https://www.miratekstiltr.com';
-
 // =============================================
 // ÜST KATEGORİLER
 // =============================================
@@ -9,8 +7,8 @@ export const seoParentCategories: SEOParentCategory[] = [
     {
         slug: 'perde',
         name: 'Perde',
-        title: 'Perde Modelleri ve Fiyatları 2025 | MiraTekstil',
-        metaDescription: 'En şık perde modelleri, blackout perde, saten perde, tül perde ve özel ölçü perde seçenekleri uygun fiyatlarla MiraTekstil\'de. Ücretsiz kargo fırsatı!',
+        title: 'Perde Modelleri ve Fiyatları 2026 | MiraTekstil',
+        metaDescription: 'Blackout, saten, tül ve özel ölçü perde modellerini güncel fiyatlarla inceleyin. MiraTekstil\'de 500 TL üzeri siparişlerde ücretsiz kargo.',
         h1: 'Perde Modelleri',
         seoBlocks: [
             {
@@ -23,7 +21,7 @@ export const seoParentCategories: SEOParentCategory[] = [
             },
             {
                 type: 'paragraph',
-                content: 'Blackout perdeler yatak odanızda tam karanlık sağlarken, saten perdeler salonunuza zarif bir hava katar. Tül perdeler ise doğal ışığı süzerek odanıza ferah bir ambiyans yaratır. Her oda için farklı perde ihtiyaçlarınızı tek bir adresten karşılayabilirsiniz.'
+                content: 'Blackout perdeler yatak odasında güçlü ışık kontrolü sağlarken, saten perdeler salona zarif bir görünüm katar. Tül perdeler ise doğal ışığı süzerek ferah bir ortam oluşturur. Her oda için farklı perde ihtiyaçlarınızı tek bir adresten karşılayabilirsiniz.'
             },
             {
                 type: 'heading',
@@ -111,13 +109,13 @@ export const seoCategories: SEOCategory[] = [
         parentSlug: 'perde',
         categorySlug: 'blackout-perde',
         firebaseCategoryName: 'Blackout Perde',
-        title: 'Blackout Perde Modelleri ve Fiyatları 2025 | Karartma Perde | MiraTekstil',
-        metaDescription: 'Karartma blackout perde modelleri ve fiyatları. Güneş geçirmeyen tam karartma perde, yatak odası karartma perde seçenekleri. Özel ölçü blackout perde dikimi.',
+        title: 'Blackout Perde Modelleri ve Fiyatları 2026 | MiraTekstil',
+        metaDescription: 'Blackout ve karartma perde modellerini, metre fiyatlarını ve özel ölçü seçeneklerini inceleyin. Yatak odası için ışık geçirmeyen perdeler.',
         h1: 'Blackout Perde Modelleri',
         seoBlocks: [
             {
                 type: 'paragraph',
-                content: 'Karartma blackout perde, güneş ışığını tamamen keserek yaşam alanlarınızda ideal karanlık ortamı sağlayan fonksiyonel bir perde türüdür. Özellikle yatak odalarında tercih edilen tam karartma perde modelleri, kaliteli uyku düzeni için vazgeçilmezdir.'
+                content: 'Karartma blackout perde, dışarıdan gelen ışığı güçlü biçimde azaltmak için kullanılan işlevsel bir perde türüdür. Özellikle yatak odası, çocuk odası ve ekran kullanılan alanlarda ışık seviyesini kontrol etmek isteyenler tarafından tercih edilir.'
             },
             {
                 type: 'heading',
@@ -125,7 +123,7 @@ export const seoCategories: SEOCategory[] = [
             },
             {
                 type: 'paragraph',
-                content: 'Blackout perde, özel dokuma teknikleriyle üretilen, güneş geçirmeyen kumaşlardan yapılmış perdelerdir. Normal perdelerden farklı olarak ışığı %99-100 oranında engeller. Gündüz uyuyanlar, gece vardiyası çalışanları ve bebek odaları için ideal bir çözümdür. Ayrıca yaz aylarında odanızı serin tutarak enerji tasarrufu sağlar.'
+                content: 'Blackout perde, sık dokulu karartma kumaşı sayesinde dışarıdan gelen ışığı büyük ölçüde azaltır. Sağladığı karartma düzeyi kumaşa, renge, pencere ölçüsüne ve montaj biçimine göre değişebilir. Gündüz uyuyanlar, gece vardiyasında çalışanlar ve çocuk odasında ışık kontrolü isteyenler için kullanışlı bir çözümdür.'
             },
             {
                 type: 'heading',
@@ -152,6 +150,22 @@ export const seoCategories: SEOCategory[] = [
             },
             {
                 type: 'heading',
+                content: 'Blackout Perde Fiyatları Nasıl Belirlenir?'
+            },
+            {
+                type: 'paragraph',
+                content: 'Blackout perde fiyatları kumaşın yapısına, perdenin en ve boy ölçüsüne, pile oranına ve dikim detaylarına göre değişir. Ürün kartlarında başlangıç fiyatını, ürün sayfasında ise seçtiğiniz ölçü ve varyanta göre güncel toplam fiyatı görebilirsiniz.'
+            },
+            {
+                type: 'heading',
+                content: 'Desenli ve Düz Karartma Perde Modelleri'
+            },
+            {
+                type: 'paragraph',
+                content: 'Düz blackout perdeler sade ve zamansız bir görünüm sunarken desenli karartma perdeler odaya dekoratif bir odak noktası kazandırır. Açık renkler daha ferah, koyu renkler daha güçlü bir karartma hissi oluşturur. Seçim yaparken duvar, mobilya ve zemin rengini birlikte değerlendirin.'
+            },
+            {
+                type: 'heading',
                 content: 'Blackout Perde Bakımı'
             },
             {
@@ -162,7 +176,7 @@ export const seoCategories: SEOCategory[] = [
         faq: [
             {
                 question: 'Blackout perde güneş ışığını tamamen keser mi?',
-                answer: 'Evet, kaliteli blackout perde kumaşları güneş ışığının %99-100\'ünü keserek odanızda tam karanlık ortam sağlar. MiraTekstil blackout perdeleri birinci sınıf karartma kumaşlarından üretilmektedir.'
+                answer: 'Blackout kumaşlar dışarıdan gelen ışığı büyük ölçüde azaltır. Karartma düzeyi kumaşın rengine, dokusuna, perde ölçüsüne ve montaj sırasında kenarlarda bırakılan boşluğa göre değişebilir.'
             },
             {
                 question: 'Blackout perde yatak odası için uygun mu?',
@@ -191,7 +205,7 @@ export const seoCategories: SEOCategory[] = [
         parentSlug: 'perde',
         categorySlug: 'saten-perde',
         firebaseCategoryName: 'Saten Perde',
-        title: 'Saten Perde Modelleri ve Fiyatları 2025 | Parlak Saten Perde | MiraTekstil',
+        title: 'Saten Perde Modelleri ve Fiyatları 2026 | MiraTekstil',
         metaDescription: 'Parlak saten perde modelleri, salon için saten perde ve modern özel dikim seçenekleri. En şık saten perde fiyatları MiraTekstil\'de!',
         h1: 'Saten Perde Modelleri',
         seoBlocks: [
@@ -251,7 +265,7 @@ export const seoCategories: SEOCategory[] = [
         parentSlug: 'perde',
         categorySlug: 'tul-perde',
         firebaseCategoryName: 'Tül Perde',
-        title: 'Tül Perde Modelleri ve Fiyatları 2025 | Salon Tül Perde | MiraTekstil',
+        title: 'Tül Perde Modelleri ve Fiyatları 2026 | MiraTekstil',
         metaDescription: 'Sade tül perde modelleri, salon için tül perde ve özel ölçü tül perde dikimi. En şık tül perde çeşitleri uygun fiyatlarla MiraTekstil\'de!',
         h1: 'Tül Perde Modelleri',
         seoBlocks: [
@@ -277,7 +291,7 @@ export const seoCategories: SEOCategory[] = [
             },
             {
                 type: 'heading',
-                content: 'Tül Perde Trendleri 2025'
+                content: 'Tül Perde Trendleri 2026'
             },
             {
                 type: 'paragraph',

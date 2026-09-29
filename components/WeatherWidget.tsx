@@ -27,7 +27,6 @@ const CITIES: CityCoords[] = [
 export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ productCategory = '', productName = '' }) => {
     const [selectedCity, setSelectedCity] = useState<string>('Antalya');
     const [temperature, setTemperature] = useState<number | null>(null);
-    const [weatherCode, setWeatherCode] = useState<number | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<boolean>(false);
 
@@ -46,7 +45,6 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ productCategory = 
                 const data = await response.json();
                 if (data?.current_weather) {
                     setTemperature(Math.round(data.current_weather.temperature));
-                    setWeatherCode(data.current_weather.weathercode);
                 }
             } catch (err) {
                 console.error('Error fetching weather data:', err);
@@ -59,21 +57,6 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ productCategory = 
         fetchWeather();
     }, [selectedCity]);
 
-    // WMO Weather Interpretation Codes (https://open-meteo.com/en/docs)
-    const getWeatherCondition = (code: number | null): { text: string; icon: string } => {
-        if (code === null) return { text: 'Bilinmiyor', icon: '☁️' };
-        if (code === 0) return { text: 'Açık, Güneşli', icon: '☀️' };
-        if (code >= 1 && code <= 3) return { text: 'Parçalı Bulutlu', icon: '⛅' };
-        if (code >= 45 && code <= 48) return { text: 'Sisli', icon: '🌫️' };
-        if (code >= 51 && code <= 67) return { text: 'Yağmurlu', icon: '🌧️' };
-        if (code >= 71 && code <= 77) return { text: 'Karlı', icon: '❄️' };
-        if (code >= 80 && code <= 82) return { text: 'Sağanak Yağış', icon: '🌦️' };
-        if (code >= 95 && code <= 99) return { text: 'Fırtına', icon: '⛈️' };
-        return { text: 'Bulutlu', icon: '☁️' };
-    };
-
-    const condition = getWeatherCondition(weatherCode);
-
     // Kategoriye ve hava durumuna göre akıllı öneri motoru
     const getRecommendation = () => {
         const cat = (productCategory + ' ' + productName).toLowerCase();
@@ -85,9 +68,9 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ productCategory = 
 
         if (isBlackout) {
             if (temp >= 24) {
-                return `${selectedCity}'da bugün sıcaklık ${temp}°C ve güneş etkisini hissettiriyor. Bu sıcak havada evinizin iç mekan ısısını korumak ve klima enerjisinden tasarruf etmek için blackout (karartma) perdelerimiz %100 güneş koruması ve yüksek ısı yalıtımı sunar.`;
+                return `${selectedCity}'da bugün sıcaklık ${temp}°C. Güneş alan odalarda blackout (karartma) perdeler doğrudan gelen ışığı azaltmaya ve daha kontrollü bir ortam oluşturmaya yardımcı olabilir.`;
             } else {
-                return `${selectedCity}'da hava ${temp}°C. Kaliteli bir uyku ortamı oluşturmak ve gün ışığını tamamen engellemek için blackout perdelerimiz oda sıcaklığını dengeleyerek mükemmel bir loşluk sağlar.`;
+                return `${selectedCity}'da hava ${temp}°C. Yatak odasında dış aydınlatmayı azaltmak için pencereye uygun ölçüde bir blackout perde tercih edebilirsiniz.`;
             }
         }
 
@@ -161,7 +144,7 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ productCategory = 
                         <a
                             href="https://havapusula.com.tr"
                             target="_blank"
-                            rel="dofollow"
+                            rel="noopener noreferrer"
                             style={{ fontSize: '12px', color: '#888', textDecoration: 'none' }}
                             className="hover:text-brand-secondary transition-colors font-bold"
                         >
@@ -186,7 +169,7 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ productCategory = 
                     <a
                         href={`https://www.havapusula.com.tr/hava/${getCitySlug(selectedCity)}`}
                         target="_blank"
-                        rel="dofollow"
+                        rel="noopener noreferrer"
                         className="font-bold text-brand-secondary hover:underline inline-flex items-center gap-0.5"
                         title={`${selectedCity} Hava Durumu`}
                     >

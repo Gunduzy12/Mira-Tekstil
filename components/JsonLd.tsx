@@ -1,4 +1,5 @@
 import React from 'react';
+import { calculateShippingCost } from '../utils/commerce';
 
 interface JsonLdProps {
     data: Record<string, unknown>;
@@ -46,15 +47,7 @@ export function generateWebSiteSchema() {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
         name: 'MiraTekstil',
-        url: BASE_URL,
-        potentialAction: {
-            '@type': 'SearchAction',
-            target: {
-                '@type': 'EntryPoint',
-                urlTemplate: `${BASE_URL}/shop?q={search_term_string}`
-            },
-            'query-input': 'required name=search_term_string'
-        }
+        url: BASE_URL
     };
 }
 
@@ -92,10 +85,54 @@ export function generateCollectionPageSchema(
     };
 }
 
+export function generateItemListSchema(items: { name: string; url: string; imageUrl?: string }[]) {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        numberOfItems: items.length,
+        itemListElement: items.map((item, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            url: item.url.startsWith('http') ? item.url : `${BASE_URL}${item.url}`,
+            name: item.name,
+            ...(item.imageUrl ? { image: item.imageUrl } : {}),
+        })),
+    };
+}
+
+export function generateBlogPostingSchema(article: {
+    headline: string;
+    description: string;
+    url: string;
+}) {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: article.headline,
+        description: article.description,
+        mainEntityOfPage: `${BASE_URL}${article.url}`,
+        image: `${BASE_URL}/perde_hava_durumu_banner.png`,
+        author: {
+            '@type': 'Organization',
+            name: 'MiraTekstil',
+            url: BASE_URL,
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: 'MiraTekstil',
+            url: BASE_URL,
+            logo: {
+                '@type': 'ImageObject',
+                url: `${BASE_URL}/favicon.ico`,
+            },
+        },
+    };
+}
+
 export function generateProductSchema(product: {
     name: string;
     description: string;
-    imageUrl: string;
+    imageUrl: string | string[];
     price: number;
     originalPrice?: number;
     brand: string;
@@ -122,6 +159,7 @@ export function generateProductSchema(product: {
         offers: {
             '@type': 'Offer',
             url: `${BASE_URL}${product.url}`,
+            itemCondition: 'https://schema.org/NewCondition',
             priceCurrency: 'TRY',
             price: product.price.toFixed(2),
             priceValidUntil: new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split('T')[0],
@@ -135,10 +173,9 @@ export function generateProductSchema(product: {
             hasMerchantReturnPolicy: {
                 '@type': 'MerchantReturnPolicy',
                 applicableCountry: 'TR',
-                returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnPeriod',
+                returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
                 merchantReturnDays: 14,
-                returnMethod: 'https://schema.org/ReturnByMail',
-                returnFees: 'https://schema.org/FreeReturn'
+                returnMethod: 'https://schema.org/ReturnByMail'
             },
             shippingDetails: {
                 '@type': 'OfferShippingDetails',
@@ -148,7 +185,7 @@ export function generateProductSchema(product: {
                 },
                 shippingRate: {
                     '@type': 'MonetaryAmount',
-                    value: '0.00',
+                    value: calculateShippingCost(product.price).toFixed(2),
                     currency: 'TRY'
                 },
                 deliveryTime: {

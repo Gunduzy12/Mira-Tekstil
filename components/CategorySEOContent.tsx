@@ -26,9 +26,18 @@ const CategorySEOContent: React.FC<CategorySEOContentProps> = ({ seoBlocks, faq 
                                 </h2>
                             );
                         case 'paragraph':
+                            if (block.content.trimStart().startsWith('<div')) {
+                                return (
+                                    <div
+                                        key={index}
+                                        className="text-gray-600 leading-relaxed mb-4"
+                                        dangerouslySetInnerHTML={{ __html: block.content }}
+                                    />
+                                );
+                            }
                             return (
-                                <p 
-                                    key={index} 
+                                <p
+                                    key={index}
                                     className="text-gray-600 leading-relaxed mb-4"
                                     dangerouslySetInnerHTML={{ __html: block.content }}
                                 />

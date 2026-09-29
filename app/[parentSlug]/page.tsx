@@ -51,6 +51,10 @@ export default async function ParentCategoryPage({ params }: Props) {
         notFound();
     }
 
+    const introBlockIndex = parent.seoBlocks.findIndex(block => block.type === 'paragraph');
+    const introBlock = introBlockIndex >= 0 ? parent.seoBlocks[introBlockIndex] : null;
+    const supportingBlocks = parent.seoBlocks.filter((_, index) => index !== introBlockIndex);
+
     return (
         <div className="bg-brand-bg min-h-screen">
             <JsonLd
@@ -68,6 +72,12 @@ export default async function ParentCategoryPage({ params }: Props) {
                 <h1 className="text-3xl md:text-4xl font-serif font-bold text-brand-primary mb-8">
                     {parent.h1}
                 </h1>
+
+                {introBlock && (
+                    <p className="max-w-4xl text-gray-600 leading-relaxed mb-8">
+                        {introBlock.content}
+                    </p>
+                )}
 
                 {/* Alt Kategori Kartları */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
@@ -96,7 +106,7 @@ export default async function ParentCategoryPage({ params }: Props) {
                 </div>
 
                 {/* SEO İçerik */}
-                <CategorySEOContent seoBlocks={parent.seoBlocks} />
+                <CategorySEOContent seoBlocks={supportingBlocks} />
             </div>
         </div>
     );

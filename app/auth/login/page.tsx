@@ -4,6 +4,10 @@ import LoginForm from '@/components/auth/LoginForm';
 export const metadata: Metadata = {
     title: 'Giriş Yap | MiraTekstil',
     description: 'MiraTekstil hesabınıza giriş yapın.',
+    robots: {
+        index: false,
+        follow: false,
+    },
 };
 
 export default function LoginPage() {

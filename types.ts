@@ -212,4 +212,6 @@ export interface SEOBlogTopic {
   metaDescription: string;
   excerpt: string;
   content: SEOContentBlock[];
+  faq?: CategoryFAQ[];
+  relatedLinks?: { label: string; href: string; description: string }[];
 }

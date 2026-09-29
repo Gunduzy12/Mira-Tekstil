@@ -4,6 +4,10 @@ import RegisterForm from '@/components/auth/RegisterForm';
 export const metadata: Metadata = {
     title: 'Hesap Oluştur | MiraTekstil',
     description: 'Yeni bir MiraTekstil hesabı oluşturun ve avantajlardan yararlanın.',
+    robots: {
+        index: false,
+        follow: false,
+    },
 };
 
 export default function RegisterPage() {

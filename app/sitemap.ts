@@ -12,31 +12,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const staticRoutes: MetadataRoute.Sitemap = [
         {
             url: baseUrl,
-            lastModified: new Date(),
             changeFrequency: 'daily',
             priority: 1,
         },
         {
             url: `${baseUrl}/shop`,
-            lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.8,
         },
         {
             url: `${baseUrl}/about`,
-            lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.5,
         },
         {
             url: `${baseUrl}/contact`,
-            lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.5,
         },
         {
             url: `${baseUrl}/blog`,
-            lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 0.7,
         },
@@ -45,7 +40,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Üst Kategori Sayfaları
     const parentCategoryRoutes: MetadataRoute.Sitemap = seoParentCategories.map(parent => ({
         url: `${baseUrl}/${parent.slug}`,
-        lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.8,
     }));
@@ -53,7 +47,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Alt Kategori Sayfaları
     const categoryRoutes: MetadataRoute.Sitemap = seoCategories.map(cat => ({
         url: `${baseUrl}/${cat.parentSlug}/${cat.categorySlug}`,
-        lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.9,
     }));
@@ -61,7 +54,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Blog Sayfaları
     const blogRoutes: MetadataRoute.Sitemap = blogTopics.map(topic => ({
         url: `${baseUrl}/blog/${topic.slug}`,
-        lastModified: new Date(),
         changeFrequency: 'monthly',
         priority: 0.6,
     }));
@@ -82,7 +74,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             );
             return {
                 url: `${baseUrl}${productUrl}`,
-                lastModified: new Date(),
                 changeFrequency: 'weekly' as const,
                 priority: 0.8,
             };

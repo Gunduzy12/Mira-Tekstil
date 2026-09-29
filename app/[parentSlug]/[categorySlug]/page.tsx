@@ -9,6 +9,7 @@ import CategorySEOContent from '@/components/CategorySEOContent';
 import JsonLd, {
     generateCollectionPageSchema,
     generateFAQSchema,
+    generateItemListSchema,
 } from '@/components/JsonLd';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -72,6 +73,9 @@ export default async function CategoryPage({ params }: Props) {
     }
 
     const products = await getCategoryProducts(categorySlug);
+    const introBlockIndex = category.seoBlocks.findIndex(block => block.type === 'paragraph');
+    const introBlock = introBlockIndex >= 0 ? category.seoBlocks[introBlockIndex] : null;
+    const supportingBlocks = category.seoBlocks.filter((_, index) => index !== introBlockIndex);
 
     return (
         <div className="bg-brand-bg min-h-screen">
@@ -83,6 +87,16 @@ export default async function CategoryPage({ params }: Props) {
                     products.length
                 )}
             />
+
+            {products.length > 0 && (
+                <JsonLd
+                    data={generateItemListSchema(products.map(product => ({
+                        name: product.name,
+                        url: getProductUrl(product.name, product.id, product.category, product.slug, product.categorySlug, product.parentSlug),
+                        imageUrl: product.imageUrl,
+                    })))}
+                />
+            )}
 
             {category.faq.length > 0 && (
                 <JsonLd data={generateFAQSchema(category.faq)} />
@@ -103,7 +117,28 @@ export default async function CategoryPage({ params }: Props) {
                     <p className="text-gray-500">
                         {products.length} ürün listeleniyor
                     </p>
+                    {introBlock && (
+                        <p className="mt-4 max-w-4xl text-gray-600 leading-relaxed">
+                            {introBlock.content}
+                        </p>
+                    )}
                 </header>
+
+                <nav aria-label={`${parent.name} alt kategorileri`} className="mb-8 flex flex-wrap gap-2">
+                    {parent.children.map(child => (
+                        <Link
+                            key={child.slug}
+                            href={`/${parent.slug}/${child.slug}`}
+                            aria-current={child.slug === category.categorySlug ? 'page' : undefined}
+                            className={`rounded-full border px-4 py-2 text-sm transition-colors ${child.slug === category.categorySlug
+                                ? 'border-brand-primary bg-brand-primary text-white'
+                                : 'border-brand-border bg-white text-brand-primary hover:border-brand-secondary'
+                                }`}
+                        >
+                            {child.name}
+                        </Link>
+                    ))}
+                </nav>
 
                 {products.length > 0 ? (
                     <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5">
@@ -153,7 +188,7 @@ export default async function CategoryPage({ params }: Props) {
                     </div>
                 )}
 
-                <CategorySEOContent seoBlocks={category.seoBlocks} faq={category.faq} />
+                <CategorySEOContent seoBlocks={supportingBlocks} faq={category.faq} />
             </div>
         </div>
     );
