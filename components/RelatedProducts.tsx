@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import Link from 'next/link';
@@ -39,7 +39,7 @@ const RelatedProducts: React.FC<RelatedProductsProps> = ({
                                 {product.name}
                             </h3>
                             <p className="text-sm font-semibold text-brand-primary mt-1">
-                                {product.priceFrom.toFixed(2)} TL
+                                {(product.priceFrom || product.price || 0).toFixed(2)} TL
                             </p>
                         </Link>
                     ))}

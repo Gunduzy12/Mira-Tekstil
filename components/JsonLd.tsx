@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { calculateShippingCost } from '../utils/commerce';
 
 interface JsonLdProps {
@@ -161,7 +161,7 @@ export function generateProductSchema(product: {
             url: `${BASE_URL}${product.url}`,
             itemCondition: 'https://schema.org/NewCondition',
             priceCurrency: 'TRY',
-            price: product.price.toFixed(2),
+            price: (product.price || 0).toFixed(2),
             priceValidUntil: new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split('T')[0],
             availability: product.inStock
                 ? 'https://schema.org/InStock'
@@ -185,7 +185,7 @@ export function generateProductSchema(product: {
                 },
                 shippingRate: {
                     '@type': 'MonetaryAmount',
-                    value: calculateShippingCost(product.price).toFixed(2),
+                    value: calculateShippingCost(product.price || 0).toFixed(2),
                     currency: 'TRY'
                 },
                 deliveryTime: {
@@ -210,7 +210,7 @@ export function generateProductSchema(product: {
     if (product.rating && product.reviewCount && product.reviewCount > 0) {
         schema.aggregateRating = {
             '@type': 'AggregateRating',
-            ratingValue: product.rating.toFixed(1),
+            ratingValue: (product.rating ? Number(product.rating) : 5).toFixed(1),
             reviewCount: product.reviewCount
         };
     }

@@ -1,4 +1,4 @@
-
+﻿
 
 "use client";
 
@@ -91,9 +91,9 @@ const StoreProductCard: React.FC<StoreProductCardProps> = ({ product, onSelectPr
           </div>
         </div>
         <div className="mt-2 flex items-baseline gap-2">
-          <p className="font-semibold text-brand-primary">{product.priceFrom.toFixed(2)} TL</p>
+          <p className="font-semibold text-brand-primary">{(product.priceFrom || product.price || 0).toFixed(2)} TL</p>
           {product.originalPrice && product.originalPrice > product.priceFrom && (
-            <p className="text-sm text-gray-400 line-through">{product.originalPrice.toFixed(2)} TL</p>
+            <p className="text-sm text-gray-400 line-through">{(product.originalPrice || 0).toFixed(2)} TL</p>
           )}
         </div>
       </div>

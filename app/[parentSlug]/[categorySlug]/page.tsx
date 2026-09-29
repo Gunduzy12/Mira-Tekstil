@@ -1,9 +1,10 @@
-import { Metadata } from 'next';
+﻿import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { db } from '@/firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 import { Product } from '@/types';
 import { findSEOCategory, findSEOParent, seoCategories, getProductUrl, filterProductsBySubcategory } from '@/data/seoCategories';
+import { getProductDisplayPrice } from '@/utils/commerce';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CategorySEOContent from '@/components/CategorySEOContent';
 import JsonLd, {
@@ -142,7 +143,10 @@ export default async function CategoryPage({ params }: Props) {
 
                 {products.length > 0 ? (
                     <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5">
-                        {products.map((product, index) => (
+                        {products.map((product, index) => {
+                            const displayPrice = getProductDisplayPrice(product);
+                            const hasDiscount = Boolean(product.originalPrice && displayPrice > 0 && product.originalPrice > displayPrice);
+                            return (
                             <Link
                                 key={product.id}
                                 href={getProductUrl(product.name, product.id, product.category, product.slug, product.categorySlug, product.parentSlug)}
@@ -157,9 +161,9 @@ export default async function CategoryPage({ params }: Props) {
                                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                                         priority={index < 4}
                                     />
-                                    {product.originalPrice && product.originalPrice > product.priceFrom && (
+                                    {hasDiscount && (
                                         <div className="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded">
-                                            %{Math.round(((product.originalPrice - product.priceFrom) / product.originalPrice) * 100)}
+                                            %{Math.round(((product.originalPrice! - displayPrice) / product.originalPrice!) * 100)}
                                         </div>
                                     )}
                                 </div>
@@ -170,17 +174,18 @@ export default async function CategoryPage({ params }: Props) {
                                     </h2>
                                     <div className="flex items-baseline gap-1.5">
                                         <span className="font-semibold text-sm md:text-base text-brand-primary">
-                                            {product.priceFrom.toFixed(2)} TL
+                                            {displayPrice > 0 ? `${displayPrice.toFixed(2)} TL` : 'Fiyat Sorunuz'}
                                         </span>
-                                        {product.originalPrice && product.originalPrice > product.priceFrom && (
+                                        {hasDiscount && (
                                             <span className="text-[10px] md:text-xs text-gray-400 line-through">
-                                                {product.originalPrice.toFixed(2)} TL
+                                                {(product.originalPrice || 0).toFixed(2)} TL
                                             </span>
                                         )}
                                     </div>
                                 </div>
                             </Link>
-                        ))}
+                            );
+                        })}
                     </div>
                 ) : (
                     <div className="text-center py-20 bg-white rounded-lg border border-dashed border-gray-300">

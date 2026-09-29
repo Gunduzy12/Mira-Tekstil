@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import Link from 'next/link';
 import { getProductUrl } from '../data/seoCategories';
 import Image from 'next/image';
@@ -142,7 +142,7 @@ const HomePage: React.FC<HomePageProps> = ({ initialProducts }) => {
                                             priority={index < 4}
                                         />
                                         {/* İndirim Badge */}
-                                        {product.originalPrice && product.originalPrice > product.priceFrom && (
+                                        {product.originalPrice && product.originalPrice > (product.priceFrom || product.price || 0) && (
                                             <div className="absolute top-1.5 left-1.5 bg-red-500 text-white text-[9px] md:text-[10px] font-bold px-1.5 py-0.5 rounded">
                                                 %{Math.round(((product.originalPrice - product.priceFrom) / product.originalPrice) * 100)}
                                             </div>
@@ -176,11 +176,11 @@ const HomePage: React.FC<HomePageProps> = ({ initialProducts }) => {
                                         {/* Fiyat */}
                                         <div className="flex items-baseline gap-1 flex-wrap">
                                             <span className="font-semibold text-sm md:text-base text-brand-primary">
-                                                {product.priceFrom.toFixed(2)} TL
+                                                {(product.priceFrom || product.price || 0).toFixed(2)} TL
                                             </span>
-                                            {product.originalPrice && product.originalPrice > product.priceFrom && (
+                                            {product.originalPrice && product.originalPrice > (product.priceFrom || product.price || 0) && (
                                                 <span className="text-[10px] md:text-xs text-gray-400 line-through">
-                                                    {product.originalPrice.toFixed(2)} TL
+                                                    {(product.originalPrice || 0).toFixed(2)} TL
                                                 </span>
                                             )}
                                         </div>
