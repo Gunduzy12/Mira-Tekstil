@@ -1,4 +1,4 @@
-import Script from "next/script";
+﻿import Script from "next/script";
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
@@ -36,6 +36,12 @@ export const metadata: Metadata = {
     locale: 'tr_TR',
     type: 'website',
   },
+  verification: {
+    yandex: '1ab87f83fe70d252',
+  },
+  other: {
+    'yandex-verification': '1ab87f83fe70d252',
+  },
   twitter: {
     card: 'summary_large_image',
     site: '@miratekstil',
@@ -53,6 +59,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr">
+      <head>
+        <meta name="yandex-verification" content="1ab87f83fe70d252" />
+      </head>
       <body
         className={`${inter.variable} ${playfair.variable} antialiased font-sans flex flex-col min-h-screen`}
       >
