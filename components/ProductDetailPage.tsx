@@ -33,7 +33,7 @@ const maskName = (name: string) => {
 };
 
 const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
-    const [reviews, setReviews] = useState<Review[]>(product.reviews);
+    const [reviews, setReviews] = useState<Review[]>(product.reviews || []);
     const [questions, setQuestions] = useState<Question[]>(product.questions || []);
     const [activeTab, setActiveTab] = useState<'description' | 'reviews' | 'qa'>('description');
 
@@ -65,7 +65,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
     };
 
     const allImages = useMemo(() => {
-        const images = [product.imageUrl, ...(product.images || []), ...product.variants.map(v => v.imageUrl).filter((url): url is string => !!url)];
+        const images = [product.imageUrl, ...(product.images || []), ...(product.variants || []).map(v => v?.imageUrl).filter((url): url is string => !!url)];
         return [...new Set(images)];
     }, [product]);
     const [mainImage, setMainImage] = useState(product.imageUrl);
@@ -108,7 +108,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
             : (uniqueSizes.length === 1 ? (uniqueSizes[0] as string) : null));
 
         setQuantity(1);
-        setReviews(product.reviews);
+        setReviews(product.reviews || []);
         setQuestions(product.questions || []);
         // setActiveTab('description'); // Keep tab state if user navigates back? Up to preference.
 
@@ -420,7 +420,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                         <div className="flex items-center gap-4 mb-6 text-sm text-brand-accent">
                             <div className="flex items-center gap-1" title={`${product.averageRating} yıldız`}>
                                 <StarRating rating={product.averageRating} />
-                                <span className="ml-1 underline cursor-pointer hover:text-brand-primary" onClick={() => { handleScrollToDetails(); setActiveTab('reviews'); }}>({reviews.length} Değerlendirme)</span>
+                                <span className="ml-1 underline cursor-pointer hover:text-brand-primary" onClick={() => { handleScrollToDetails(); setActiveTab('reviews'); }}>({(reviews?.length || 0)} Değerlendirme)</span>
                             </div>
                         </div>
 
@@ -678,8 +678,8 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                     <div className="border-b border-brand-border max-w-4xl mx-auto">
                         <div className="flex flex-wrap justify-center sm:space-x-12 -mb-px">
                             <button onClick={() => setActiveTab('description')} className={`py-4 px-4 sm:px-1 border-b-2 text-base sm:text-lg font-medium transition-colors whitespace-nowrap ${activeTab === 'description' ? 'border-brand-primary text-brand-primary' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>Ürün Özellikleri</button>
-                            <button onClick={() => setActiveTab('reviews')} className={`py-4 px-4 sm:px-1 border-b-2 text-base sm:text-lg font-medium transition-colors whitespace-nowrap ${activeTab === 'reviews' ? 'border-brand-primary text-brand-primary' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>Değerlendirmeler ({reviews.length})</button>
-                            <button onClick={() => setActiveTab('qa')} className={`py-4 px-4 sm:px-1 border-b-2 text-base sm:text-lg font-medium transition-colors whitespace-nowrap ${activeTab === 'qa' ? 'border-brand-primary text-brand-primary' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>Satıcıya Sor ({questions.length})</button>
+                            <button onClick={() => setActiveTab('reviews')} className={`py-4 px-4 sm:px-1 border-b-2 text-base sm:text-lg font-medium transition-colors whitespace-nowrap ${activeTab === 'reviews' ? 'border-brand-primary text-brand-primary' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>Değerlendirmeler ({(reviews?.length || 0)})</button>
+                            <button onClick={() => setActiveTab('qa')} className={`py-4 px-4 sm:px-1 border-b-2 text-base sm:text-lg font-medium transition-colors whitespace-nowrap ${activeTab === 'qa' ? 'border-brand-primary text-brand-primary' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>Satıcıya Sor ({(questions?.length || 0)})</button>
                         </div>
                     </div>
 
@@ -698,7 +698,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                         {activeTab === 'reviews' && (
                             <section className="bg-white p-8 rounded-lg shadow-sm border border-brand-border">
                                 <h2 className="text-2xl font-serif mb-6 text-center text-brand-primary">Müşteri Yorumları</h2>
-                                {reviews.length > 0 ? (
+                                {(reviews?.length || 0) > 0 ? (
                                     <div className="space-y-8">
                                         {reviews.map(review => (
                                             <article key={review.id} className="border-b border-brand-border pb-6 last:border-0">
@@ -761,7 +761,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                                 <h2 className="text-2xl font-serif mb-6 text-center text-brand-primary">Satıcıya Sor</h2>
 
                                 {/* Previous Questions List */}
-                                {questions.length > 0 && (
+                                {(questions?.length || 0) > 0 && (
                                     <div className="space-y-6 mb-10">
                                         {questions.map((q) => (
                                             <div key={q.id} className="bg-gray-50 p-4 rounded-lg border border-gray-100">
