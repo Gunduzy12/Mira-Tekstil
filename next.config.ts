@@ -14,6 +14,9 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    // Vercel Image Optimization kotası dolduğunda görseller 402 dönmesin.
+    // Kaynak görselleri doğrudan Firebase/Imgur üzerinden sunuyoruz.
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

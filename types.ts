@@ -35,6 +35,7 @@ export interface Product {
   name: string;
   brand: string;
   priceFrom: number;
+  price?: number; // Eski Firestore ürün kayıtları için geriye dönük uyumluluk
   originalPrice?: number;
   category: string;
   imageUrl: string;

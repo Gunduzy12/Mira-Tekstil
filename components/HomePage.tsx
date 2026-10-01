@@ -14,7 +14,7 @@ const HomePage: React.FC<HomePageProps> = ({ initialProducts }) => {
     return (
         <div className="bg-brand-bg text-brand-primary">
             {/* Hero Section */}
-            <header className="relative h-[75vh] flex items-center overflow-hidden" role="banner">
+            <header className="relative h-[75vh] flex items-center overflow-hidden bg-brand-dark" role="banner">
                 <Image
                     src="https://i.imgur.com/RHzDAQB.png"
                     alt="MiraTekstil perde koleksiyonu ile dekore edilmiş modern salon"

@@ -35,12 +35,17 @@ export const metadata: Metadata = {
     siteName: 'MiraTekstil',
     locale: 'tr_TR',
     type: 'website',
+    images: [
+      {
+        url: 'https://i.imgur.com/RHzDAQB.png',
+        width: 1920,
+        height: 1080,
+        alt: 'MiraTekstil perde koleksiyonu',
+      },
+    ],
   },
   verification: {
     yandex: '1ab87f83fe70d252',
-  },
-  other: {
-    'yandex-verification': '1ab87f83fe70d252',
   },
   twitter: {
     card: 'summary_large_image',
@@ -49,6 +54,7 @@ export const metadata: Metadata = {
     title: "MiraTekstil | Perde Modelleri, Tül Perde & Lüks Ev Tekstili",
     description:
       "Eviniz için en şık perde modelleri, tül perde, blackout perde ve ışık geçirmeyen perde seçenekleri MiraTekstil'de.",
+    images: ['https://i.imgur.com/RHzDAQB.png'],
   },
 };
 
@@ -59,16 +65,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr">
-      <head>
-        <meta name="yandex-verification" content="1ab87f83fe70d252" />
-      </head>
       <body
         className={`${inter.variable} ${playfair.variable} antialiased font-sans flex flex-col min-h-screen`}
       >
         <JsonLd data={generateOrganizationSchema()} />
         <JsonLd data={generateWebSiteSchema()} />
-        <link rel="preconnect" href="https://tekstil-6f7d4.firebaseapp.com" />
-        <link rel="dns-prefetch" href="https://tekstil-6f7d4.firebaseapp.com" />
+        <link rel="preconnect" href="https://firebasestorage.googleapis.com" />
+        <link rel="dns-prefetch" href="https://firebasestorage.googleapis.com" />
+        <link rel="preconnect" href="https://i.imgur.com" />
 
         <Providers>
           <Header />
