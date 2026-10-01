@@ -73,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
         <div className="container mx-auto px-6 flex justify-between items-center h-20 border-b border-brand-border">
           <div className="flex items-center">
             <button
-              className="xl:hidden mr-4 text-brand-primary hover:text-brand-secondary"
+              className="2xl:hidden mr-4 text-brand-primary hover:text-brand-secondary"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Menüyü aç/kapat"
             >
@@ -89,7 +89,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
             </Link>
           </div>
 
-          <nav className="hidden xl:flex items-center space-x-6" role="navigation">
+          <nav className="hidden 2xl:flex items-center space-x-6" role="navigation">
             {/* Mega Menu Categories */}
             {megaMenuCategories.map((cat) => (
               <div key={cat.name} className="relative group h-full flex items-center">
@@ -183,7 +183,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
                   </div>
                 </div>
               ) : (
-                <div className="hidden xl:flex items-center space-x-3">
+                <div className="hidden 2xl:flex items-center space-x-3">
                   <Link href="/auth/login" className="text-sm font-medium text-brand-primary hover:text-brand-secondary transition-colors" title="Giriş Yap">Giriş</Link>
                   <span className="text-gray-300">|</span>
                   <Link href="/auth/register" className="text-sm font-medium text-brand-primary hover:text-brand-secondary transition-colors" title="Kayıt Ol">Kayıt Ol</Link>
@@ -222,7 +222,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`xl:hidden fixed top-0 left-0 h-screen w-80 bg-brand-bg shadow-2xl transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out z-50 border-r border-brand-border`}>
+        <div className={`2xl:hidden fixed top-0 left-0 h-screen w-80 bg-brand-bg shadow-2xl transform ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out z-50 border-r border-brand-border`}>
           <div className="p-6 h-full flex flex-col">
             <div className="flex justify-between items-center mb-10 border-b border-gray-100 pb-4">
               <span className="text-2xl font-serif font-bold text-brand-primary">MiraTekstil</span>
@@ -316,7 +316,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
             </div>
           </div>
         </div>
-        {isMenuOpen && <div className="xl:hidden fixed inset-0 bg-black/40 z-40 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)}></div>}
+        {isMenuOpen && <div className="2xl:hidden fixed inset-0 bg-black/40 z-40 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)}></div>}
       </header>
       <CartSidebar isOpen={isCartOpen} onClose={() => setIsCartOpen(false)} />
     </>
