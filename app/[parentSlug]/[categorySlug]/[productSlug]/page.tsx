@@ -16,6 +16,35 @@ type Props = {
     params: Promise<{ parentSlug: string; categorySlug: string; productSlug: string }>;
 };
 
+function getProductMaterial(product: Product): string | undefined {
+    const declaredMaterial = product.featuredAttributes?.find(({ label }) =>
+        /^(malzeme|kumaş|kumas)$/i.test(label.trim())
+    )?.value?.trim();
+
+    if (declaredMaterial) return declaredMaterial;
+
+    const productText = [product.name, product.description, ...(product.details || [])].join(' ');
+
+    if (/pamuk[^.]{0,40}polyester|polyester[^.]{0,40}pamuk/i.test(productText)) {
+        return 'Pamuk ve polyester karışımlı kumaş';
+    }
+    if (/polyester/i.test(productText)) return 'Polyester';
+    if (/gabardin/i.test(productText)) return 'Gabardin kumaş';
+    if (/blackout/i.test(productText)) return 'Blackout kumaş';
+    if (/saten/i.test(productText)) return 'Saten kumaş';
+    if (/tül|tul/i.test(productText)) return 'Tül kumaş';
+
+    return undefined;
+}
+
+function getProductColors(product: Product): string[] {
+    return [...new Set(
+        (product.variants || [])
+            .map(variant => variant.color?.trim())
+            .filter((color): color is string => Boolean(color))
+    )];
+}
+
 /**
  * Ürünü slug ile getir. Eğer slug bulamazsa ID ile dene (fallback).
  */
@@ -141,6 +170,8 @@ export default async function ProductPage({ params }: Props) {
                     reviewCount: product.reviewCount,
                     category: product.subcategory || product.category,
                     sku: product.variants?.[0]?.sku,
+                    color: getProductColors(product),
+                    material: getProductMaterial(product),
                     reviews: product.reviews,
                 })}
             />

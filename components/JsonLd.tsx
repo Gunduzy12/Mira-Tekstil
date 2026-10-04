@@ -142,6 +142,8 @@ export function generateProductSchema(product: {
     reviewCount?: number;
     category?: string;
     sku?: string;
+    color?: string | string[];
+    material?: string;
     reviews?: { author: string; rating: number; comment: string; date: string }[];
 }) {
     const schema: Record<string, unknown> = {
@@ -206,6 +208,14 @@ export function generateProductSchema(product: {
             }
         }
     };
+
+    if (product.color && (Array.isArray(product.color) ? product.color.length > 0 : product.color.trim())) {
+        schema.color = product.color;
+    }
+
+    if (product.material?.trim()) {
+        schema.material = product.material;
+    }
 
     if (product.rating && product.reviewCount && product.reviewCount > 0) {
         schema.aggregateRating = {
