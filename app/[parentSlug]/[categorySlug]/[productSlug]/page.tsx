@@ -37,12 +37,16 @@ function getProductMaterial(product: Product): string | undefined {
     return undefined;
 }
 
-function getProductColors(product: Product): string[] {
-    return [...new Set(
-        (product.variants || [])
-            .map(variant => variant.color?.trim())
-            .filter((color): color is string => Boolean(color))
-    )];
+function getProductColor(product: Product): string | undefined {
+    return (product.variants || [])
+        .map(variant => variant.color?.trim())
+        .find((color): color is string => Boolean(color));
+}
+
+function getProductSku(product: Product): string | undefined {
+    return (product.variants || [])
+        .map(variant => variant.sku?.trim())
+        .find((sku): sku is string => Boolean(sku));
 }
 
 /**
@@ -169,8 +173,9 @@ export default async function ProductPage({ params }: Props) {
                     rating: product.averageRating,
                     reviewCount: product.reviewCount,
                     category: product.subcategory || product.category,
-                    sku: product.variants?.[0]?.sku,
-                    color: getProductColors(product),
+                    sku: getProductSku(product),
+                    productId: product.id,
+                    color: getProductColor(product),
                     material: getProductMaterial(product),
                     reviews: product.reviews,
                 })}

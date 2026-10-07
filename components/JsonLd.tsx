@@ -22,6 +22,24 @@ export default JsonLd;
 
 const BASE_URL = 'https://www.miratekstiltr.com';
 
+function normalizeMerchantSku(value: string): string {
+    return value
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^A-Za-z0-9._-]+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '')
+        .slice(0, 70);
+}
+
+function getSchemaImages(imageUrl: string | string[]): string[] {
+    const urls = (Array.isArray(imageUrl) ? imageUrl : [imageUrl])
+        .filter((url): url is string => typeof url === 'string' && /^https?:\/\//i.test(url.trim()))
+        .map(url => url.trim());
+
+    return urls.length > 0 ? [...new Set(urls)] : [`${BASE_URL}/perde_hava_durumu_banner.png`];
+}
+
 export function generateOrganizationSchema() {
     return {
         '@context': 'https://schema.org',
@@ -38,6 +56,15 @@ export function generateOrganizationSchema() {
             telephone: '+905374009410',
             contactType: 'customer service',
             availableLanguage: 'Turkish'
+        },
+        hasMerchantReturnPolicy: {
+            '@type': 'MerchantReturnPolicy',
+            applicableCountry: 'TR',
+            returnPolicyCountry: 'TR',
+            returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+            merchantReturnDays: 14,
+            returnMethod: 'https://schema.org/ReturnByMail',
+            returnFees: 'https://schema.org/FreeReturn'
         }
     };
 }
@@ -142,18 +169,22 @@ export function generateProductSchema(product: {
     reviewCount?: number;
     category?: string;
     sku?: string;
+    productId?: string;
     color?: string | string[];
     material?: string;
     reviews?: { author: string; rating: number; comment: string; date: string }[];
 }) {
+    const fallbackSku = `MIRA-${product.productId || product.name}`;
+    const sku = normalizeMerchantSku(product.sku || fallbackSku) || 'MIRA-PRODUCT';
+
     const schema: Record<string, unknown> = {
         '@context': 'https://schema.org',
         '@type': 'Product',
         name: product.name,
         description: product.description,
-        image: product.imageUrl,
+        image: getSchemaImages(product.imageUrl),
         category: product.category || 'Perde',
-        sku: product.sku || `MIRA-${product.name.replace(/\s+/g, '-').toUpperCase()}`,
+        sku,
         brand: {
             '@type': 'Brand',
             name: product.brand || 'MiraTekstil'
@@ -164,6 +195,7 @@ export function generateProductSchema(product: {
             itemCondition: 'https://schema.org/NewCondition',
             priceCurrency: 'TRY',
             price: (product.price || 0).toFixed(2),
+            validFrom: new Date().toISOString(),
             priceValidUntil: new Date(new Date().getFullYear() + 1, 11, 31).toISOString().split('T')[0],
             availability: product.inStock
                 ? 'https://schema.org/InStock'
@@ -175,6 +207,7 @@ export function generateProductSchema(product: {
             hasMerchantReturnPolicy: {
                 '@type': 'MerchantReturnPolicy',
                 applicableCountry: 'TR',
+                returnPolicyCountry: 'TR',
                 returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
                 merchantReturnDays: 14,
                 returnMethod: 'https://schema.org/ReturnByMail',
