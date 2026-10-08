@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GlobalNotification from "../components/GlobalNotification";
 import JsonLd, { generateOrganizationSchema, generateWebSiteSchema } from "../components/JsonLd";
+import GooglePurchaseTracker from "../components/GooglePurchaseTracker";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -79,6 +80,7 @@ export default function RootLayout({
           <main className="flex-grow">{children}</main>
           <Footer />
           <GlobalNotification />
+          <GooglePurchaseTracker />
         </Providers>
 
         {/* Google Analytics */}
