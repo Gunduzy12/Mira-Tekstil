@@ -220,18 +220,22 @@ const CheckoutContent: React.FC = () => {
             if (paytrResponse && (paytrResponse as any).token) {
                 // Sadece bu tarayıcı oturumunda tutulur; PayTR isteği, callback'i ve
                 // tahsilat akışı bu veriden etkilenmez.
-                sessionStorage.setItem('pending-google-purchase', JSON.stringify({
-                    transactionId: orderId,
-                    value: total,
-                    currency: 'TRY'
-                }));
+                try {
+                    sessionStorage.setItem('pending-google-purchase', JSON.stringify({
+                        transactionId: orderId,
+                        value: total,
+                        currency: 'TRY'
+                    }));
+                } catch { /* Analytics storage must not prevent payment. */ }
                 setIframeToken((paytrResponse as any).token);
             } else if (typeof paytrResponse === 'string') {
-                sessionStorage.setItem('pending-google-purchase', JSON.stringify({
-                    transactionId: orderId,
-                    value: total,
-                    currency: 'TRY'
-                }));
+                try {
+                    sessionStorage.setItem('pending-google-purchase', JSON.stringify({
+                        transactionId: orderId,
+                        value: total,
+                        currency: 'TRY'
+                    }));
+                } catch { /* Analytics storage must not prevent payment. */ }
                 setIframeToken(paytrResponse);
             } else {
                 showNotification('PayTR Token alınamadı.', 'error');
