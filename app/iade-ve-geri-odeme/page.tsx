@@ -16,7 +16,7 @@ export default function ReturnPolicyPage() {
             <div className="space-y-8 leading-relaxed">
                 <section aria-labelledby="standard-returns">
                     <h2 id="standard-returns" className="text-xl font-semibold mb-3">Standart ürünlerde iade</h2>
-                    <p>Size özel üretilmemiş standart ürünlerde, teslim aldığınız tarihten itibaren 14 gün içinde gerekçe göstermeden cayma bildirimi yapabilirsiniz. Ürünü kontrol etmek için gereken olağan inceleme, tek başına iade hakkını ortadan kaldırmaz. Bildirimin ardından ürünü yasal geri gönderim süresi içinde, taşıma sırasında zarar görmeyecek şekilde paketleyerek gönderin.</p>
+                    <p>Size özel üretilmemiş standart ürünlerde, teslim aldığınız tarihten itibaren 14 gün içinde gerekçe göstermeden cayma bildirimi yapabilirsiniz. İadeler yeni ürünler için kabul edilir; ürünü kontrol etmek için gereken olağan inceleme, tek başına iade hakkını ortadan kaldırmaz. Bildirimin ardından ürünü yasal geri gönderim süresi içinde, taşıma sırasında zarar görmeyecek şekilde paketleyerek gönderin. Değişim talepleri de kabul edilir; ürün ve stok seçenekleri için bize ulaşabilirsiniz.</p>
                 </section>
 
                 <section aria-labelledby="custom-returns">
@@ -32,12 +32,12 @@ export default function ReturnPolicyPage() {
 
                 <section aria-labelledby="return-shipping">
                     <h2 id="return-shipping" className="text-xl font-semibold mb-3">İade kargosu ve ücretler</h2>
-                    <p>İade kapsamındaki ürünler için tarafımızdan sağlanan iade kodu ile gönderim ücretsizdir; ayrıca iade işlem veya yeniden stoklama ücreti alınmaz. Kodu ve gönderim bilgilerini aldıktan sonra ürünü belirtilen taşıyıcıya teslim edin. Farklı bir taşıyıcı kullanmak isterseniz gönderimden önce bize ulaşın. Ayıplı veya yanlış gönderilmiş ürünlerin iadesinde tüketiciye masraf yüklenmez.</p>
+                    <p>İade etiketi pakete dahildir. Etikete veya iade koduna yeniden ihtiyaç duyarsanız bize ulaşabilirsiniz. İade kapsamındaki ürünler için tarafımızdan sağlanan etiket veya iade kodu ile gönderim ücretsizdir; ayrıca iade işlem veya yeniden stoklama ücreti alınmaz. Gönderim bilgilerini kontrol ettikten sonra ürünü belirtilen taşıyıcıya teslim edin. Farklı bir taşıyıcı kullanmak isterseniz gönderimden önce bize ulaşın. Ayıplı veya yanlış gönderilmiş ürünlerin iadesinde tüketiciye masraf yüklenmez.</p>
                 </section>
 
                 <section aria-labelledby="refunds">
                     <h2 id="refunds" className="text-xl font-semibold mb-3">Geri ödeme</h2>
-                    <p>Cayma hakkı kapsamındaki geri ödeme, cayma bildiriminizin bize ulaşmasından itibaren en geç 14 gün içinde yapılır. İade edilen ürünlerin bedeli ve mevzuat gereği iade edilmesi gereken teslimat bedelleri, satın alırken kullandığınız ödeme aracına uygun şekilde, ek işlem ücreti alınmadan geri ödenir. Kartınıza veya hesabınıza yansıma süresi bankanızın işlem sürecine bağlıdır. Ayıplı ürün başvurularında ilgili yasal haklar ve süreler geçerlidir.</p>
+                    <p>İade edilen ürünün bize ulaşmasının ardından geri ödeme işlemini 7 gün içinde tamamlarız. Cayma hakkı kapsamındaki yasal geri ödeme süresi hiçbir durumda aşılmaz. İade edilen ürünlerin bedeli ve mevzuat gereği iade edilmesi gereken teslimat bedelleri, satın alırken kullandığınız ödeme aracına uygun şekilde, ek işlem ücreti alınmadan geri ödenir. Kartınıza veya hesabınıza yansıma süresi bankanızın işlem sürecine bağlıdır. Ayıplı ürün başvurularında ilgili yasal haklar ve süreler geçerlidir.</p>
                 </section>
 
                 <section aria-labelledby="contact">
