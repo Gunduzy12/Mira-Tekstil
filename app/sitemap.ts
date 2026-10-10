@@ -23,6 +23,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Statik sayfalar
     const staticRoutes: MetadataRoute.Sitemap = [
         {
+            url: `${baseUrl}/iade-ve-geri-odeme`,
+            changeFrequency: 'monthly',
+            priority: 0.5,
+        },
+        {
             url: baseUrl,
             changeFrequency: 'daily',
             priority: 1,
