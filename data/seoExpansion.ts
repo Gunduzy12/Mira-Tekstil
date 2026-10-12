@@ -1,0 +1,50 @@
+import type { SEOBlogTopic } from '../types';
+
+export const seoExpansionTopics: SEOBlogTopic[] = [
+    {
+        slug: 'balkon-perdesi-olcusu-nasil-alinir',
+        title: 'Balkon Perdesi Ölçüsü Nasıl Alınır? En ve Boy Rehberi | MiraTekstil',
+        metaDescription: 'Bağcıklı balkon perdesi için en ve boy ölçüsünü alın. Bağlantı noktaları, parçalı alanlar ve sipariş öncesi kontrol adımlarını örnekle öğrenin.',
+        excerpt: 'Bağcıklı balkon perdesinde kapatılacak alan, bağlantı noktaları ve alt bitişi birlikte ölçün.',
+        content: [
+            { type: 'paragraph', content: 'Balkon perdesi ölçüsü, salon perdesinin korniş ölçüsünden farklı olabilir. Bağcıklı bir model alırken önce perdenin hangi noktalara bağlanacağını ve hangi alanı kapatacağını belirleyin. Bağlantı biçimini varsaymak yerine ürün detaylarıyla karşılaştırmak, yanlış ölçü siparişini önlemeye yardımcı olur.' },
+            { type: 'heading', content: 'Ölçü Almadan Önce Hazırlık' },
+            { type: 'list', content: 'Bir mezura, not kâğıdı ve balkonun genel görünümünü gösteren fotoğraf hazırlayın:', items: ['Bağlantı noktalarını belirleyin; montaj parçasının pakete dahil olduğunu varsaymayın.', 'Açılan camların, kapının ve korkuluğun hareket alanını kontrol edin.', 'Perdenin zemine, korkuluğa veya cam koluna değmemesi için alt bitişi belirleyin.', 'En ve boyu santimetre cinsinden ayrı ayrı yazın.'] },
+            { type: 'heading', content: 'Balkon Perdesinin Eni Nasıl Ölçülür?' },
+            { type: 'paragraph', content: 'Kapatılacak alanın sol ve sağ sınırı arasındaki mesafeyi ölçün. Üst, orta ve alt noktaları ayrı ölçerek eğrilik veya daralma olup olmadığını kontrol edin. Birden fazla parça kullanılacaksa her parçanın ölçüsünü ayrı yazın. Ürün açıklamasında belirtilmeyen bir pile veya taşma katsayısını kendiliğinizden eklemeyin.' },
+            { type: 'heading', content: 'Balkon Perdesinin Boyu Nasıl Ölçülür?' },
+            { type: 'paragraph', content: 'Üst bağlantı noktasından istediğiniz alt bitişe kadar ölçün. Sol, orta ve sağ tarafta kontrol yapın. Bağcığın ürünün belirtilen boyuna dahil olup olmadığını sipariş öncesinde sorun; her üreticinin ölçü tanımı aynı olmayabilir.' },
+            { type: 'heading', content: 'Örnek Ölçü Notu' },
+            { type: 'paragraph', content: 'Örneğin kapatılacak alanın eni 200 cm, bağlantı noktasından alt bitişe boyu 240 cm ise notunuz “en: 200 cm, boy: 240 cm” olmalıdır. Bu yalnızca ölçüm örneğidir; otomatik dikim payı veya fiyat hesabı değildir. İki parça istiyorsanız toplam eni iki parçaya nasıl dağıtacağınızı ayrıca belirtin.' },
+            { type: 'heading', content: 'Siparişten Önce Son Kontrol' },
+            { type: 'list', content: 'Ölçüleri seçmeden önce şu bilgileri doğrulayın:', items: ['Ürünün en-boy sırası ve ölçü birimi.', 'Paketin tek parça mı, birden fazla parça mı olduğu.', 'Bağcıklar, montaj parçaları ve bağlantı biçimi.', 'Seçilen renk ve ölçü için güncel fiyat.', 'Ürünün dış mekân kullanımına uygunluğu; su ve rüzgâr dayanımını varsaymayın.'] },
+            { type: 'paragraph', content: '<a href="/perde/balkon-perdesi" class="underline">Bağcıklı balkon perdesi modellerini</a> karşılaştırın. Ölçü veya bağlantı konusunda emin değilseniz <a href="/contact" class="underline">fotoğraf ve ölçü notuyla bize ulaşın</a>. İç mekân raylı perde ölçümü için <a href="/blog/perde-olcusu-nasil-alinir" class="underline">korniş ve perde ölçü rehberini</a> kullanın.' },
+        ],
+        faq: [
+            { question: 'Balkon perdesinde en ve boy hangi sırayla yazılır?', answer: 'Genellikle en × boy kullanılır, ancak ürün sayfasındaki etiketleri esas alın. Her iki ölçüyü santimetre cinsinden ayrı yazmak karışıklığı önler.' },
+            { question: 'Balkon perdesine otomatik pile payı eklenir mi?', answer: 'Hayır. Bağcıklı balkon modelinin ölçü tanımı ve dikim biçimi doğrulanmadan tül perde pile katsayısı uygulanmamalıdır.' },
+        ],
+        relatedLinks: [{ label: 'Balkon perdesi modelleri', href: '/perde/balkon-perdesi', description: 'Üç renk seçeneğinin ürün ve ölçü detaylarını inceleyin.' }, { label: 'Ölçü konusunda yardım alın', href: '/contact', description: 'Ölçü notunuzla sipariş öncesi bilgi isteyin.' }],
+    },
+    {
+        slug: 'perde-pile-hesabi-nasil-yapilir',
+        title: 'Perde Pile Hesabı Nasıl Yapılır? 1/2 ve 1/3 Örnekleri | MiraTekstil',
+        metaDescription: 'Tül perde pile hesabını bitmiş en ve kumaş eni ayrımıyla öğrenin. 1/2, 1/2,5 ve 1/3 pile için örnek hesaplama aracını kullanın.',
+        excerpt: 'Bitmiş perde eni ile dikim öncesi kumaş eni aynı değildir. Pile katsayılarını örneklerle karşılaştırın.',
+        content: [
+            { type: 'paragraph', content: 'Pile, kumaşın üst kısmında oluşturulan katların düzenidir. Pile hesabı yaparken pencerenin veya rayın eni, bitmiş perdenin kaplayacağı en ve dikimden önce kullanılan kumaş eni birbirinden ayrılmalıdır. Kumaş ihtiyacını hesaplamak, ürün sayfasına gireceğiniz sipariş enini değiştirmek anlamına gelmez.' },
+            { type: 'heading', content: 'Bitmiş En ile Kumaş Eni Arasındaki Fark' },
+            { type: 'paragraph', content: 'Bitmiş en, perde hazır olduğunda ray üzerinde kaplayacağı genişliktir. Kumaş eni ise pile oluşturulmadan önceki yaklaşık malzeme ihtiyacıdır. Sipariş alanı bitmiş eni soruyorsa pile katsayısıyla çarptığınız değeri girmeyin. Ürün sayfasındaki ölçü tanımını ve satıcının açıklamasını esas alın.' },
+            { type: 'heading', content: '1/2 ve 1/3 Pile Ne Demek?' },
+            { type: 'list', content: 'Yaygın anlatımda katsayılar yaklaşık olarak şöyle kullanılır:', items: ['1/2 pile: bitmiş enin yaklaşık iki katı kumaş eni.', '1/2,5 pile: bitmiş enin yaklaşık iki buçuk katı kumaş eni.', '1/3 pile: bitmiş enin yaklaşık üç katı kumaş eni.'] },
+            { type: 'paragraph', content: 'Pile adları ve dikim uygulaması üreticiye göre değişebilir. Bu katsayılar eğitim amaçlı örnektir; kenar kıvırma, dikiş, çekme ve üretim payları ayrıca değerlendirilir. Hazır dikilmiş bir ürünün paket içeriğini hesaplama aracına göre değiştirmeyin.' },
+            { type: 'heading', content: '200 cm Bitmiş En İçin Örnek' },
+            { type: 'paragraph', content: '200 cm bitmiş en için 2 katsayısı yaklaşık 400 cm, 2,5 katsayısı 500 cm, 3 katsayısı ise 600 cm kumaş eni verir. Boy bu hesapta kullanılmaz; boy ve kumaş eninin beraber değerlendirilmesi gereken üretim hesabı daha farklıdır. Bu değerler satış fiyatı veya sipariş ölçüsü değildir.' },
+            { type: 'heading', content: 'Tek Kanat mı, İki Kanat mı?' },
+            { type: 'paragraph', content: 'İki kanat tasarlanıyorsa her parçanın bitmiş enini ayrı belirleyin. Örneğin toplam 200 cm kapatma alanı iki eşit kanada ayrılırsa her kanat 100 cm kaplar; 1/3 örneğinde her kanat için yaklaşık 300 cm kumaş eni hesaplanır. Ortada bindirme veya farklı bir görünüm isteniyorsa bunu sipariş öncesinde ayrıca netleştirin.' },
+            { type: 'paragraph', content: '<a href="/perde/tul-perde" class="underline">Tül perde modellerini</a> ve ürünün pile bilgisini inceleyin. Bitmiş ölçüyü almak için <a href="/blog/perde-olcusu-nasil-alinir" class="underline">perde ölçü rehberine</a> bakın. Tereddüt ettiğiniz ölçüyü siparişe dönüştürmeden önce <a href="/contact" class="underline">bize danışın</a>.' },
+        ],
+        faq: [{ question: 'Pileli perde siparişinde eni üçle çarpmalı mıyım?', answer: 'Sipariş alanı bitmiş en istiyorsa hayır. Katsayı kumaş ihtiyacını anlatır. Ürünün bitmiş en veya kumaş eni istediğini önce doğrulayın.' }, { question: 'Hesaplama fiyatı gösterir mi?', answer: 'Hayır. Araç yaklaşık kumaş eni örneği verir. Satış fiyatı seçtiğiniz ürün ve ölçüye göre ürün sayfasında gösterilir.' }],
+        relatedLinks: [{ label: 'Tül perde koleksiyonu', href: '/perde/tul-perde', description: 'Pile ve ölçü bilgilerini ürün detaylarıyla karşılaştırın.' }, { label: 'Özel ölçü perde', href: '/perde/ozel-olcu-perde', description: 'Özel ölçü üretilebilen perde seçeneklerini inceleyin.' }],
+    },
+];

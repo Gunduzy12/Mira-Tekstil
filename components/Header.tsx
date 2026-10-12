@@ -36,6 +36,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
       path: '/perde',
       children: [
         { name: 'Blackout Perde', path: '/perde/blackout-perde' },
+        { name: 'Balkon Perdesi', path: '/perde/balkon-perdesi' },
         { name: 'Saten Perde', path: '/perde/saten-perde' },
         { name: 'Tül Perde', path: '/perde/tul-perde' },
         { name: 'Özel Ölçü Perde', path: '/perde/ozel-olcu-perde' },

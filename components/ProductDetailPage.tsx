@@ -122,6 +122,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
     const canReview = useMemo(() => {
         if (!user) return false;
         return orders.some(order =>
+            order.userId === user.id &&
             order.status === 'Teslim Edildi' &&
             order.items.some(item => item.id === product.id)
         );
@@ -276,7 +277,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
 
     const handleReviewSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!newReviewComment.trim()) return;
+        if (!newReviewComment.trim() || !canReview || isSubmittingReview) return;
         setIsSubmittingReview(true);
 
         // Use logged in user's name if available, otherwise form name (though logic hides form if not logged in)
@@ -284,22 +285,12 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
 
         try {
             const reviewData = { productName: product.name, author: authorName, rating: newReviewRating, comment: newReviewComment };
-            await sendFormToEmail('Yeni Ürün Değerlendirmesi', reviewData);
-
-            const newReview: Review = {
-                id: Date.now(),
-                author: authorName,
-                rating: newReviewRating,
-                comment: newReviewComment,
-                date: new Date().toISOString().split('T')[0]
-            };
-
-            // This is a local update for Reviews. In a full implementation, we'd persist reviews to DB similar to Questions.
-            setReviews(prev => [newReview, ...prev]);
+            const delivered = await sendFormToEmail('Yeni Ürün Değerlendirmesi', reviewData);
+            if (!delivered) throw new Error('Review notification could not be delivered');
             setNewReviewAuthor('');
             setNewReviewComment('');
             setNewReviewRating(5);
-            showNotification('Değerlendirmeniz için teşekkür ederiz!', 'success');
+            showNotification('Değerlendirmeniz mağazaya gönderildi. Kontrol edilmeden yayınlanmaz.', 'success');
         } catch {
             showNotification('Bir hata oluştu.', 'error');
         } finally {

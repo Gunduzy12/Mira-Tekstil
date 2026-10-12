@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { blogTopics, findBlogTopic } from '@/data/seoBlogTopics';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CategorySEOContent from '@/components/CategorySEOContent';
+import PleatCalculator from '@/components/PleatCalculator';
+import CurtainMeasurementDiagram from '@/components/CurtainMeasurementDiagram';
 import Link from 'next/link';
 import JsonLd, { generateBlogPostingSchema, generateFAQSchema } from '@/components/JsonLd';
 
@@ -83,6 +85,8 @@ export default async function BlogArticlePage({ params }: Props) {
                         </div>
                     </div>
 
+                    {(slug === 'perde-olcusu-nasil-alinir' || slug === 'balkon-perdesi-olcusu-nasil-alinir') && <CurtainMeasurementDiagram />}
+                    {slug === 'perde-pile-hesabi-nasil-yapilir' && <PleatCalculator />}
                     <CategorySEOContent seoBlocks={topic.content} faq={topic.faq} />
                 </article>
 

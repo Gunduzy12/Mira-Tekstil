@@ -7,6 +7,7 @@ import { findSEOCategory, findSEOParent, seoCategories, getProductUrl, filterPro
 import { getProductDisplayPrice } from '@/utils/commerce';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import CategorySEOContent from '@/components/CategorySEOContent';
+import CategoryBuyingGuide from '@/components/CategoryBuyingGuide';
 import JsonLd, {
     generateCollectionPageSchema,
     generateFAQSchema,
@@ -193,6 +194,7 @@ export default async function CategoryPage({ params }: Props) {
                     </div>
                 )}
 
+                <CategoryBuyingGuide categorySlug={categorySlug} />
                 <CategorySEOContent seoBlocks={supportingBlocks} faq={category.faq} />
             </div>
         </div>

@@ -1,6 +1,8 @@
 import { SEOBlogTopic } from '../types';
+import { seoExpansionTopics } from './seoExpansion';
 
 export const blogTopics: SEOBlogTopic[] = [
+    ...seoExpansionTopics,
     {
         slug: 'blackout-perde-mi-tul-perde-mi',
         title: 'Blackout Perde mi Tül Perde mi? Doğru Perde Seçim Rehberi | MiraTekstil Blog',
@@ -86,6 +88,10 @@ export const blogTopics: SEOBlogTopic[] = [
             {
                 type: 'paragraph',
                 content: 'Evet. Fon perde yatak odasında dekoratif bir çerçeve oluşturur ve seçilen kumaşa göre ışığı azaltmaya yardımcı olur. Güçlü karartma gerekiyorsa fon perdenin blackout kumaştan üretilmesini veya tül perdeyle blackout fonun birlikte kullanılmasını tercih edin.'
+            },
+            { type: 'heading', content: 'Yatak Odası İçin Sipariş Kontrol Listesi' },
+            { type: 'list', content: 'Ölçü ve kullanım ihtiyacını birlikte değerlendirin:', items: ['Sabah ışığı, gece sokak aydınlatması ve gündüz mahremiyeti ihtiyacınızı ayırın.', 'Ray enini ve raydan alt bitişe boyu ölçün. Kenardan ışık girmesini azaltmak için kapatma alanını kontrol edin.', 'Tek kanat veya iki kanat seçimini ve paket içeriğini doğrulayın.', 'Renk seçimi tek başına karartma performansı garantisi değildir; kumaş bilgilerini esas alın.', 'Ürün sayfasında seçilen ölçünün güncel fiyatını ve iade koşullarını okuyun.'] },
+            { type: 'paragraph', content: 'Ölçü almak için <a href="/blog/perde-olcusu-nasil-alinir" class="underline">korniş ve perde ölçü rehberini</a>, tül ile birlikte kullanacaksanız <a href="/blog/perde-pile-hesabi-nasil-yapilir" class="underline">pile hesabı rehberini</a> inceleyin. Montajın yanlarından gelen ışık, kumaş iyi karartma sağlasa bile odanın tamamen karanlık olmamasına neden olabilir.'
             }
         ],
         faq: [

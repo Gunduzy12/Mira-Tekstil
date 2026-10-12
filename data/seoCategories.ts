@@ -60,6 +60,7 @@ export const seoParentCategories: SEOParentCategory[] = [
         ],
         children: [
             { name: 'Blackout Perde', slug: 'blackout-perde', description: 'Tam karartma sağlayan blackout perde modelleri' },
+            { name: 'Balkon Perdesi', slug: 'balkon-perdesi', description: 'Bağcıklı balkon perdesi renk ve ölçü seçenekleri' },
             { name: 'Saten Perde', slug: 'saten-perde', description: 'Zarif ve parlak saten perde koleksiyonu' },
             { name: 'Tül Perde', slug: 'tul-perde', description: 'Işık geçiren şık tül perde çeşitleri' },
             { name: 'Özel Ölçü Perde', slug: 'ozel-olcu-perde', description: 'Pencerelerinize özel ölçülerde perde dikimi' },
@@ -104,6 +105,27 @@ export const seoParentCategories: SEOParentCategory[] = [
 // ALT KATEGORİLER (SEO LANDING PAGES)
 // =============================================
 export const seoCategories: SEOCategory[] = [
+    {
+        parentSlug: 'perde', categorySlug: 'balkon-perdesi', firebaseCategoryName: 'Balkon Perdesi',
+        title: 'Bağcıklı Balkon Perdesi Modelleri ve Fiyatları | MiraTekstil',
+        metaDescription: 'Mavi-beyaz, gri-beyaz ve sarı-gri bağcıklı balkon perdelerini karşılaştırın. En ve boy seçeneklerini, ürün detaylarını ve güncel fiyatları inceleyin.',
+        h1: 'Bağcıklı Balkon Perdesi Modelleri',
+        seoBlocks: [
+            { type: 'paragraph', content: 'Balkon perdesi seçerken yalnızca renk değil, kapatılacak alanın eni, boyu ve bağlantı noktaları da önemlidir. Bu koleksiyonda mavi-beyaz, gri-beyaz ve sarı-gri bağcıklı balkon perdelerini bir arada inceleyebilir; ölçü seçeneklerini ürün sayfasında karşılaştırabilirsiniz.' },
+            { type: 'heading', content: 'Balkon Perdesinde En ve Boy Nasıl Seçilir?' },
+            { type: 'paragraph', content: 'Perdenin kapatacağı alanı ve sabitleneceği noktaları ölçün. Bağcıklı modelde bağlantı noktası, raylı perdeyle aynı olmayabilir. En ve boyu santimetre olarak not edin; ürünün montaj ve paket içeriği bilgilerini siparişten önce kontrol edin. <a href="/blog/balkon-perdesi-olcusu-nasil-alinir" class="underline">Balkon perdesi ölçü rehberimiz</a> ile ölçüm adımlarını inceleyebilirsiniz.' },
+            { type: 'heading', content: 'Renk Seçimi ve Güncel Fiyat' },
+            { type: 'paragraph', content: 'Mavi-beyaz daha belirgin bir renk karşıtlığı, gri-beyaz nötr bir görünüm, sarı-gri ise sıcak bir vurgu isteyenler için değerlendirilebilir. Ekran ve ortam ışığı kumaş renginin algısını değiştirebilir. Liste fiyatını başlangıç noktası olarak değerlendirin; satın almak istediğiniz ölçünün fiyatını ürün sayfasında kontrol edin.' },
+            { type: 'heading', content: 'Balkon Perdesi ile Blackout Perde Aynı mı?' },
+            { type: 'paragraph', content: 'Bağcıklı balkon perdesi ile iç mekân için seçilen blackout fon perde aynı kullanım biçimini ifade etmez. Bir modelin su geçirmezliği, dış mekân veya karartma özelliği ancak ürün detaylarında doğrulanmışsa esas alınmalıdır. Yatak odasında ışık kontrolü için <a href="/perde/blackout-perde" class="underline">blackout perde koleksiyonunu</a> ayrıca inceleyin.' },
+        ],
+        faq: [
+            { question: 'Balkon perdesi nasıl ölçülür?', answer: 'Kapatılacak alanın enini ve bağlantı noktasından istenen alt bitişe kadar boyunu ölçün. Birkaç noktadan ölçüm yapın ve bağlantı biçimini ürün detaylarıyla karşılaştırın.' },
+            { question: 'Her balkon perdesi blackout mudur?', answer: 'Hayır. Balkon perdesi kullanım alanını, blackout ise kumaşın karartma özelliğini anlatır. Bir ürünün blackout olduğu ayrıca belirtilmiş olmalıdır.' },
+            { question: 'Ölçü seçimi fiyatı değiştirebilir mi?', answer: 'Ölçüye göre fiyat değişebilir. Seçiminizin güncel fiyatını ve sipariş özetini satın almadan önce kontrol edin.' },
+        ],
+        keywords: ['balkon perdesi', 'bağcıklı balkon perdesi', 'balkon perdesi ölçüsü'],
+    },
     // BLACKOUT PERDE
     {
         parentSlug: 'perde',
@@ -325,12 +347,12 @@ export const seoCategories: SEOCategory[] = [
         categorySlug: 'ozel-olcu-perde',
         firebaseCategoryName: 'Özel Ölçü Perde',
         title: 'Özel Ölçü Perde Dikimi ve Fiyatları | MiraTekstil',
-        metaDescription: 'Pencerelerinize özel ölçülerde perde dikimi hizmeti. Blackout, saten, tül - tüm perde türlerinde özel ölçü. Kolay sipariş, hızlı teslimat!',
+        metaDescription: 'Özel ölçü üretilebilen blackout, saten, tül ve balkon perdelerini inceleyin. En, boy ve seçtiğiniz ölçünün güncel fiyatını ürün sayfasında karşılaştırın.',
         h1: 'Özel Ölçü Perde Dikimi',
         seoBlocks: [
             {
                 type: 'paragraph',
-                content: 'Standart perde ölçüleri pencerelerinize uymadığında, özel ölçü perde dikimi en doğru çözümdür. MiraTekstil olarak her pencere tipine, her oda boyutuna uygun özel ölçülerde perde dikimi yapıyoruz.'
+                content: 'Standart ölçüler kapatmak istediğiniz alana uymadığında, özel ölçü üretilebilen modelleri değerlendirebilirsiniz. Bu sayfada özel ölçü seçeneği bulunan perdeler listelenir. Her ürünün en, boy ve üretim sınırlarını ürün sayfasında kontrol edin.'
             },
             {
                 type: 'heading',
@@ -350,23 +372,23 @@ export const seoCategories: SEOCategory[] = [
                 items: [
                     'Kornişin veya rayın toplam genişliğini ölçün',
                     'Yerden kornişe kadar olan yüksekliği ölçün',
-                    'Her iki tarafa 10-15 cm taşma payı ekleyin',
-                    'Yere kadar istiyor iseniz yerden 1-2 cm kısa bırakın'
+                    'Bitmiş perde eni ile dikim öncesi kumaş enini karıştırmayın; ürünün istediği ölçü biçimini kontrol edin',
+                    'İstenen alt bitişi ve bağlantı biçimini belirleyin; modele özel payları sipariş öncesinde teyit edin'
                 ]
             },
             {
                 type: 'paragraph',
-                content: 'Tüm perde türlerinde özel ölçü hizmeti sunuyoruz: blackout perde, saten perde, tül perde ve fon perde. Her model özel ölçülerle üretilebilir.'
+                content: 'Özel ölçü seçeneği bulunan blackout, saten, tül ve balkon modellerinin sınırları farklı olabilir. Seçilen ölçünün fiyatını ve paket adedini sipariş özetinde karşılaştırın. Kararsız kaldığınız ölçüyü sipariş vermeden önce iletişim sayfasından bize danışın.'
             }
         ],
         faq: [
             {
                 question: 'Özel ölçü perde ne kadar sürede hazır olur?',
-                answer: 'Özel ölçü perdeler genellikle sipariş tarihinden itibaren 3-5 iş günü içinde hazırlanarak kargoya verilir. Yoğun dönemlerde bu süre 7 iş gününe kadar uzayabilir.'
+                answer: 'Hazırlık süresi modele, ölçüye ve üretim yoğunluğuna göre değişebilir. Güncel süreyi ürün bilgileri ve mağaza desteği üzerinden siparişten önce teyit edin.'
             },
             {
                 question: 'Özel ölçü perde iade edilebilir mi?',
-                answer: 'Özel ölçü perdeler müşteriye özel üretildiği için standart iade kapsamı dışındadır. Ancak ölçü hatası veya üretim kaynaklı sorunlarda değişim yapılmaktadır.'
+                answer: 'Özel ölçü siparişler için geçerli koşulları sitenin İade ve Geri Ödeme Politikası sayfasından inceleyin. Yanlış veya kusurlu ürünle ilgili taleplerinizi mağazaya iletin.'
             },
             {
                 question: 'Perde ölçümü için hizmet geliyor musunuz?',
@@ -385,8 +407,8 @@ export const seoCategories: SEOCategory[] = [
         parentSlug: 'ev-tekstili',
         categorySlug: 'yastik-kilifi',
         firebaseCategoryName: 'Yastık Kılıfı',
-        title: 'Dekoratif Yastık Kılıfı Modelleri ve Fiyatları | MiraTekstil',
-        metaDescription: 'Dekoratif yastık kılıfı, salon yastık kılıfı ve modern yastık kılıfı modelleri. Kaliteli kumaş, şık tasarım. MiraTekstil\'de keşfedin!',
+        title: '50x70 Beyaz Fermuarlı Yastık Kılıfı | MiraTekstil',
+        metaDescription: '50x70 cm beyaz fermuarlı yastık kılıfı paketini inceleyin. Paket adedi, ölçü, kumaş bilgileri ve güncel fiyatı ürün sayfasında kontrol edin.',
         h1: 'Yastık Kılıfı Modelleri',
         seoBlocks: [
             {
@@ -407,17 +429,17 @@ export const seoCategories: SEOCategory[] = [
             },
             {
                 type: 'paragraph',
-                content: 'Modern yastık kılıfı modeli arayanlar için kadife, keten, saten ve pamuklu kumaş seçenekleri sunuyoruz. Her kumaş türü farklı bir ambiyans yaratır: kadife sıcak ve şık, keten doğal ve bohem, saten zarif ve parlak bir görünüm sağlar.'
+                content: 'Kumaş türünü ve bakım bilgisini seçtiğiniz ürünün detaylarından kontrol edin. Bu koleksiyondaki beyaz fermuarlı yastık kılıfı için ölçü ve paket adedini mevcut yastığınızla karşılaştırın; listede bulunmayan kumaş veya renk seçeneklerini siparişe dahil varsaymayın.'
             }
         ],
         faq: [
             {
                 question: 'Yastık kılıfı hangi ölçülerde gelir?',
-                answer: 'Yastık kılıflarımız standart 43x43 cm ve 45x45 cm ölçülerinde mevcuttur. Bazı modellerde dikdörtgen (30x50 cm) seçeneği de bulunmaktadır.'
+                answer: 'Mevcut beyaz fermuarlı yastık kılıfının ürün başlığında 50x70 cm ölçüsü belirtilir. Sipariş öncesinde ürün detayındaki ölçüyü ve paket adedini kontrol edin.'
             },
             {
                 question: 'Dekoratif yastık kılıfları yıkanabilir mi?',
-                answer: 'Evet, tüm yastık kılıflarımız 30 derecede makine yıkamaya uygundur. Renk haslığı test edilmiş kumaşlar kullanılmaktadır.'
+                answer: 'Yıkama sıcaklığı ve kurutma yönteminde ürünün bakım etiketini esas alın. Kumaş türünü doğrulamadan genel bir yıkama sıcaklığı uygulamayın.'
             },
             {
                 question: 'Yastık kılıfları ile birlikte iç yastık geliyor mu?',
@@ -582,9 +604,16 @@ export function getProductUrl(
  * Ürün adına bakarak keyword matching yapar.
  */
 export function filterProductsBySubcategory(
-    products: { name: string }[],
+    products: { name: string; isCustomSize?: boolean }[],
     categorySlug: string
 ): typeof products {
+    // Collection membership only: product URLs, SKUs and Product schema stay unchanged.
+    if (categorySlug === 'ozel-olcu-perde') {
+        return products.filter(product => product.isCustomSize === true && /perde/i.test(product.name) && !/cibinlik/i.test(product.name));
+    }
+    if (categorySlug === 'balkon-perdesi') {
+        return products.filter(product => /balkon/i.test(product.name));
+    }
     const subcategory = subcategoryKeywords.find(s => s.categorySlug === categorySlug);
     if (!subcategory || subcategory.keywords.length === 0) return products;
 

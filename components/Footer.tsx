@@ -48,6 +48,7 @@ const Footer: React.FC = () => {
             <h4 className="font-semibold mb-4 tracking-wider uppercase text-gray-300">Perde</h4>
             <ul className="space-y-3 text-sm text-gray-400">
               <li><Link href="/perde/blackout-perde" className="hover:text-white transition-colors" title="Blackout Perde Modelleri">Blackout Perde</Link></li>
+              <li><Link href="/perde/balkon-perdesi" className="hover:text-white transition-colors">Balkon Perdesi</Link></li>
               <li><Link href="/perde/saten-perde" className="hover:text-white transition-colors" title="Saten Perde Modelleri">Saten Perde</Link></li>
               <li><Link href="/perde/tul-perde" className="hover:text-white transition-colors" title="Tül Perde Modelleri">Tül Perde</Link></li>
               <li><Link href="/perde/ozel-olcu-perde" className="hover:text-white transition-colors" title="Özel Ölçü Perde Dikimi">Özel Ölçü Perde</Link></li>
@@ -61,6 +62,8 @@ const Footer: React.FC = () => {
               <li><Link href="/blog/blackout-perde-mi-tul-perde-mi" className="hover:text-white transition-colors" title="Blackout Perde mi Tül Perde mi?">Blackout vs Tül Perde</Link></li>
               <li><Link href="/blog/yatak-odasi-icin-en-iyi-perde" className="hover:text-white transition-colors" title="Yatak Odası İçin En İyi Perde">Yatak Odası Perdesi</Link></li>
               <li><Link href="/blog/perde-olcusu-nasil-alinir" className="hover:text-white transition-colors" title="Perde Ölçüsü Nasıl Alınır">Perde Ölçüsü Rehberi</Link></li>
+              <li><Link href="/blog/balkon-perdesi-olcusu-nasil-alinir" className="hover:text-white transition-colors">Balkon Perdesi Ölçüsü</Link></li>
+              <li><Link href="/blog/perde-pile-hesabi-nasil-yapilir" className="hover:text-white transition-colors">Pile Hesabı ve Hesaplayıcı</Link></li>
               <li><Link href="/blog/salon-perde-secimi" className="hover:text-white transition-colors" title="Salon Perde Seçimi 2026">Salon Perde Seçimi</Link></li>
               <li><Link href="/about" className="hover:text-white transition-colors" title="Hakkımızda">Hakkımızda</Link></li>
               <li><Link href="/contact" className="hover:text-white transition-colors" title="İletişim">İletişim</Link></li>
