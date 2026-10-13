@@ -70,7 +70,7 @@ const ContactForm: React.FC = () => {
                                     <h3 className="font-semibold text-brand-primary text-lg">Merkez Ofis & Depo</h3>
                                     <p className="text-gray-500 mt-1 uppercase">
                                         KURTDERESİ MAH. BERRAK SOK. NO: 8 / 1C<br />
-                                        31520 Cumhuriyet, Samandağ / Hatay<br />
+                                        31800 Cumhuriyet, Samandağ / Hatay<br />
                                         TÜRKİYE
                                     </p>
                                 </div>
