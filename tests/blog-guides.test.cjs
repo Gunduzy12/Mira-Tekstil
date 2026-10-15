@@ -70,6 +70,15 @@ test('every post in the blog has at least 400 words', () => {
     for (const topic of topics) assert.ok(wordCount(topic) >= 400, `${topic.slug}: ${wordCount(topic)} words`);
 });
 
+test('every post has a modified date and the new guides have a publish date', () => {
+    const guideSlugs = new Set(guides.seoGuideTopics.map(topic => topic.slug));
+    for (const topic of topics) {
+        assert.match(topic.dateModified || '', /^\d{4}-\d{2}-\d{2}$/, `${topic.slug}: dateModified`);
+        if (guideSlugs.has(topic.slug)) assert.match(topic.datePublished || '', /^\d{4}-\d{2}-\d{2}$/, `${topic.slug}: datePublished`);
+        else assert.equal(topic.datePublished, undefined, `${topic.slug}: older posts must not get an invented publish date`);
+    }
+});
+
 test('internal links in blog content and related links resolve', () => {
     const pagePaths = new Set([
         '/', '/perde', '/ev-tekstili', '/shop', '/blog', '/about', '/contact', '/iade-ve-geri-odeme',

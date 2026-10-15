@@ -93,6 +93,25 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
     const { addQuestion } = useProducts();
     const isWishlisted = isInWishlist(product.id);
 
+    // Galeri küçük resimleri ve renk seçenekleri tam boy görsel indirir. Ana görsel (LCP) önce yüklensin diye
+    // bunlar sayfa yüklemesi bittikten sonra getirilir.
+    const [secondaryImagesReady, setSecondaryImagesReady] = useState(false);
+    useEffect(() => {
+        let timer: ReturnType<typeof setTimeout>;
+        const start = () => { timer = setTimeout(() => setSecondaryImagesReady(true), 300); };
+        const fallback = setTimeout(() => setSecondaryImagesReady(true), 6000);
+        if (document.readyState === 'complete') {
+            start();
+        } else {
+            window.addEventListener('load', start, { once: true });
+        }
+        return () => {
+            clearTimeout(timer);
+            clearTimeout(fallback);
+            window.removeEventListener('load', start);
+        };
+    }, []);
+
     const ownColor = useMemo(() => getProductOwnColor(product), [product]);
 
     // Initialize selection
@@ -396,13 +415,17 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                                     className={`relative aspect-square border-2 rounded-md transition-all overflow-hidden bg-white ${img === mainImage ? 'border-brand-secondary ring-1 ring-brand-secondary opacity-100' : 'border-transparent hover:border-gray-300 opacity-80 hover:opacity-100'}`}
                                     aria-label={`${product.name} görseli ${index + 1}`}
                                 >
-                                    <Image
-                                        src={img}
-                                        alt={`${product.name} detay görseli ${index + 1}`}
-                                        fill
-                                        sizes="(max-width: 768px) 18vw, 8vw"
-                                        className="object-cover"
-                                    />
+                                    {secondaryImagesReady ? (
+                                        <Image
+                                            src={img}
+                                            alt={`${product.name} detay görseli ${index + 1}`}
+                                            fill
+                                            sizes="(max-width: 768px) 18vw, 8vw"
+                                            className="object-cover"
+                                        />
+                                    ) : (
+                                        <span className="absolute inset-0 bg-gray-100" aria-hidden="true" />
+                                    )}
                                 </button>
                             ))}
                         </div>
@@ -485,13 +508,17 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                                             role="radio"
                                             aria-checked={selectedColor === color}
                                         >
-                                            <Image
-                                                src={imageUrl}
-                                                alt={`${product.name} ${color} renk seçeneği`}
-                                                fill
-                                                sizes="80px"
-                                                className="object-cover rounded-sm p-1"
-                                            />
+                                            {secondaryImagesReady ? (
+                                                <Image
+                                                    src={imageUrl}
+                                                    alt={`${product.name} ${color} renk seçeneği`}
+                                                    fill
+                                                    sizes="80px"
+                                                    className="object-cover rounded-sm p-1"
+                                                />
+                                            ) : (
+                                                <span className="absolute inset-1 rounded-sm bg-gray-100" aria-hidden="true" />
+                                            )}
                                         </button>
                                     ))}
                                 </div>

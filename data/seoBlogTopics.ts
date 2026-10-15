@@ -434,15 +434,20 @@ const baseBlogTopics: SEOBlogTopic[] = [
 ];
 
 // Daha önce yayınlanmış yazılara ek bölümler eklenir (içerik ayrı dosyada tutulur).
+// Eski yazıların ilk yayın tarihi kesin bilinmediği için yalnızca "güncellendi" tarihi verilir.
+const LEGACY_POSTS_UPDATED = '2026-10-15';
+
 export const blogTopics: SEOBlogTopic[] = baseBlogTopics.map(topic => {
     const extra = legacyExtras[topic.slug];
-    if (!extra) return topic;
-    return {
-        ...topic,
-        content: [...topic.content, ...extra.content],
-        faq: [...(topic.faq || []), ...(extra.faq || [])],
-        relatedLinks: [...(topic.relatedLinks || []), ...(extra.relatedLinks || [])],
-    };
+    const merged: SEOBlogTopic = extra
+        ? {
+            ...topic,
+            content: [...topic.content, ...extra.content],
+            faq: [...(topic.faq || []), ...(extra.faq || [])],
+            relatedLinks: [...(topic.relatedLinks || []), ...(extra.relatedLinks || [])],
+        }
+        : topic;
+    return { ...merged, dateModified: merged.dateModified || LEGACY_POSTS_UPDATED };
 });
 
 export function findBlogTopic(slug: string): SEOBlogTopic | undefined {

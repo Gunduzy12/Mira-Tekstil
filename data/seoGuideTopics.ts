@@ -645,7 +645,12 @@ const baseGuideTopics: SEOBlogTopic[] = [
 ];
 
 // Her rehbere ek, pratik bölümler eklenir (içerik ayrı dosyada tutulur).
+// Bu rehberler 15 Ekim 2026'da yayınlandı.
+const GUIDES_PUBLISHED = '2026-10-15';
+
 export const seoGuideTopics: SEOBlogTopic[] = baseGuideTopics.map(topic => ({
     ...topic,
+    datePublished: GUIDES_PUBLISHED,
+    dateModified: GUIDES_PUBLISHED,
     content: [...topic.content, ...(guideExtras[topic.slug] || [])],
 }));

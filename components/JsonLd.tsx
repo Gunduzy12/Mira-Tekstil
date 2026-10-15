@@ -151,12 +151,16 @@ export function generateBlogPostingSchema(article: {
     headline: string;
     description: string;
     url: string;
+    datePublished?: string;
+    dateModified?: string;
 }) {
     return {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
         headline: article.headline,
         description: article.description,
+        ...(article.datePublished ? { datePublished: article.datePublished } : {}),
+        ...(article.dateModified ? { dateModified: article.dateModified } : {}),
         mainEntityOfPage: `${BASE_URL}${article.url}`,
         image: `${BASE_URL}/perde_hava_durumu_banner.png`,
         author: {

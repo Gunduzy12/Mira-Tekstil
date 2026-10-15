@@ -14,9 +14,11 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    // Vercel Image Optimization kotası dolduğunda görseller 402 dönmesin.
-    // Kaynak görselleri doğrudan Firebase/Imgur üzerinden sunuyoruz.
-    unoptimized: true,
+    // Görseller Next/Vercel görsel optimizasyonundan geçer: ekran boyutuna göre küçültülür ve WebP'ye çevrilir.
+    // Orijinal dosyalar (Firebase/Imgur) değişmez. Kota sorunu (402) yaşanırsa geçici çözüm: aşağıya `unoptimized: true` ekleyin.
+    formats: ['image/webp'],
+    // Aynı görsel için yeniden dönüştürme sayısını azaltmak için uzun önbellek (31 gün).
+    minimumCacheTTL: 60 * 60 * 24 * 31,
     remotePatterns: [
       {
         protocol: 'https',
