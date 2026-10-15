@@ -64,6 +64,10 @@ export const seoParentCategories: SEOParentCategory[] = [
             { name: 'Saten Perde', slug: 'saten-perde', description: 'Zarif ve parlak saten perde koleksiyonu' },
             { name: 'Tül Perde', slug: 'tul-perde', description: 'Işık geçiren şık tül perde çeşitleri' },
             { name: 'Özel Ölçü Perde', slug: 'ozel-olcu-perde', description: 'Pencerelerinize özel ölçülerde perde dikimi' },
+            { name: 'Yatak Odası Perdesi', slug: 'yatak-odasi-perdesi', description: 'Yatak odası için blackout ve saten perde modelleri' },
+            { name: 'Salon Perdesi', slug: 'salon-perdesi', description: 'Salon için saten, tül ve koyu tonlu fon perdeler' },
+            { name: 'Koyu Renk Perde', slug: 'koyu-renk-perde', description: 'Antrasit, lacivert, siyah ve kahverengi perdeler' },
+            { name: 'Açık Renk Perde', slug: 'acik-renk-perde', description: 'Bej, krem, beyaz, vizon ve gri perdeler' },
         ]
     },
     {
@@ -453,7 +457,95 @@ export const seoCategories: SEOCategory[] = [
         ]
     },
 
-
+    // KOLEKSİYON SAYFALARI (mevcut ürünleri kullanım amacına ve renge göre gruplar)
+    {
+        parentSlug: 'perde',
+        categorySlug: 'yatak-odasi-perdesi',
+        firebaseCategoryName: 'Yatak Odası Perdesi',
+        title: 'Yatak Odası Perdesi Modelleri ve Fiyatları | MiraTekstil',
+        metaDescription: 'Yatak odası için blackout ve saten perde modellerini inceleyin. Işık kontrolü, renk seçenekleri ve özel ölçü dikimle yatak odanıza uygun perdeyi seçin.',
+        h1: 'Yatak Odası Perdesi Modelleri',
+        seoBlocks: [
+            { type: 'paragraph', content: 'Yatak odası perdesi hem uyku düzeninizi hem de odanın görünümünü etkiler. Bu sayfada yatak odasında en sık tercih edilen iki perde türünü bir arada bulabilirsiniz: dış ışığı azaltmaya yardımcı olan blackout perdeler ve odaya şık bir görünüm veren saten perdeler.' },
+            { type: 'heading', content: 'Yatak Odası İçin Hangi Perde Seçilmeli?' },
+            { type: 'paragraph', content: 'Sabah güneşi veya sokak aydınlatması uykunuzu bölüyorsa blackout perde daha uygun olur. Dekoratif görünüm ön plandaysa ve ışık kontrolü ikinci önceliğinizse saten perde tercih edilebilir. Karartmanın düzeyi kumaşa, renge ve pencereyi kapatma biçimine göre değişir. Ayrıntılı karşılaştırma için <a href="/blog/yatak-odasi-icin-en-iyi-perde" class="underline">yatak odası perdesi rehberimize</a> bakın.' },
+            { type: 'heading', content: 'Yatak Odası Perdesinde Renk Seçimi' },
+            { type: 'paragraph', content: 'Küçük yatak odalarında bej, krem, vizon ve açık gri gibi sakin tonlar mekânı ferah gösterir. Daha belirgin bir görünüm isteyenler lacivert, antrasit veya kahverengi seçebilir. Renk seçerken duvar, yatak başlığı ve halı rengini birlikte düşünün; fikir için <a href="/blog/perde-rengi-nasil-secilir" class="underline">perde rengi rehberini</a> inceleyebilirsiniz.' },
+            { type: 'list', content: 'Sipariş vermeden önce kontrol edin:', items: ['Kornişin kullanılabilir genişliğini ve perdenin asılacağı noktadan bitişe kadar boyu ölçün.', 'Özel ölçü modellerde en ve boyu santimetre olarak ürün sayfasına girin.', 'Perdenin ışık kontrolü ve bakım bilgisini ürün sayfasından doğrulayın.'] },
+        ],
+        faq: [
+            { question: 'Yatak odasına blackout perde mi saten perde mi uygun?', answer: 'Işığı azaltmak istiyorsanız blackout, dekoratif ve şık bir görünüm istiyorsanız saten tercih edilebilir. İkisini aynı odada tül ile birlikte kullanmak da mümkündür.' },
+            { question: 'Yatak odası perdesi hangi renk olmalı?', answer: 'Sakin ve açık tonlar odayı ferah gösterir. Koyu tonlar daha kapalı ve güçlü bir görünüm verir. Duvar ve mobilya rengiyle uyumlu bir ton seçmek en güvenli yoldur.' },
+            { question: 'Yatak odası perdesi özel ölçü sipariş edilebilir mi?', answer: 'Evet, bu sayfadaki modeller özel ölçü seçeneğiyle sipariş edilebilir. Geçerli en ve boy aralığı ürün sayfasında belirtilir.' },
+        ],
+        keywords: ['yatak odası perdesi', 'yatak odası blackout perde', 'yatak odası fon perde'],
+    },
+    {
+        parentSlug: 'perde',
+        categorySlug: 'salon-perdesi',
+        firebaseCategoryName: 'Salon Perdesi',
+        title: 'Salon Perdesi Modelleri ve Fiyatları | MiraTekstil',
+        metaDescription: 'Salon için saten, tül ve koyu renk fon perde modellerini inceleyin. Oturma odası perdesi seçimi, renk önerileri ve özel ölçü seçenekleri.',
+        h1: 'Salon Perdesi Modelleri',
+        seoBlocks: [
+            { type: 'paragraph', content: 'Salon perdesi, evin en çok görülen alanında hem ışığı süzmeli hem de dekorasyonu tamamlamalıdır. Bu koleksiyonda salonlarda sık tercih edilen saten perdeleri, tül perdeyi ve koyu tonlu fon perdeleri bir arada bulabilirsiniz.' },
+            { type: 'heading', content: 'Salon İçin Perde Türleri' },
+            { type: 'paragraph', content: 'Saten perde, yüzeyi pürüzsüz ve hafif parlak görünümüyle salona şık bir hava katar. Tül perde gün ışığını süzerek odayı aydınlık tutar. Lacivert ve antrasit gibi koyu tonlu fon perdeler ise salona derinlik ve karakter kazandırır. İkisini birlikte kullanmayı düşünüyorsanız <a href="/blog/fon-perde-ile-tul-perde-farki" class="underline">fon perde ile tül perde farkı</a> yazımıza göz atın.' },
+            { type: 'heading', content: 'Salon Perdesi Seçerken' },
+            { type: 'list', content: 'Karar vermeden önce şunlara bakın:', items: ['Salonun aldığı gün ışığı miktarı ve cephesi.', 'Koltuk, halı ve duvar rengiyle uyum.', 'Kornişin genişliği ve tavan yüksekliği; ölçü için <a href="/blog/perde-olcusu-nasil-alinir" class="underline">ölçü rehberi</a>.', 'Mahremiyet ihtiyacı: tül gündüz, fon perde akşam için.'] },
+            { type: 'paragraph', content: 'Daha fazla fikir için <a href="/blog/salon-perde-secimi" class="underline">salon perde seçimi rehberimizi</a> okuyabilirsiniz.' },
+        ],
+        faq: [
+            { question: 'Salon için hangi perde türü uygundur?', answer: 'Saten ve tül perdeler salonlarda sık tercih edilir. Koyu tonlu fon perde ise daha belirgin bir görünüm verir. Tercih, odanın ışığına ve dekorasyona göre değişir.' },
+            { question: 'Salon perdesinde tül ve fon perde birlikte kullanılır mı?', answer: 'Evet. İki raylı korniş ile tül iç rayda, fon perde dış rayda kullanılır; gündüz tül, akşam fon perde kapatılır.' },
+            { question: 'Salon perdesi ölçüsü nasıl alınır?', answer: 'Kornişin kullanılabilir genişliğini ve asılacağı noktadan bitişe kadar boyu santimetre cinsinden ölçün. Adımlar için ölçü rehberimize bakın.' },
+        ],
+        keywords: ['salon perdesi', 'oturma odası perdesi', 'salon saten perde'],
+    },
+    {
+        parentSlug: 'perde',
+        categorySlug: 'koyu-renk-perde',
+        firebaseCategoryName: 'Koyu Renk Perde',
+        title: 'Koyu Renk Perde Modelleri: Antrasit, Lacivert, Siyah | MiraTekstil',
+        metaDescription: 'Antrasit, lacivert, siyah ve kahverengi blackout perde modellerini inceleyin. Koyu renk perdenin hangi odalara ve duvar renklerine uyduğunu öğrenin.',
+        h1: 'Koyu Renk Perde Modelleri',
+        seoBlocks: [
+            { type: 'paragraph', content: 'Koyu renk perdeler odaya derinlik ve karakter katar; güçlü bir görünüm istenen yatak odası, salon ve çalışma odalarında sık tercih edilir. Bu sayfada antrasit, lacivert, siyah ve kahverengi modelleri bir arada bulabilirsiniz.' },
+            { type: 'heading', content: 'Koyu Renk Perdenin Avantajları' },
+            { type: 'paragraph', content: 'Koyu tonlar ışığın daha az yansımasını sağladığı için karartma hissini güçlendirir. Açık renkli duvarlarla birlikte kullanıldığında belirgin bir kontrast oluşturur. Perdenin ışık geçirgenliği kumaşa ve dikime bağlıdır; ürün sayfasındaki bilgileri esas alın.' },
+            { type: 'heading', content: 'Hangi Renk Nereye Uyar?' },
+            { type: 'list', content: 'Koyu tonlara göre kullanım önerileri:', items: ['Antrasit: siyahın sertliği olmadan koyu görünüm isteyenler için; gri ve beyaz tonlarla uyumludur.', 'Lacivert: salon ve çalışma odalarında derin ve zarif bir görünüm verir.', 'Siyah: minimalist ve endüstriyel tarzlarda güçlü bir vurgu yaratır.', 'Kahverengi: ahşap ve toprak tonlarındaki dekorasyonlarda sıcak bir hava verir.'] },
+            { type: 'paragraph', content: 'Renk seçimi için <a href="/blog/perde-rengi-nasil-secilir" class="underline">perde rengi rehberimize</a>, tüm blackout modelleri için <a href="/perde/blackout-perde" class="underline">blackout perde koleksiyonuna</a> bakabilirsiniz.' },
+        ],
+        faq: [
+            { question: 'Koyu renk perde odayı küçültür mü?', answer: 'Koyu renkler odayı daha kapalı hissettirebilir ancak açık renkli duvarlarla birlikte şık bir kontrast da oluşturur. Küçük odalarda açık duvar rengiyle dengelemek faydalıdır.' },
+            { question: 'Antrasit ile siyah perde arasındaki fark nedir?', answer: 'Antrasit, siyahtan biraz daha açık ve griye yakın bir koyu tondur; siyah kadar sert görünmez.' },
+            { question: 'Koyu renk perde daha iyi karartma sağlar mı?', answer: 'Koyu renkler ışığın geçişini azaltmaya yardımcı olabilir, ancak karartma düzeyi kumaş yapısına da bağlıdır. Ürün bilgisini kontrol edin.' },
+        ],
+        keywords: ['koyu renk perde', 'antrasit perde', 'lacivert perde'],
+    },
+    {
+        parentSlug: 'perde',
+        categorySlug: 'acik-renk-perde',
+        firebaseCategoryName: 'Açık Renk Perde',
+        title: 'Açık Renk Perde Modelleri: Bej, Krem, Beyaz, Vizon | MiraTekstil',
+        metaDescription: 'Bej, krem, beyaz, vizon ve gri perde modellerini inceleyin. Açık renk perdenin odayı nasıl ferah gösterdiğini ve hangi dekorasyona uyduğunu öğrenin.',
+        h1: 'Açık Renk Perde Modelleri',
+        seoBlocks: [
+            { type: 'paragraph', content: 'Açık renk perdeler odayı ferah ve aydınlık gösterir; küçük odalarda ve sade dekorasyonlarda sık tercih edilir. Bu sayfada bej, krem, beyaz, vizon ve gri tonlarındaki modelleri bir arada bulabilirsiniz.' },
+            { type: 'heading', content: 'Açık Renk Perdenin Avantajları' },
+            { type: 'paragraph', content: 'Açık tonlar odanın daha geniş görünmesine yardımcı olur ve çoğu duvar ve mobilya rengiyle kolay uyum sağlar. Beyaz ve krem saten perdeler salon ve yatak odasında yumuşak bir görünüm verir.' },
+            { type: 'heading', content: 'Hangi Renk Nereye Uyar?' },
+            { type: 'list', content: 'Açık tonlara göre kullanım önerileri:', items: ['Bej: sıcak ve nötr; açık duvarlar ve ahşap mobilyalarla uyumludur.', 'Krem ve beyaz: temiz ve aydınlık görünüm sağlar.', 'Vizon: gri ile bej arasında yumuşak bir geçiş rengidir.', 'Gri: modern ve sade dekorasyonlarda dengeli bir arka plan oluşturur.'] },
+            { type: 'paragraph', content: 'Açık renklerde lekeler daha kolay fark edilebilir; bakım bilgisi için ürün sayfasına ve <a href="/blog/perde-nasil-yikanir" class="underline">perde yıkama rehberimize</a> bakın. Renk seçimi için <a href="/blog/perde-rengi-nasil-secilir" class="underline">perde rengi rehberi</a> da faydalıdır.' },
+        ],
+        faq: [
+            { question: 'Küçük odaya hangi renk perde uyar?', answer: 'Bej, krem, beyaz ve açık gri gibi açık tonlar küçük odayı daha ferah gösterebilir.' },
+            { question: 'Beyaz perde kirlenir mi?', answer: 'Açık renklerde lekeler daha kolay fark edilir. Yıkanabilir kumaşlar tercih etmek ve ürünün bakım talimatını izlemek önemlidir.' },
+            { question: 'Açık renk perde ışığı geçirir mi?', answer: 'Işık geçirgenliği renkten çok kumaşa bağlıdır. Ürünün ışık geçirgenliği bilgisini ürün sayfasından kontrol edin.' },
+        ],
+        keywords: ['açık renk perde', 'bej perde', 'krem saten perde'],
+    },
 ];
 
 // =============================================
@@ -603,6 +695,29 @@ export function getProductUrl(
  * Firestore'dan çekilen ürünleri SEO kategorisine göre filtreler.
  * Ürün adına bakarak keyword matching yapar.
  */
+function normalizeProductName(name: string): string {
+    return name
+        .toLocaleLowerCase('tr-TR')
+        .replace(/ğ/g, 'g')
+        .replace(/ü/g, 'u')
+        .replace(/ş/g, 's')
+        .replace(/ı/g, 'i')
+        .replace(/ö/g, 'o')
+        .replace(/ç/g, 'c');
+}
+
+// Balkon perdesi, cibinlik ve yastık kılıfı koleksiyonlara karışmaz.
+function isCurtainName(normalizedName: string): boolean {
+    return /perde/.test(normalizedName) && !/balkon|cibinlik|yastik|kilif/.test(normalizedName);
+}
+
+const collectionPatterns: Record<string, RegExp> = {
+    'yatak-odasi-perdesi': /blackout|saten/,
+    'salon-perdesi': /saten|\btul\b|lacivert|antrasit/,
+    'koyu-renk-perde': /\b(antrasit|siyah|lacivert|kahverengi)\b/,
+    'acik-renk-perde': /\b(bej|beyaz|krem|vizon|gri)\b/,
+};
+
 export function filterProductsBySubcategory(
     products: { name: string; isCustomSize?: boolean }[],
     categorySlug: string
@@ -613,6 +728,14 @@ export function filterProductsBySubcategory(
     }
     if (categorySlug === 'balkon-perdesi') {
         return products.filter(product => /balkon/i.test(product.name));
+    }
+    // Koleksiyon sayfaları: mevcut perde ürünlerini kullanım amacına ve renge göre gruplar.
+    const collectionPattern = collectionPatterns[categorySlug];
+    if (collectionPattern) {
+        return products.filter(product => {
+            const name = normalizeProductName(product.name);
+            return isCurtainName(name) && collectionPattern.test(name);
+        });
     }
     const subcategory = subcategoryKeywords.find(s => s.categorySlug === categorySlug);
     if (!subcategory || subcategory.keywords.length === 0) return products;

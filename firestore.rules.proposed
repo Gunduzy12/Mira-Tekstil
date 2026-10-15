@@ -1,0 +1,60 @@
+rules_version = '2';
+// ÖNERİLEN KURALLAR - henüz yayında DEĞİL. Yayınlamadan önce NOTLAR bölümünü okuyun.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && request.auth.uid == "pK1tSzJTM0YFg2imDLEIenqrFwv2";
+    }
+
+    // Ürünler: herkes okur. Ekleme/silme/fiyat/içerik değişikliği sadece admin.
+    // Müşteriler yalnızca "questions" alanını güncelleyebilir (ürün sayfasındaki soru formu).
+    match /products/{productId} {
+      allow read: if true;
+      allow create, delete: if isAdmin();
+      allow update: if isAdmin()
+        || request.resource.data.diff(resource.data).affectedKeys().hasOnly(['questions']);
+    }
+
+    match /categories/{document=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /coupons/{document=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Kullanıcılar: herkes sadece kendi kaydını okur/yazar, admin hepsini okur.
+    // Kayıt sırasında rol yalnızca "customer" olabilir; sonradan rol değiştirilemez.
+    match /users/{userId} {
+      allow read: if isAdmin() || (request.auth != null && request.auth.uid == userId);
+      allow create: if request.auth != null && request.auth.uid == userId
+        && request.resource.data.role == 'customer';
+      allow update: if isAdmin() || (request.auth != null && request.auth.uid == userId
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']));
+      allow delete: if isAdmin();
+    }
+
+    // Siparişler: tek sipariş ID ile okunabilir (ödeme başarı/takip sayfaları), ama
+    // sipariş LİSTESİ yalnızca admin veya siparişin sahibi tarafından çekilebilir.
+    match /orders/{orderId} {
+      allow get: if true;
+      allow list: if isAdmin() || (request.auth != null && resource.data.userId == request.auth.uid);
+      allow create: if true;
+      // NOT: PayTR callback sunucuda istemci SDK'sı ile (giriş yapmadan) güncelliyor.
+      // Bu yüzden update şimdilik açık. Kalıcı çözüm: callback'i Admin SDK'ya taşımak.
+      allow update: if true;
+      allow delete: if isAdmin();
+    }
+  }
+}
+
+// NOTLAR
+// 1) Admin hesabı uid'si uygulamadaki (AuthContext) ile aynı olduğu için admin işlemleri çalışmaya devam eder.
+// 2) Sipariş güncellemesi (update) hâlâ açık: biri kendi siparişini "ödendi" yapabilir. Bunu kapatmak için
+//    PayTR callback'ini firebase-admin ile yazmak gerekir (servis hesabı anahtarı lazım).
+// 3) Sipariş ID'si tahmin edilemez olmalı; checkout'ta Date.now() tabanlı ID kullanılıyorsa bu zayıf kalır.
+// 4) Yayınlamadan önce Firebase Emulator veya test ortamında şu akışları deneyin:
+//    giriş, kayıt, ürün sayfasında soru sorma, admin ürün ekleme/düzenleme, sipariş verme, ödeme sonrası sayfa,
+//    hesabım > siparişlerim, admin sipariş listesi.

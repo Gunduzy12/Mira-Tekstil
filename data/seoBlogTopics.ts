@@ -1,8 +1,11 @@
 import { SEOBlogTopic } from '../types';
 import { seoExpansionTopics } from './seoExpansion';
+import { seoGuideTopics } from './seoGuideTopics';
+import { legacyExtras } from './seoLegacyExtras';
 
-export const blogTopics: SEOBlogTopic[] = [
+const baseBlogTopics: SEOBlogTopic[] = [
     ...seoExpansionTopics,
+    ...seoGuideTopics,
     {
         slug: 'blackout-perde-mi-tul-perde-mi',
         title: 'Blackout Perde mi Tül Perde mi? Doğru Perde Seçim Rehberi | MiraTekstil Blog',
@@ -36,7 +39,65 @@ export const blogTopics: SEOBlogTopic[] = [
             {
                 type: 'paragraph',
                 content: 'Profesyonel dekoratörlerin önerisi, iç katmana tül perde, dış katmana fon/blackout perde takmaktır. Bu sayede gündüz tül perde ile ışıktan faydalanır, gece veya istediğinizde blackout perde ile karartma sağlarsınız. Bu kombinasyon hem estetik hem fonksiyonel açıdan en iyi sonucu verir.'
+            },
+            {
+                type: 'heading',
+                content: 'Hızlı Karşılaştırma'
+            },
+            {
+                type: 'list',
+                content: 'İki perde türünü yan yana değerlendirin:',
+                items: [
+                    'Işık: blackout ışığı belirgin biçimde azaltır; tül ışığı süzer.',
+                    'Mahremiyet: tül gündüz dışarıdan görüntüyü azaltır; blackout hem gündüz hem gece tam mahremiyet sağlar.',
+                    'Görünüm: tül hafif ve ferah; blackout dolgun ve karakterlidir.',
+                    'Bakım: tül daha kolay ve sık yıkanır; blackout etiket talimatına dikkat ister.',
+                    'Kullanım yeri: blackout yatak ve çocuk odasında, tül salon ve mutfakta öne çıkar.'
+                ]
+            },
+            {
+                type: 'heading',
+                content: 'Hangi Odada Hangisi?'
+            },
+            {
+                type: 'paragraph',
+                content: 'Yatak odasında uyku düzeni için blackout, salonda gün ışığını kullanmak için tül, çocuk odasında ikisinin birlikte kullanımı çoğunlukla daha dengelidir. Mutfakta ise yağ ve buhar nedeniyle hafif ve kolay yıkanan tül tercih edilir. Odalara göre ayrıntılı öneriler için <a href="/blog/yatak-odasi-icin-en-iyi-perde" class="underline">yatak odası perdesi</a> ve <a href="/blog/salon-perde-secimi" class="underline">salon perde seçimi</a> rehberlerine bakın.'
+            },
+            {
+                type: 'heading',
+                content: 'Karar Verirken Sorulacak Üç Soru'
+            },
+            {
+                type: 'list',
+                content: 'Şu soruları kendinize sorun:',
+                items: [
+                    'Bu odada ışığı kesmem gerekiyor mu, yoksa süzmem yeterli mi?',
+                    'Gündüz dışarıdan görünmek beni rahatsız ediyor mu?',
+                    'Perdenin görünümü mü yoksa işlevi mi önceliğim?'
+                ]
+            },
+            {
+                type: 'paragraph',
+                content: 'İlk soruya "kesmem gerekiyor" cevabını veriyorsanız blackout; üçüncü soruda "görünüm" diyorsanız tül veya saten ile başlayın. Blackout perdenin ne olduğunu öğrenmek için <a href="/blog/blackout-perde-nedir" class="underline">blackout perde nedir</a> yazımıza göz atabilirsiniz.'
             }
+        ],
+        faq: [
+            {
+                question: 'Blackout perde mi tül perde mi daha iyi?',
+                answer: 'Bu ihtiyaca bağlıdır. Işığı belirgin biçimde azaltmak istiyorsanız blackout, gün ışığını süzmek ve hafif bir görünüm istiyorsanız tül tercih edilir. İkisi birlikte de kullanılabilir.'
+            },
+            {
+                question: 'Tül ve blackout birlikte kullanılır mı?',
+                answer: 'Evet. İki raylı korniş ile tül iç rayda, blackout perde dış rayda asılır.'
+            },
+            {
+                question: 'Yatak odasına tül mü blackout mu?',
+                answer: 'Işık uykunuzu bölüyorsa blackout daha uygundur. Gündüz mahremiyet ve yumuşak ışık için ek olarak tül kullanılabilir.'
+            }
+        ],
+        relatedLinks: [
+            { label: 'Blackout perde modelleri', href: '/perde/blackout-perde', description: 'Karartma sağlayan fon perde seçeneklerini inceleyin.' },
+            { label: 'Tül perde modelleri', href: '/perde/tul-perde', description: 'Gün ışığını süzen tül perdeler.' }
         ]
     },
     {
@@ -233,13 +294,77 @@ export const blogTopics: SEOBlogTopic[] = [
                     'Motorlu perde sistemleri - Modern ve konforlu çözüm',
                     'Zebra perde - Pratik ve modern görünüm'
                 ]
+            },
+            {
+                type: 'heading',
+                content: 'Salonun Işığına Göre Perde Seçimi'
+            },
+            {
+                type: 'paragraph',
+                content: 'Güney ve batı cepheli salonlar öğleden sonra güçlü güneş alır; bu odalarda kalın fon perde ve tül kombinasyonu hem ışığı kontrol eder hem de mobilyaları güneşten korur. Kuzey cepheli veya az ışık alan salonlarda ise açık renkli ve ince perdeler odayı daha aydınlık tutar. Perde seçmeden önce gün içinde salonun ışığını bir iki saat aralıkla gözlemlemek iyi bir başlangıçtır.'
+            },
+            {
+                type: 'heading',
+                content: 'Katmanlı Perde Düzeni Nasıl Kurulur?'
+            },
+            {
+                type: 'paragraph',
+                content: 'Katmanlı düzende ince tül pencereye yakın, kalın fon perde ise dışta asılır. Bunun için iki raylı korniş gerekir. Gündüz yalnızca tül açık bırakılarak ışık süzülür, akşam fon perde kapatılarak mahremiyet sağlanır. Tül ve fon perdenin farkını ayrıntılı okumak için <a href="/blog/fon-perde-ile-tul-perde-farki" class="underline">fon perde ile tül perde farkı</a> yazımıza bakabilirsiniz.'
+            },
+            {
+                type: 'heading',
+                content: 'Salon Perdesinde Ölçü ve Montaj'
+            },
+            {
+                type: 'list',
+                content: 'Ölçü alırken dikkat edin:',
+                items: [
+                    'Salon pencereleri genellikle geniştir; kornişi uzun tutup orta destek ekleyin.',
+                    'Kornişi tavana yakın monte etmek odayı daha yüksek gösterir; boyu buna göre ölçün.',
+                    'Perde boyunu yerden birkaç santimetre yüksek bitirmek temizliği kolaylaştırır.',
+                    'Tül için sık pile (örneğin 1/2,5) dolgun görünüm sağlar; hesabı pile rehberimizde bulabilirsiniz.'
+                ]
+            },
+            {
+                type: 'heading',
+                content: 'Salon Perdesi Bakımı'
+            },
+            {
+                type: 'paragraph',
+                content: 'Salon perdeleri toz ve ışıktan etkilenir. Düzenli aralıklarla silkelemek, tülü yılda birkaç kez yıkamak ve fon perdeyi etiket talimatına göre temizlemek perdelerin uzun ömürlü olmasını sağlar. Ayrıntılar için <a href="/blog/perde-nasil-yikanir" class="underline">perde nasıl yıkanır</a> rehberimize bakın.'
+            },
+            {
+                type: 'heading',
+                content: 'Salon İçin Ürün Seçenekleri'
+            },
+            {
+                type: 'paragraph',
+                content: 'Saten, tül ve lacivert/antrasit tonlu fon perdeleri <a href="/perde/salon-perdesi" class="underline">salon perdesi koleksiyonumuzda</a> bir arada inceleyebilirsiniz. Renk kararı için <a href="/blog/perde-rengi-nasil-secilir" class="underline">perde rengi rehberimiz</a> yardımcı olur.'
             }
+        ],
+        faq: [
+            {
+                question: 'Salon için hangi perde türü uygundur?',
+                answer: 'Saten ve tül perdeler salonlarda sık tercih edilir. Koyu tonlu fon perde ise daha belirgin bir görünüm verir. Tercih, odanın ışığına ve dekorasyona göre değişir.'
+            },
+            {
+                question: 'Salon perdesi ne renk olmalı?',
+                answer: 'Duvar ve mobilya rengiyle uyumlu, bir iki ton farklı bir renk güvenlidir. Nötr tonlar (krem, bej, gri) çoğu dekorasyonla uyum sağlar; koyu tonlar daha karakterli bir görünüm verir.'
+            },
+            {
+                question: 'Salonda tül ve fon perde birlikte kullanılır mı?',
+                answer: 'Evet. İki raylı korniş ile tül iç rayda, fon perde dış rayda kullanılır; gündüz tül, akşam fon perde kapatılır.'
+            }
+        ],
+        relatedLinks: [
+            { label: 'Salon perdesi modelleri', href: '/perde/salon-perdesi', description: 'Saten, tül ve koyu tonlu fon perdeleri inceleyin.' },
+            { label: 'Saten perde modelleri', href: '/perde/saten-perde', description: 'Beyaz ve krem saten perdeler.' }
         ]
     },
     {
         slug: 'sicak-havalarda-hava-durumuna-gore-perde-secimi',
         title: 'Sıcak Havalarda Hava Durumuna Göre Perde Seçim Rehberi | MiraTekstil Blog',
-        metaDescription: 'Yaz sıcaklarında İstanbul, Ankara, İzmir ve Antalya başta olmak üzere illerin hava durumuna göre evinizi nasıl serin tutarsınız? Karartma, saten ve tül perde tavsiyelerimiz.',
+        metaDescription: 'Yaz sıcaklarında evinizi nasıl serin tutarsınız? İllerin hava durumuna göre karartma, saten ve tül perde seçimi tavsiyelerimiz.',
         excerpt: 'Yaz sıcaklarında Türkiye genelinde hava durumu nasıl olacak? İllere göre iklimlendirme ve akıllı perde seçim rehberi.',
         content: [
             {
@@ -307,6 +432,18 @@ export const blogTopics: SEOBlogTopic[] = [
         ]
     }
 ];
+
+// Daha önce yayınlanmış yazılara ek bölümler eklenir (içerik ayrı dosyada tutulur).
+export const blogTopics: SEOBlogTopic[] = baseBlogTopics.map(topic => {
+    const extra = legacyExtras[topic.slug];
+    if (!extra) return topic;
+    return {
+        ...topic,
+        content: [...topic.content, ...extra.content],
+        faq: [...(topic.faq || []), ...(extra.faq || [])],
+        relatedLinks: [...(topic.relatedLinks || []), ...(extra.relatedLinks || [])],
+    };
+});
 
 export function findBlogTopic(slug: string): SEOBlogTopic | undefined {
     return blogTopics.find(t => t.slug === slug);

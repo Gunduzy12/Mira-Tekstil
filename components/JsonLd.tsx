@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 import { calculateShippingCost } from '../utils/commerce';
+import { BUSINESS_INFO } from '../data/businessInfo';
 
 interface JsonLdProps {
     data: Record<string, unknown>;
@@ -48,14 +49,32 @@ export function generateOrganizationSchema() {
         url: BASE_URL,
         logo: `${BASE_URL}/favicon.ico`,
         sameAs: [
-            'https://www.instagram.com/barisyilmaz4139/',
+            'https://www.instagram.com/mira._.tekstil/',
             'https://www.trendyol.com/sr?mid=750999&os=1'
         ],
+        email: 'yilmazbaris814@gmail.com',
+        taxID: BUSINESS_INFO.taxId,
+        address: {
+            '@type': 'PostalAddress',
+            streetAddress: 'Kurtderesi Mah. Berrak Sok. No: 8/1C',
+            addressLocality: 'Samandağ',
+            addressRegion: 'Hatay',
+            postalCode: '31800',
+            addressCountry: 'TR'
+        },
         contactPoint: {
             '@type': 'ContactPoint',
             telephone: '+905374009410',
+            email: 'yilmazbaris814@gmail.com',
             contactType: 'customer service',
-            availableLanguage: 'Turkish'
+            areaServed: 'TR',
+            availableLanguage: 'Turkish',
+            hoursAvailable: {
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                opens: '09:00',
+                closes: '18:00'
+            }
         },
         hasMerchantReturnPolicy: {
             '@type': 'MerchantReturnPolicy',

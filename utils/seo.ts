@@ -33,7 +33,51 @@ export function getProductMetaTitle(product: Product): string {
     return `${trimAtWord(getProductSearchName(product), 52)} | ${SITE_NAME}`;
 }
 
+function slugifyTr(value: string): string {
+    return value
+        .toLocaleLowerCase('tr-TR')
+        .replace(/ğ/g, 'g')
+        .replace(/ü/g, 'u')
+        .replace(/ş/g, 's')
+        .replace(/ı/g, 'i')
+        .replace(/ö/g, 'o')
+        .replace(/ç/g, 'c')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-|-$/g, '');
+}
+
+/**
+ * Sayfanın kendi rengini bulur. Bir model birden fazla renk seçeneği taşıyabilir;
+ * hangisinin bu sayfanın ürünü olduğunu slug (yoksa ürün adı) içinden anlarız.
+ */
+export function getProductOwnColor(product: Product): string | undefined {
+    const colors = [...new Set((product.variants || [])
+        .map(variant => variant.color?.trim())
+        .filter((color): color is string => Boolean(color)))];
+
+    if (colors.length === 0) return undefined;
+    if (colors.length === 1) return colors[0];
+
+    for (const source of [product.slug, product.name]) {
+        if (!source) continue;
+        const haystack = `-${slugifyTr(source)}-`;
+        let best: { color: string; length: number } | undefined;
+
+        for (const color of colors) {
+            const colorSlug = slugifyTr(color);
+            if (colorSlug && haystack.includes(`-${colorSlug}-`) && (!best || colorSlug.length > best.length)) {
+                best = { color, length: colorSlug.length };
+            }
+        }
+        if (best) return best.color;
+    }
+
+    return undefined;
+}
+
 export function getProductMetaDescription(product: Product): string {
+    if (product.seoDescription?.trim()) return product.seoDescription.trim();
+
     const searchName = getProductSearchName(product);
     const benefits = [
         product.isCustomSize ? 'ölçünüze özel dikim' : 'farklı ölçü seçenekleri',

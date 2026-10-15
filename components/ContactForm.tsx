@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useNotification } from '../context/NotificationContext';
 import { sendFormToEmail } from '../services/emailService';
+import { BUSINESS_INFO } from '../data/businessInfo';
 
 const ContactForm: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -105,6 +106,13 @@ const ContactForm: React.FC = () => {
                                 </div>
                             </div>
                         </address>
+
+                        <div className="mt-8 rounded-lg border border-brand-border bg-white p-5 text-sm text-gray-600">
+                            <h3 className="font-semibold text-brand-primary text-base mb-2">Satıcı Bilgileri</h3>
+                            <p>{BUSINESS_INFO.sellerName} ({BUSINESS_INFO.businessType})</p>
+                            <p>{BUSINESS_INFO.taxOffice}</p>
+                            <p>Vergi Kimlik No: {BUSINESS_INFO.taxId}</p>
+                        </div>
                     </section>
 
                     {/* Contact Form */}
