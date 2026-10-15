@@ -54,6 +54,35 @@ export default function AboutPage() {
                 </div>
             </article>
 
+            {/* Marketplace Trust Section */}
+            <section className="container mx-auto px-6 pb-16" aria-labelledby="marketplace-title">
+                <div className="max-w-4xl mx-auto rounded-xl border border-brand-border bg-white p-8 text-center shadow-sm">
+                    <h2 id="marketplace-title" className="text-2xl font-serif text-brand-primary mb-3">Trendyol&apos;da da Mağazamız Var</h2>
+                    <p className="text-gray-600 leading-relaxed mb-6">
+                        Ürünlerimizi Trendyol mağazamızda da satıyoruz. Mağaza puanımızı ve ürün değerlendirmelerini Trendyol&apos;da bağımsız olarak inceleyebilirsiniz.
+                    </p>
+                    <dl className="grid grid-cols-2 gap-4 max-w-md mx-auto mb-6">
+                        <div className="rounded-lg bg-brand-light p-4">
+                            <dt className="text-sm text-gray-500">Satıcı puanı</dt>
+                            <dd className="text-2xl font-semibold text-brand-primary">9,3</dd>
+                        </div>
+                        <div className="rounded-lg bg-brand-light p-4">
+                            <dt className="text-sm text-gray-500">Takipçi</dt>
+                            <dd className="text-2xl font-semibold text-brand-primary">14,2 bin</dd>
+                        </div>
+                    </dl>
+                    <p className="text-xs text-gray-400 mb-6">Ekim 2026 itibarıyla Trendyol mağaza sayfasında görünen değerlerdir.</p>
+                    <a
+                        href="https://www.trendyol.com/sr?mid=750999&os=1"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block rounded-md bg-brand-primary px-6 py-3 text-white hover:bg-brand-dark transition-colors"
+                    >
+                        Trendyol Mağazamızı Görüntüleyin
+                    </a>
+                </div>
+            </section>
+
             {/* Values Section */}
             <section className="bg-brand-light py-20">
                 <div className="container mx-auto px-6">

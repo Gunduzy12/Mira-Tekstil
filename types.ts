@@ -76,6 +76,7 @@ export interface Product {
   parentSlug?: string;
   subcategory?: string;
   seoTitle?: string;
+  seoDescription?: string;
 }
 
 

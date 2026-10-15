@@ -28,6 +28,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.5,
         },
         {
+            url: `${baseUrl}/kargo-ve-teslimat`,
+            changeFrequency: 'monthly',
+            priority: 0.5,
+        },
+        {
             url: baseUrl,
             changeFrequency: 'daily',
             priority: 1,

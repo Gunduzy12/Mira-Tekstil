@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import { db } from '@/firebaseConfig';
 import { collection, getDocs, query, where, doc, getDoc } from 'firebase/firestore';
 import { Product } from '@/types';
@@ -8,7 +8,7 @@ import Breadcrumbs from '@/components/Breadcrumbs';
 import RelatedProducts from '@/components/RelatedProducts';
 import JsonLd, { generateProductSchema } from '@/components/JsonLd';
 import ProductDetailPage from '@/components/ProductDetailPage';
-import { getProductMetaDescription, getProductMetaTitle } from '@/utils/seo';
+import { getProductMetaDescription, getProductMetaTitle, getProductOwnColor } from '@/utils/seo';
 
 export const revalidate = 3600;
 
@@ -38,7 +38,7 @@ function getProductMaterial(product: Product): string | undefined {
 }
 
 function getProductColor(product: Product): string | undefined {
-    return (product.variants || [])
+    return getProductOwnColor(product) || (product.variants || [])
         .map(variant => variant.color?.trim())
         .find((color): color is string => Boolean(color));
 }
@@ -141,6 +141,14 @@ export default async function ProductPage({ params }: Props) {
 
     if (!product) {
         notFound();
+    }
+
+    // Ürünün kategorisi değiştiyse eski adresten yeni (canonical) adrese kalıcı yönlendir.
+    if (product.slug && product.categorySlug && product.parentSlug) {
+        const canonicalPath = `/${product.parentSlug}/${product.categorySlug}/${product.slug}`;
+        if (canonicalPath !== `/${parentSlug}/${categorySlug}/${productSlug}`) {
+            permanentRedirect(canonicalPath);
+        }
     }
 
     const related = await getRelatedProducts(product);

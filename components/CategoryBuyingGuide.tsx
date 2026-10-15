@@ -11,7 +11,7 @@ export default function CategoryBuyingGuide({ categorySlug }: { categorySlug: st
             <div className="mt-4 flex flex-wrap gap-4 text-sm underline">
                 <Link href={balcony ? '/blog/balkon-perdesi-olcusu-nasil-alinir' : '/blog/perde-olcusu-nasil-alinir'}>Ölçü alma rehberi</Link>
                 {!balcony && <Link href="/blog/perde-pile-hesabi-nasil-yapilir">Pile hesabı ve örnekler</Link>}
-                <Link href="/iletisim">Ölçü konusunda destek alın</Link>
+                <Link href="/contact">Ölçü konusunda destek alın</Link>
             </div>
         </aside>
     );

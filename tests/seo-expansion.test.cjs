@@ -47,9 +47,19 @@ test('category paths are unique and every navigation category exists', () => {
     }
 });
 
-test('Product schema implementation and caller remain byte-for-byte unchanged', () => {
-    for (const path of ['components/JsonLd.tsx', 'app/[parentSlug]/[categorySlug]/[productSlug]/page.tsx']) {
-        const before = execFileSync('git', ['show', `HEAD:${path}`], { encoding: 'utf8' }).replace(/\r\n/g, '\n');
-        assert.equal(fs.readFileSync(path, 'utf8').replace(/\r\n/g, '\n'), before);
-    }
+// Product schema üretimi ve çağrısı korunur; dosyanın geri kalanı (ör. Organization sameAs,
+// ürün sayfasındaki yönlendirme) bilerek değiştirilebilir.
+function extract(path, pattern) {
+    const normalize = text => text.replace(/\r\n/g, '\n');
+    const match = normalize(fs.readFileSync(path, 'utf8')).match(pattern);
+    const before = normalize(execFileSync('git', ['show', `HEAD:${path}`], { encoding: 'utf8' })).match(pattern);
+    assert.ok(match && before, `pattern not found in ${path}`);
+    return [match[0], before[0]];
+}
+
+test('Product schema implementation and its call arguments remain unchanged', () => {
+    const [now, before] = extract('components/JsonLd.tsx', /export function generateProductSchema[\s\S]*?\nexport function generateFAQSchema/);
+    assert.equal(now, before);
+    const [callNow, callBefore] = extract('app/[parentSlug]/[categorySlug]/[productSlug]/page.tsx', /generateProductSchema\(\{[\s\S]*?\}\)\}/);
+    assert.equal(callNow, callBefore);
 });

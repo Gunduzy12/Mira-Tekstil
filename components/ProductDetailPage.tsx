@@ -15,6 +15,7 @@ import InteractiveStarRating from '../components/InteractiveStarRating';
 import { sendFormToEmail } from '../services/emailService';
 import SizeGuideModal from '../components/SizeGuideModal';
 import { WeatherWidget } from './WeatherWidget';
+import { getProductOwnColor } from '../utils/seo';
 
 interface ProductDetailPageProps {
     product: Product;
@@ -92,6 +93,8 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
     const { addQuestion } = useProducts();
     const isWishlisted = isInWishlist(product.id);
 
+    const ownColor = useMemo(() => getProductOwnColor(product), [product]);
+
     // Initialize selection
     useEffect(() => {
         setMainImage(product.imageUrl);
@@ -99,10 +102,12 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
         const uniqueColors = Array.from(new Set(product.variants.map(v => v.color).filter(c => !!c)));
         const uniqueSizes = Array.from(new Set(product.variants.map(v => v.size).filter(s => !!s)));
 
-        // Only set default if nothing is selected yet or if options changed significantly
-        setSelectedColor(currentColor => currentColor && uniqueColors.includes(currentColor)
-            ? currentColor
-            : (uniqueColors.length === 1 ? (uniqueColors[0] as string) : null));
+        // Sayfanın kendi rengi varsayılan olarak seçili gelir (örn. "Bej Blackout Perde" sayfasında Bej)
+        setSelectedColor(currentColor => ownColor && uniqueColors.includes(ownColor)
+            ? ownColor
+            : currentColor && uniqueColors.includes(currentColor)
+                ? currentColor
+                : (uniqueColors.length === 1 ? (uniqueColors[0] as string) : null));
         setSelectedSize(currentSize => currentSize && uniqueSizes.includes(currentSize)
             ? currentSize
             : (uniqueSizes.length === 1 ? (uniqueSizes[0] as string) : null));
@@ -116,7 +121,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
             setCustomWidth(product.minWidth || 100);
             setCustomHeight(product.minHeight || 200);
         }
-    }, [product.id, product.imageUrl, product.isCustomSize, product.minWidth, product.minHeight, product.reviews, product.questions, product.variants]);
+    }, [product.id, ownColor, product.imageUrl, product.isCustomSize, product.minWidth, product.minHeight, product.reviews, product.questions, product.variants]);
 
     // Verify if the logged-in user has purchased and received this item
     const canReview = useMemo(() => {
@@ -615,7 +620,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                                     {product.featuredAttributes.map((attr, idx) => (
                                         <div key={idx} className="bg-[#f9f9f9] p-3 rounded-md border border-[#e5e5e5] flex flex-col items-start justify-center">
                                             <p className="text-xs text-gray-500 mb-1">{attr.label}</p>
-                                            <p className="font-semibold text-brand-primary text-sm leading-tight">{attr.value}</p>
+                                            <p className="font-semibold text-brand-primary text-sm leading-tight">{attr.label === 'Renk' && selectedColor ? selectedColor : attr.value}</p>
                                         </div>
                                     ))}
                                 </div>
