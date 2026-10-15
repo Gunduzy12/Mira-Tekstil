@@ -56,6 +56,8 @@ export default async function BlogArticlePage({ params }: Props) {
                     headline: topic.title.split('|')[0].trim(),
                     description: topic.metaDescription,
                     url: `/blog/${topic.slug}`,
+                    datePublished: topic.datePublished,
+                    dateModified: topic.dateModified,
                 })}
             />
             {topic.faq && topic.faq.length > 0 && <JsonLd data={generateFAQSchema(topic.faq)} />}

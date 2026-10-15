@@ -138,6 +138,7 @@ export const WeatherWidget: React.FC<WeatherWidgetProps> = ({ productCategory = 
                         height="160"
                         frameBorder="0"
                         scrolling="no"
+                        title={`HavaPusula ${selectedCity} hava durumu`}
                         className="rounded-lg"
                     ></iframe>
                     <div style={{ width: '300px', textAlign: 'center' }} className="mt-2">

@@ -210,6 +210,8 @@ export interface SEOParentCategory {
 
 export interface SEOBlogTopic {
   slug: string;
+  datePublished?: string; // ISO tarih (YYYY-MM-DD); yalnızca kesin biliniyorsa doldurulur
+  dateModified?: string; // ISO tarih (YYYY-MM-DD)
   title: string;
   metaDescription: string;
   excerpt: string;
