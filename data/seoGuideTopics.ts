@@ -440,7 +440,7 @@ const baseGuideTopics: SEOBlogTopic[] = [
             h('Adım 3: Rengi Seçin ve Ölçüyü Girin'),
             p(`Renk seçiminden sonra en ve boyu girin. Fiyat, girdiğiniz ölçüye göre hesaplanır; son fiyatı sepete eklemeden önce ürün sayfasında görebilirsiniz.`),
             h('Adım 4: Sepeti ve Siparişi Kontrol Edin'),
-            p(`Sepette seçtiğiniz renk, en ve boy değerlerini tekrar okuyun. Birden fazla pencereniz varsa her pencere için ayrı ürün olarak ekleyin. 500 TL üzeri siparişlerde ücretsiz kargo uygulanır.`),
+            p(`Sepette seçtiğiniz renk, en ve boy değerlerini tekrar okuyun. Birden fazla pencereniz varsa her pencere için ayrı ürün olarak ekleyin. 700 TL üzeri siparişlerde ücretsiz kargo uygulanır.`),
             h('Özel Ölçü Ürünlerde İade'),
             p(`Özel ölçüde kesilen veya dikilen ürünler, standart cayma hakkının istisnasıdır. Bunu İade ve Geri Ödeme Politikası sayfamızda açıkça belirtiyoruz. Hatalı üretim, siparişten farklı ürün veya ayıplı ürün durumunda yasal haklarınız saklıdır. Bu yüzden ölçüyü siparişten önce dikkatle kontrol etmeniz önemlidir. Ayrıntılar: <a href="/iade-ve-geri-odeme" class="underline">iade ve geri ödeme politikası</a>.`),
             h('Sipariş Öncesi Kontrol Listesi'),

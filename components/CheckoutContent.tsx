@@ -9,6 +9,7 @@ import { initializePaytrPayment } from '../services/paytrService';
 import { useNotification } from '../context/NotificationContext';
 import { Coupon } from '../types';
 import { sendFormToEmail } from '../services/emailService';
+import { calculateOrderShippingCost } from '../utils/orderShipping';
 
 // İkon (SVG)
 const CreditCardIcon = () => (
@@ -85,8 +86,8 @@ const CheckoutContent: React.FC = () => {
         return discount > cartTotal ? cartTotal : discount;
     }, [cartTotal, activeCoupon]);
 
-    const shippingCost = 0; // TEST: Gecici olarak 0 TL yapildi
     const subTotalAfterDiscount = cartTotal - discountAmount;
+    const shippingCost = calculateOrderShippingCost(subTotalAfterDiscount);
     const total = Math.max(0, subTotalAfterDiscount + shippingCost);
 
     // --- KUPON ---

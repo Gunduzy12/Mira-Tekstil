@@ -8,7 +8,7 @@ export const seoParentCategories: SEOParentCategory[] = [
         slug: 'perde',
         name: 'Perde',
         title: 'Perde Modelleri ve Fiyatları 2026 | MiraTekstil',
-        metaDescription: 'Blackout, saten, tül ve özel ölçü perde modellerini güncel fiyatlarla inceleyin. MiraTekstil\'de 500 TL üzeri siparişlerde ücretsiz kargo.',
+        metaDescription: 'Blackout, saten, tül ve özel ölçü perde modellerini güncel fiyatlarla inceleyin. MiraTekstil\'de 700 TL üzeri siparişlerde ücretsiz kargo.',
         h1: 'Perde Modelleri',
         seoBlocks: [
             {
@@ -37,7 +37,7 @@ export const seoParentCategories: SEOParentCategory[] = [
             },
             {
                 type: 'paragraph',
-                content: 'MiraTekstil olarak tüm perdelerimizi birinci sınıf kumaşlardan, özenli dikiş işçiliğiyle üretiyoruz. Standart ölçülerin yanı sıra özel ölçü perde dikimi hizmeti de sunuyoruz. Pencerelerinize birebir oturan, kusursuz perdeler için bize güvenebilirsiniz. 500 TL üzeri siparişlerde ücretsiz kargo ayrıcalığından faydalanın.'
+                content: 'MiraTekstil olarak tüm perdelerimizi birinci sınıf kumaşlardan, özenli dikiş işçiliğiyle üretiyoruz. Standart ölçülerin yanı sıra özel ölçü perde dikimi hizmeti de sunuyoruz. Pencerelerinize birebir oturan, kusursuz perdeler için bize güvenebilirsiniz. 700 TL üzeri siparişlerde ücretsiz kargo ayrıcalığından faydalanın.'
             },
             {
                 type: 'heading',

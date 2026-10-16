@@ -5,6 +5,7 @@ import { useCart } from '../context/CartContext';
 import { CloseIcon, PlusIcon, MinusIcon, TrashIcon } from './Icons';
 
 import { useRouter } from 'next/navigation';
+import { calculateOrderShippingCost } from '../utils/orderShipping';
 
 interface CartSidebarProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface CartSidebarProps {
 const CartSidebar: React.FC<CartSidebarProps> = ({ isOpen, onClose }) => {
   const { cartItems, updateQuantity, removeFromCart, cartTotal, itemCount } = useCart();
   const router = useRouter();
+  const shippingCost = calculateOrderShippingCost(cartTotal);
 
   const handleCheckout = () => {
     onClose();
@@ -99,9 +101,12 @@ const CartSidebar: React.FC<CartSidebarProps> = ({ isOpen, onClose }) => {
 
               <div className="p-6 border-t border-gray-200 bg-gray-50">
                 <div className="flex justify-between items-center font-semibold mb-4 text-lg">
-                  <span>Toplam</span>
+                  <span>Ürünler toplamı</span>
                   <span className="text-brand-primary">{cartTotal.toFixed(2)} TL</span>
                 </div>
+                <div className="flex justify-between text-sm mb-3"><span>Kargo</span><span>{shippingCost === 0 ? 'Ücretsiz' : `${shippingCost.toFixed(2)} TL`}</span></div>
+                <div className="flex justify-between font-semibold mb-3"><span>Genel toplam</span><span>{(cartTotal + shippingCost).toFixed(2)} TL</span></div>
+                <p className="text-xs text-gray-500 mb-4">Kargo, kupon uygulandıktan sonraki ürün tutarına göre ödeme adımında yeniden hesaplanır.</p>
                 <button
                   onClick={handleCheckout}
                   className="w-full bg-brand-primary text-white py-3.5 text-center hover:bg-brand-dark transition-colors font-bold rounded-lg shadow-md"

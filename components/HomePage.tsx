@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getProductUrl } from '../data/seoCategories';
 import Image from 'next/image';
 import { Product } from '../types';
+import { ORDER_FREE_SHIPPING_THRESHOLD } from '../utils/orderShipping';
 
 interface HomePageProps {
     initialProducts: Product[];
@@ -247,7 +248,7 @@ const HomePage: React.FC<HomePageProps> = ({ initialProducts }) => {
                         </p>
 
                         <p>
-                            Perde ve ev tekstili ihtiyaçlarınız için MiraTekstil koleksiyonunu keşfedin. 500 TL üzeri siparişlerde <strong>ücretsiz kargo</strong> ve güvenli ödeme seçeneklerinden yararlanın.
+                            Perde ve ev tekstili ihtiyaçlarınız için MiraTekstil koleksiyonunu keşfedin. {ORDER_FREE_SHIPPING_THRESHOLD} TL üzeri siparişlerde <strong>ücretsiz kargo</strong> ve güvenli ödeme seçeneklerinden yararlanın.
                         </p>
                     </div>
                 </div>

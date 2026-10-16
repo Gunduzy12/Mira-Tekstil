@@ -1,8 +1,9 @@
-﻿export const FREE_SHIPPING_THRESHOLD = 500;
-export const STANDARD_SHIPPING_COST = 50;
+﻿export const FREE_SHIPPING_THRESHOLD = 700;
+export const STANDARD_SHIPPING_COST = 100;
+import { calculateOrderShippingCost } from './orderShipping';
 
 export function calculateShippingCost(orderTotal: number): number {
-    return (orderTotal || 0) > FREE_SHIPPING_THRESHOLD ? 0 : STANDARD_SHIPPING_COST;
+    return calculateOrderShippingCost(orderTotal);
 }
 
 export function getProductDisplayPrice(product: any): number {

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { FREE_SHIPPING_THRESHOLD, STANDARD_SHIPPING_COST } from '@/utils/commerce';
+import { ORDER_FREE_SHIPPING_THRESHOLD as FREE_SHIPPING_THRESHOLD, ORDER_STANDARD_SHIPPING_COST as STANDARD_SHIPPING_COST } from '@/utils/orderShipping';
 
 export const metadata: Metadata = {
     title: 'Kargo ve Teslimat Bilgileri | MiraTekstil',
