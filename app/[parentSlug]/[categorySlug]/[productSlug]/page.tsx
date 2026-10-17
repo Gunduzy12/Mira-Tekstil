@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
 import { db } from '@/firebaseConfig';
-import { collection, getDocs, query, where, doc, getDoc } from 'firebase/firestore';
+import { cache } from 'react';
+import { collection, getDocs, query, where, doc, getDoc, limit } from 'firebase/firestore';
 import { Product } from '@/types';
 import { findSEOCategory, findSEOParent, getProductUrl } from '@/data/seoCategories';
 import Breadcrumbs from '@/components/Breadcrumbs';
@@ -52,7 +53,7 @@ function getProductSku(product: Product): string | undefined {
 /**
  * Ürünü slug ile getir. Eğer slug bulamazsa ID ile dene (fallback).
  */
-async function getProductBySlug(productSlug: string): Promise<Product | null> {
+const getProductBySlug = cache(async (productSlug: string): Promise<Product | null> => {
     try {
         // 1) slug alanıyla ara
         const q = query(
@@ -81,11 +82,12 @@ async function getProductBySlug(productSlug: string): Promise<Product | null> {
         console.error('Error fetching product:', error);
         return null;
     }
-}
+});
 
 async function getRelatedProducts(product: Product): Promise<Product[]> {
     try {
-        const snapshot = await getDocs(collection(db, 'products'));
+        // Yalnızca ilk 5 ürün okunur (mevcut ürün dahil); önceki sonuçla aynı 4 ürün elde edilir.
+        const snapshot = await getDocs(query(collection(db, 'products'), limit(5)));
         return snapshot.docs
             .map(d => ({ id: d.id, ...d.data() } as Product))
             .filter(p => p.id !== product.id)
