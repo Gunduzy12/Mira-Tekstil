@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getShopCategoryRedirect } from './data/redirectMap';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
     const { pathname, searchParams } = request.nextUrl;
 
     // 1) /shop?category=X → redirect to SEO URL
