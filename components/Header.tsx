@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, FormEvent } from 'react';
+import React, { useState, useSyncExternalStore, FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { CartIcon, UserIcon, MenuIcon, CloseIcon, HeartIcon, SearchIcon } from './Icons';
@@ -9,6 +9,10 @@ import { useWishlist } from '../context/WishlistContext';
 import { useAuth } from '../context/AuthContext';
 import CartSidebar from './CartSidebar';
 import { ORDER_FREE_SHIPPING_THRESHOLD } from '../utils/orderShipping';
+import { isCouponExpired } from '../utils/commerce';
+import { SITE_COUPON_CAMPAIGN } from '../data/siteCampaign';
+
+const subscribeNever = () => () => {};
 
 interface HeaderProps {
 
@@ -22,6 +26,12 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  // Tarih kontrolü tarayıcıda yapılır; statik sayfalarda da kampanya bitince duyuru kendiliğinden kalkar.
+  const showCoupon = useSyncExternalStore(
+    subscribeNever,
+    () => Boolean(SITE_COUPON_CAMPAIGN) && !isCouponExpired(SITE_COUPON_CAMPAIGN?.expirationDate),
+    () => false
+  );
   const router = useRouter();
 
   const navLinks = [
@@ -71,6 +81,12 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
       <header className="sticky top-0 z-30 bg-brand-bg/95 backdrop-blur-md shadow-sm transition-all">
         <div className="bg-brand-primary text-white text-center py-2 text-xs font-medium tracking-wide">
           TÜRKİYE&apos;NİN HER YERİNE {ORDER_FREE_SHIPPING_THRESHOLD} TL ÜZERİ KARGO BEDAVA
+          {showCoupon && SITE_COUPON_CAMPAIGN && (
+            <span className="block sm:inline sm:ml-2">
+              <span className="hidden sm:inline">· </span>
+              {SITE_COUPON_CAMPAIGN.code} KODUYLA %{SITE_COUPON_CAMPAIGN.percent} İNDİRİM ({SITE_COUPON_CAMPAIGN.label})
+            </span>
+          )}
         </div>
         <div className="container mx-auto px-6 flex justify-between items-center h-20 border-b border-brand-border">
           <div className="flex items-center">

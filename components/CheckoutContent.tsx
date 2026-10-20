@@ -10,6 +10,7 @@ import { useNotification } from '../context/NotificationContext';
 import { Coupon } from '../types';
 import { sendFormToEmail } from '../services/emailService';
 import { calculateOrderShippingCost } from '../utils/orderShipping';
+import { isCouponExpired } from '../utils/commerce';
 
 // İkon (SVG)
 const CreditCardIcon = () => (
@@ -78,6 +79,7 @@ const CheckoutContent: React.FC = () => {
     // --- HESAPLAMALAR ---
     const discountAmount = useMemo(() => {
         if (!activeCoupon) return 0;
+        if (isCouponExpired(activeCoupon.expirationDate)) return 0;
         const val = Number(activeCoupon.value);
         if (isNaN(val)) return 0;
         if (activeCoupon.minSpend && cartTotal < activeCoupon.minSpend) return 0;
@@ -100,6 +102,10 @@ const CheckoutContent: React.FC = () => {
         if (!coupon) {
             setActiveCoupon(null);
             return showNotification('Geçersiz kupon.', 'error');
+        }
+        if (isCouponExpired(coupon.expirationDate)) {
+            setActiveCoupon(null);
+            return showNotification('Bu kuponun süresi dolmuş.', 'error');
         }
         if (coupon.minSpend && cartTotal < coupon.minSpend) {
             return showNotification(`Sepet en az ${coupon.minSpend} TL olmalı.`, 'error');

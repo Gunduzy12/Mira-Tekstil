@@ -24,3 +24,16 @@ export function getProductDisplayPrice(product: any): number {
     }
     return 0;
 }
+
+/**
+ * Kuponun bitiş tarihi (YYYY-MM-DD) geçmiş mi? Kupon bitiş gününün sonuna kadar geçerlidir.
+ * Tarih boş veya geçersizse kupon süresiz kabul edilir.
+ */
+export function isCouponExpired(expirationDate?: string | null, now: Date = new Date()): boolean {
+    if (!expirationDate) return false;
+    const match = /^(\d{4})-(\d{2})-(\d{2})/.exec(expirationDate);
+    if (!match) return false;
+    const endOfDay = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]), 23, 59, 59, 999);
+    if (Number.isNaN(endOfDay.getTime())) return false;
+    return now.getTime() > endOfDay.getTime();
+}
