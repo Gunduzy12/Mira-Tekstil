@@ -22,6 +22,9 @@ interface ProductDetailPageProps {
 }
 
 
+// Firestore'daki eski "İade:" satırları özel ölçüyü iade dışı sayıyordu; iade politikası artık tüm ürünlerde 14 gün
+const RETURN_DETAIL = 'İade: Özel ölçü perdeler dahil teslimden itibaren 14 gün içinde iade edilebilir; iade etiketi pakete dahildir ve iade kargosu ücretsizdir.';
+
 const maskName = (name: string) => {
     if (!name) return '*****';
     const parts = name.trim().split(' ');
@@ -458,6 +461,12 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                                 <p className={`font-serif font-bold ${displayOriginalPrice && displayOriginalPrice > displayPrice ? 'text-4xl text-brand-primary' : 'text-3xl text-brand-primary'}`}>
                                     {displayPrice.toFixed(2)} TL
                                 </p>
+                                {/* Google'dan gelen müşteri en düşük (100 cm) fiyatı görür; fiyatın ölçüye göre değiştiğini baştan söyleyelim */}
+                                {product.isCustomSize && product.pricePerSqM && (
+                                    <p className="mt-2 text-sm text-gray-600">
+                                        Seçili ölçü <strong>{customWidth} x {customHeight} cm</strong> için fiyattır. Fiyat en ölçüsüne göre hesaplanır; metresi <strong>{product.pricePerSqM.toFixed(2)} TL</strong>.
+                                    </p>
+                                )}
                             </div>
                             {displayOriginalPrice && displayOriginalPrice > displayPrice && (
                                 <div className="mt-3 text-sm text-green-700 font-bold flex items-center">
@@ -713,7 +722,7 @@ const ProductDetailPage: React.FC<ProductDetailPageProps> = ({ product }) => {
                                 <p className="mb-6 leading-relaxed">{product.description}</p>
                                 <h4 className="font-bold text-brand-primary mb-2">Detaylar ve Bakım</h4>
                                 <ul className="list-disc list-inside space-y-2 marker:text-brand-secondary">
-                                    {product.details.map((detail, index) => <li key={index}>{detail}</li>)}
+                                    {product.details.map((detail, index) => <li key={index}>{detail.startsWith('İade:') ? RETURN_DETAIL : detail}</li>)}
                                 </ul>
                             </section>
                         )}

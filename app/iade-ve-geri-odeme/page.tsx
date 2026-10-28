@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
     title: 'İade ve Geri Ödeme Politikası | MiraTekstil',
-    description: 'MiraTekstil standart ve özel ölçü ürünlerinde iade koşulları, ücretsiz iade gönderimi, başvuru ve geri ödeme bilgileri.',
+    description: 'MiraTekstil\'de özel ölçü perdeler dahil tüm ürünlerde 14 gün iade, ücretsiz iade gönderimi, başvuru ve geri ödeme bilgileri.',
     alternates: { canonical: '/iade-ve-geri-odeme' },
 };
 
@@ -15,13 +15,8 @@ export default function ReturnPolicyPage() {
 
             <div className="space-y-8 leading-relaxed">
                 <section aria-labelledby="standard-returns">
-                    <h2 id="standard-returns" className="text-xl font-semibold mb-3">Standart ürünlerde iade</h2>
-                    <p>Size özel üretilmemiş standart ürünlerde, teslim aldığınız tarihten itibaren 14 gün içinde gerekçe göstermeden cayma bildirimi yapabilirsiniz. İadeler yeni ürünler için kabul edilir; ürünü kontrol etmek için gereken olağan inceleme, tek başına iade hakkını ortadan kaldırmaz. Bildirimin ardından ürünü yasal geri gönderim süresi içinde, taşıma sırasında zarar görmeyecek şekilde paketleyerek gönderin. Değişim talepleri de kabul edilir; ürün ve stok seçenekleri için bize ulaşabilirsiniz.</p>
-                </section>
-
-                <section aria-labelledby="custom-returns">
-                    <h2 id="custom-returns" className="text-xl font-semibold mb-3">Özel ölçü ve kişiye özel dikim ürünler</h2>
-                    <p>İsteğiniz veya kişisel ihtiyaçlarınız doğrultusunda size özel ölçüde kesilen ya da dikilen ürünler, standart cayma hakkının istisnasıdır. Yalnızca katalogdaki hazır ölçü veya renklerden birini seçmeniz, ürünü kendiliğinden kişiye özel üretim yapmaz. Hatalı üretim, siparişten farklı ürün veya ayıplı ürün durumlarında yasal haklarınız saklıdır; inceleme ve çözüm için bize ulaşabilirsiniz.</p>
+                    <h2 id="standard-returns" className="text-xl font-semibold mb-3">Tüm ürünlerde 14 gün iade</h2>
+                    <p>Özel ölçüde dikilen perdeler dahil sitemizdeki tüm ürünleri, teslim aldığınız tarihten itibaren 14 gün içinde gerekçe göstermeden iade edebilirsiniz. İadeler yeni ürünler için kabul edilir; ürünü kontrol etmek için gereken olağan inceleme, tek başına iade hakkını ortadan kaldırmaz. Bildirimin ardından ürünü yasal geri gönderim süresi içinde, taşıma sırasında zarar görmeyecek şekilde paketleyerek gönderin. Değişim talepleri de kabul edilir; ürün ve stok seçenekleri için bize ulaşabilirsiniz.</p>
                 </section>
 
                 <section aria-labelledby="return-request">

@@ -442,7 +442,7 @@ const baseGuideTopics: SEOBlogTopic[] = [
             h('Adım 4: Sepeti ve Siparişi Kontrol Edin'),
             p(`Sepette seçtiğiniz renk, en ve boy değerlerini tekrar okuyun. Birden fazla pencereniz varsa her pencere için ayrı ürün olarak ekleyin. 700 TL üzeri siparişlerde ücretsiz kargo uygulanır.`),
             h('Özel Ölçü Ürünlerde İade'),
-            p(`Özel ölçüde kesilen veya dikilen ürünler, standart cayma hakkının istisnasıdır. Bunu İade ve Geri Ödeme Politikası sayfamızda açıkça belirtiyoruz. Hatalı üretim, siparişten farklı ürün veya ayıplı ürün durumunda yasal haklarınız saklıdır. Bu yüzden ölçüyü siparişten önce dikkatle kontrol etmeniz önemlidir. Ayrıntılar: <a href="/iade-ve-geri-odeme" class="underline">iade ve geri ödeme politikası</a>.`),
+            p(`Özel ölçüde dikilen perdeler dahil tüm ürünlerimizi teslimden itibaren 14 gün içinde iade edebilirsiniz; iade etiketi pakete dahildir ve iade kargosu ücretsizdir. Yine de ölçüyü siparişten önce dikkatle kontrol etmeniz, perdenin pencerenize ilk seferde oturması için önemlidir. Ayrıntılar: <a href="/iade-ve-geri-odeme" class="underline">iade ve geri ödeme politikası</a>.`),
             h('Sipariş Öncesi Kontrol Listesi'),
             l('Göndermeden önce şunları kontrol edin:', [
                 'En ve boy değerlerini ters yazmadığınızdan emin olun.',
@@ -456,8 +456,8 @@ const baseGuideTopics: SEOBlogTopic[] = [
         faq: [
             q('Özel ölçü perde ne kadar sürede hazırlanır?', 'Üretim ve teslimat süresi ürün ve sipariş yoğunluğuna göre değişir. Güncel süre bilgisi için ürün sayfasına veya bizimle iletişime geçin.'),
             q('Özel ölçü perdenin fiyatı nasıl hesaplanır?', 'Fiyat girdiğiniz ölçüye göre hesaplanır ve ürün sayfasında gösterilir.'),
-            q('Ölçüyü yanlış verirsem ne olur?', 'Özel ölçü ürünler verilen ölçüye göre dikildiği için sipariş öncesinde ölçüyü dikkatle kontrol etmeniz önemlidir. İade koşulları için iade sayfamıza bakın.'),
-            q('Özel ölçü perde iade edilebilir mi?', 'Özel ölçü ürünler standart cayma hakkının istisnasıdır. Ayıplı veya siparişten farklı ürün durumunda yasal haklar geçerlidir.'),
+            q('Ölçüyü yanlış verirsem ne olur?', 'Teslimden itibaren 14 gün içinde ürünü ücretsiz iade edebilirsiniz. Yine de perdenin ilk seferde oturması için sipariş öncesinde ölçüyü dikkatle kontrol etmeniz önemlidir.'),
+            q('Özel ölçü perde iade edilebilir mi?', 'Evet. Özel ölçü perdeler dahil tüm ürünleri teslimden itibaren 14 gün içinde iade edebilirsiniz; iade kargosu ücretsizdir.'),
         ],
         relatedLinks: [
             { label: 'Özel ölçü perde modelleri', href: '/perde/ozel-olcu-perde', description: 'Ölçü girerek sipariş verebileceğiniz perdeler.' },
