@@ -394,7 +394,10 @@ const CheckoutContent: React.FC = () => {
                         {!iframeToken && (
                             <div style={{ fontSize: 12, color: '#777', marginTop: 15, display: 'flex', gap: 5 }}>
                                 <input type="checkbox" checked={contractsAccepted} onChange={(e) => setContractsAccepted(e.target.checked)} style={{ marginTop: 2 }} />
-                                <span>Mesafeli Satış Sözleşmesi'ni okudum, onaylıyorum.</span>
+                                <span>
+                                    <a href="/on-bilgilendirme-formu" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>Ön Bilgilendirme Formu</a>&apos;nu ve{' '}
+                                    <a href="/mesafeli-satis-sozlesmesi" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'underline' }}>Mesafeli Satış Sözleşmesi</a>&apos;ni okudum, onaylıyorum.
+                                </span>
                             </div>
                         )}
 

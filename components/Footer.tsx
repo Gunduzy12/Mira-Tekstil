@@ -70,6 +70,8 @@ const Footer: React.FC = () => {
               <li><Link href="/contact" className="hover:text-white transition-colors" title="İletişim">İletişim</Link></li>
               <li><Link href="/iade-ve-geri-odeme" className="hover:text-white transition-colors" title="İade ve Geri Ödeme Politikası">İade ve Geri Ödeme Politikası</Link></li>
               <li><Link href="/kargo-ve-teslimat" className="hover:text-white transition-colors" title="Kargo ve Teslimat Bilgileri">Kargo ve Teslimat</Link></li>
+              <li><Link href="/on-bilgilendirme-formu" className="hover:text-white transition-colors" title="Ön Bilgilendirme Formu">Ön Bilgilendirme Formu</Link></li>
+              <li><Link href="/mesafeli-satis-sozlesmesi" className="hover:text-white transition-colors" title="Mesafeli Satış Sözleşmesi">Mesafeli Satış Sözleşmesi</Link></li>
             </ul>
           </div>
           <div>

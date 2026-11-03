@@ -24,6 +24,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const staticRoutes: MetadataRoute.Sitemap = [
         {
             url: `${baseUrl}/iade-ve-geri-odeme`,
+            // 14 gün iade politikası tüm ürünlere genişletildi; Google'ın yeniden taraması için
+            lastModified: new Date('2026-10-28'),
             changeFrequency: 'monthly',
             priority: 0.5,
         },
@@ -31,6 +33,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             url: `${baseUrl}/kargo-ve-teslimat`,
             changeFrequency: 'monthly',
             priority: 0.5,
+        },
+        {
+            url: `${baseUrl}/on-bilgilendirme-formu`,
+            changeFrequency: 'yearly',
+            priority: 0.3,
+        },
+        {
+            url: `${baseUrl}/mesafeli-satis-sozlesmesi`,
+            changeFrequency: 'yearly',
+            priority: 0.3,
         },
         {
             url: baseUrl,
